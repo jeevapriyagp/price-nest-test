@@ -247,13 +247,14 @@ def get_wishlist(email: str):
     db.close()
     return result
 
-def deactivate_alert(alert_id):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute(
-        "UPDATE alerts SET is_active = false WHERE id = %s",
-        (alert_id,)
-    )
-    conn.commit()
-    cursor.close()
-    conn.close()
+def deactivate_alert(alert_id: int):
+    db: Session = SessionLocal()
+    alert = db.query(Alert).filter(Alert.id == alert_id).first()
+    
+    if alert:
+        alert.is_active = False
+        db.commit()
+    
+    db.close()
+    return True
+
