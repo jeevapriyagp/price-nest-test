@@ -1,87 +1,17 @@
 // =====================================================
-// CONFIG
-// =====================================================
-const API_BASE = "http://localhost:8000";
-
-
-// =====================================================
 // INITIALIZATION
 // =====================================================
 document.addEventListener('DOMContentLoaded', async function () {
 
-  if (!isLoggedIn()) {
-    window.location.href = 'login.html';
-    return;
-  }
+  if (!requireAuth()) return;
 
   await updateNavigation();
   await loadAlerts();
 });
 
 
-// =====================================================
-// API FUNCTIONS
-// =====================================================
-
-async function getAlerts() {
-  const user = getUserData();
-  if (!user) return [];
-
-  try {
-    // ✅ FIX: send email to backend
-    const res = await fetch(`${API_BASE}/alerts?email=${encodeURIComponent(user.email)}`);
-
-    if (!res.ok) {
-      console.error("Alerts API error:", res.status);
-      return [];
-    }
-
-    const data = await res.json();
-
-    // Backend already filtered by email
-    return data.map(a => ({
-      id: a.id,
-      product: a.query,
-      targetPrice: a.target_price,
-      createdAt: a.created_at,
-      active: a.is_active
-    }));
-
-  } catch (err) {
-    console.error("Fetch alerts error:", err);
-    return [];
-  }
-}
-
-
-async function deleteAlert(id) {
-  try {
-    const res = await fetch(`${API_BASE}/alerts/${id}`, {
-      method: "DELETE"
-    });
-    return res.ok;
-  } catch {
-    return false;
-  }
-}
-
-
-async function updateAlertStatus(id, status) {
-  try {
-    const res = await fetch(`${API_BASE}/alerts/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        is_active: status
-      })
-    });
-    return res.ok;
-  } catch {
-    return false;
-  }
-}
+// Note: All API functions (getAlerts, addAlert, deleteAlert, updateAlertStatus) 
+// are now managed centrally in js/utils.js
 
 
 // =====================================================

@@ -20,10 +20,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // Update page title and search input
     document.getElementById('searchQuery').textContent = `Results for "${currentQuery}"`;
     document.getElementById('searchInput').value = currentQuery;
-    document.getElementById('alertProduct').value = currentQuery;
-
     // Update navigation
     updateNavigation();
+
+    // Pre-fill alert email if logged in
+    if (isLoggedIn()) {
+        const emailInput = document.getElementById('alertEmail');
+        if (emailInput) {
+            emailInput.value = getUserData().email;
+        }
+    }
 
     // Initialize tabs
     initializeTabs();
@@ -89,20 +95,38 @@ function initializeTabs() {
     const tabContents = document.querySelectorAll('.tab-content');
 
     tabs.forEach(tab => {
-        tab.addEventListener('click', function () {
-            const targetTab = this.getAttribute('data-tab');
-
-            // Remove active class from all tabs and contents
+        tab.addEventListener('click', () => {
+            // Remove active from all tabs and contents
             tabs.forEach(t => t.classList.remove('active'));
-            tabContents.forEach(tc => tc.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
 
-            // Add active class to clicked tab and corresponding content
-            this.classList.add('active');
-            document.getElementById(targetTab).classList.add('active');
+            // Add active to current
+            tab.classList.add('active');
+            const target = tab.getAttribute('data-tab');
+            document.getElementById(target).classList.add('active');
 
-            // Load analytics when analytics tab is clicked
-            if (targetTab === 'analytics' && !storeChart) {
+            // Specific tab initializations
+            if (target === 'analytics' && !storeChart) {
                 loadAnalytics();
+            }
+            if (target === 'alert' && isLoggedIn()) {
+                const emailInput = document.getElementById('alertEmail');
+                const accountSpan = document.getElementById('currentAccountEmail');
+                const user = getUserData();
+                if (user && user.email) {
+                    if (emailInput) {
+                        emailInput.value = user.email;
+                        // Add change listener to show warning if it doesn't match
+                        emailInput.addEventListener('input', () => {
+                            const isMatch = emailInput.value.trim().toLowerCase() === user.email.toLowerCase();
+                            if (accountSpan) {
+                                accountSpan.style.color = isMatch ? 'inherit' : '#ef4444';
+                                accountSpan.textContent = isMatch ? user.email : `Mismatch! This alert won't show in your dashboard.`;
+                            }
+                        });
+                    }
+                    if (accountSpan) accountSpan.textContent = user.email;
+                }
             }
         });
     });
@@ -306,6 +330,11 @@ function toggleUnitButtons(unit) {
 
 async function loadAnalytics() {
     console.log('Starting loadAnalytics for:', currentQuery);
+
+    // Clear old values if any to avoid confusion
+    const statValues = document.querySelectorAll('.stat-value');
+    statValues.forEach(sv => sv.textContent = '...');
+
     try {
         toggleUnitButtons(trendUnit);
         const data = await apiGet('/analytics', { q: currentQuery });
@@ -313,7 +342,10 @@ async function loadAnalytics() {
 
         if (!data.summary || !data.price_trend || data.price_trend.length === 0) {
             console.warn('Empty analytics data');
-            showNotification('No analytics data available for this product', 'info');
+            showNotification('No historical data available for this product yet.', 'info');
+
+            // Set stats to "N/A"
+            document.querySelectorAll('.stat-value').forEach(sv => sv.textContent = 'N/A');
             return;
         }
 
@@ -336,31 +368,36 @@ async function loadAnalytics() {
         // 2. Store Chart
         try {
             if (storeChart) storeChart.destroy();
-            storeChart = new Chart(document.getElementById("storeChart"), {
-                type: "bar",
-                data: {
-                    labels: Object.keys(data.store_prices),
-                    datasets: [{
-                        data: Object.values(data.store_prices),
-                        backgroundColor: "#6366f1",
-                        borderRadius: 6,
-                        maxBarThickness: 32,
-                        categoryPercentage: 0.7
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { callbacks: { label: ctx => formatCurrency(ctx.parsed.y) } }
+            const storeLabels = Object.keys(data.store_prices || {});
+            const storeData = Object.values(data.store_prices || {});
+
+            if (storeLabels.length > 0) {
+                storeChart = new Chart(document.getElementById("storeChart"), {
+                    type: "bar",
+                    data: {
+                        labels: storeLabels,
+                        datasets: [{
+                            data: storeData,
+                            backgroundColor: "#6366f1",
+                            borderRadius: 6,
+                            maxBarThickness: 32,
+                            categoryPercentage: 0.7
+                        }]
                     },
-                    scales: {
-                        y: { ticks: { callback: v => formatCurrency(v), color: '#b8c1ec', font: { size: 11 } }, grid: { color: 'rgba(255, 255, 255, 0.05)' } },
-                        x: { ticks: { color: '#b8c1ec', font: { size: 11 } }, grid: { display: false } }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { callbacks: { label: ctx => formatCurrency(ctx.parsed.y) } }
+                        },
+                        scales: {
+                            y: { ticks: { callback: v => formatCurrency(v), color: '#b8c1ec', font: { size: 11 } }, grid: { color: 'rgba(255, 255, 255, 0.05)' } },
+                            x: { ticks: { color: '#b8c1ec', font: { size: 11 } }, grid: { display: false } }
+                        }
                     }
-                }
-            });
+                });
+            }
         } catch (chart1Err) {
             console.error('Error creating store chart:', chart1Err);
         }
@@ -406,28 +443,30 @@ async function loadAnalytics() {
             }));
 
             if (trendChart) trendChart.destroy();
-            trendChart = new Chart(document.getElementById("trendChart"), {
-                type: "line",
-                data: { datasets },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    parsing: false,
-                    plugins: { legend: { position: "top", labels: { color: '#b8c1ec', boxWidth: 16, font: { size: 11 } } } },
-                    scales: {
-                        x: {
-                            type: "time",
-                            time: {
-                                unit: trendUnit === "week" ? "day" : trendUnit,
-                                tooltipFormat: trendUnit === "hour" ? "MMM d, HH:mm" : trendUnit === "day" ? "MMM d" : "'Week of' MMM d"
+            if (datasets.length > 0) {
+                trendChart = new Chart(document.getElementById("trendChart"), {
+                    type: "line",
+                    data: { datasets },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        parsing: false,
+                        plugins: { legend: { position: "top", labels: { color: '#b8c1ec', boxWidth: 16, font: { size: 11 } } } },
+                        scales: {
+                            x: {
+                                type: "time",
+                                time: {
+                                    unit: trendUnit === "week" ? "day" : trendUnit,
+                                    tooltipFormat: trendUnit === "hour" ? "MMM d, HH:mm" : trendUnit === "day" ? "MMM d" : "'Week of' MMM d"
+                                },
+                                ticks: { color: '#b8c1ec', font: { size: 11 } },
+                                grid: { display: false }
                             },
-                            ticks: { color: '#b8c1ec', font: { size: 11 } },
-                            grid: { display: false }
-                        },
-                        y: { beginAtZero: false, grace: "5%", ticks: { callback: v => formatCurrency(v), color: '#b8c1ec', font: { size: 11 } }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                            y: { beginAtZero: false, grace: "5%", ticks: { callback: v => formatCurrency(v), color: '#b8c1ec', font: { size: 11 } }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                        }
                     }
-                }
-            });
+                });
+            }
         } catch (chart2Err) {
             console.error('Error creating trend chart:', chart2Err);
         }
@@ -441,21 +480,40 @@ async function loadAnalytics() {
             const tbody = document.querySelector("#storeTable tbody");
             if (tbody) {
                 tbody.innerHTML = "";
-                Object.entries(cheapestCount).forEach(([store, count]) => {
-                    tbody.innerHTML += `
-                        <tr>
-                            <td>${store}</td>
-                            <td>${count}</td>
-                        </tr>
-                    `;
-                });
+                const entries = Object.entries(cheapestCount);
+                if (entries.length === 0) {
+                    tbody.innerHTML = "<tr><td colspan='2' style='text-align:center'>No consistency data</td></tr>";
+                } else {
+                    entries.forEach(([store, count]) => {
+                        tbody.innerHTML += `
+                            <tr>
+                                <td>${store}</td>
+                                <td>${count}</td>
+                            </tr>
+                        `;
+                    });
+                }
             }
         } catch (tableErr) {
             console.error('Error updating store table:', tableErr);
         }
     } catch (err) {
         console.error('Failed to load analytics:', err);
-        alert('Analytics Error: ' + err.message);
+
+        if (err.message.includes('404') || err.message.includes('history')) {
+            showNotification('No historical data available for this product yet.', 'info');
+            document.querySelectorAll('.stat-value').forEach(sv => sv.textContent = 'N/A');
+            document.getElementById("buyInsight").innerText = "Wait for more price updates to see insights.";
+            const tbody = document.querySelector("#storeTable tbody");
+            if (tbody) tbody.innerHTML = "<tr><td colspan='2' style='text-align:center'>No consistency data</td></tr>";
+        } else {
+            showNotification(err.message, 'error');
+            // Update UI to show error state
+            document.querySelectorAll('.stat-value').forEach(sv => sv.textContent = 'Error');
+            document.getElementById("buyInsight").innerText = "Unable to load analytics data.";
+            const tbody = document.querySelector("#storeTable tbody");
+            if (tbody) tbody.innerHTML = "<tr><td colspan='2' style='text-align:center; color: var(--error)'>Service Unavailable</td></tr>";
+        }
     }
 }
 
@@ -487,11 +545,16 @@ function initializeAlertForm() {
             return;
         }
 
-        // Create alert
+        // Create alert - Use entered email if present, otherwise session email
+        const enteredEmail = document.getElementById('alertEmail').value;
+        const finalEmail = enteredEmail || getUserData().email;
+
+        console.log(`[ALERT] Creating alert for: ${finalEmail}`);
+
         const alert = {
             product: product,
             targetPrice: targetPrice,
-            email: email || getUserData().email,
+            email: finalEmail,
             active: true
         };
 

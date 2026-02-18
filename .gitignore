@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 .env
+*.db
+*.sqlite
+git_status.txt
+git_status_output.txt

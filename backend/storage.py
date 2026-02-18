@@ -155,7 +155,22 @@ def add_alert(email, query, target_price, notify_method="email"):
     }
 
 
-def list_alerts():
+def list_alerts(email: str):
+    db: Session = SessionLocal()
+    alerts = db.query(Alert).filter(Alert.email == email).all()
+    db.close()
+    return [
+        {
+            "id": a.id,
+            "email": a.email,
+            "query": a.query,
+            "target_price": a.target_price,
+            "is_active": a.is_active
+        } for a in alerts
+    ]
+
+
+def list_all_alerts():
     db: Session = SessionLocal()
     alerts = db.query(Alert).all()
     db.close()
@@ -199,14 +214,10 @@ def create_user(first_name, last_name, email, hashed_password):
 # -----------------------------
 def add_to_wishlist(email: str, product_id: int):
     db: Session = SessionLocal()
-    user = db.query(User).filter(User.email == email).first()
-    if not user:
-        db.close()
-        return None
     
     # Check if already in wishlist
     existing = db.query(Wishlist).filter(
-        Wishlist.user_id == user.id,
+        Wishlist.email == email,
         Wishlist.product_id == product_id
     ).first()
     
@@ -214,7 +225,7 @@ def add_to_wishlist(email: str, product_id: int):
         db.close()
         return existing
 
-    wish_item = Wishlist(user_id=user.id, product_id=product_id)
+    wish_item = Wishlist(email=email, product_id=product_id)
     db.add(wish_item)
     db.commit()
     db.refresh(wish_item)
@@ -224,13 +235,9 @@ def add_to_wishlist(email: str, product_id: int):
 
 def remove_from_wishlist(email: str, product_id: int):
     db: Session = SessionLocal()
-    user = db.query(User).filter(User.email == email).first()
-    if not user:
-        db.close()
-        return False
     
     wish_item = db.query(Wishlist).filter(
-        Wishlist.user_id == user.id,
+        Wishlist.email == email,
         Wishlist.product_id == product_id
     ).first()
     
@@ -246,15 +253,11 @@ def remove_from_wishlist(email: str, product_id: int):
 
 def get_wishlist(email: str):
     db: Session = SessionLocal()
-    user = db.query(User).filter(User.email == email).first()
-    if not user:
-        db.close()
-        return []
     
     items = (
         db.query(Product)
         .join(Wishlist, Product.id == Wishlist.product_id)
-        .filter(Wishlist.user_id == user.id)
+        .filter(Wishlist.email == email)
         .all()
     )
     

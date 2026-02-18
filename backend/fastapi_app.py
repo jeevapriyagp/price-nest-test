@@ -129,21 +129,36 @@ def create_alert(req: AlertRequest):
 
         # Ensure product exists
         if not storage.get_product(query):
-            fresh = compare_product(query)
-            storage.upsert_product(query, fresh.get("results", []))
+            try:
+                # 🔍 DEBUG: Log that we are scraping
+                logger.info(f"[ALERT CREATE] Product not found, scraping: {query}")
+                fresh = compare_product(query)
+                if not fresh or "results" not in fresh:
+                    logger.error(f"[ALERT CREATE] Scraper returned invalid data for {query}: {fresh}")
+                    raise HTTPException(status_code=500, detail="Failed to fetch product data")
+                
+                storage.upsert_product(query, fresh.get("results", []))
+            except Exception as e:
+                logger.error(f"[ALERT CREATE] Scraper failed for {query}: {e}")
+                # We can allow the alert to be created even if scraping fails, 
+                # but for now let's fail to let user know product is invalid.
+                raise HTTPException(status_code=500, detail=f"Failed to verify product: {str(e)}")
 
         alert = storage.add_alert(
             email=req.email,
             query=query,
             target_price=req.target_price,
-            notify_method=req.notify_method
+            notify_method=req.notify_method  # This is safe even if DB ignores it? Yes, function arg.
         )
-
+        
+        logger.info(f"[ALERT CREATE] Success: {alert}")
         return {"status": "ok", "alert": alert}
 
+    except HTTPException as he:
+        raise he
     except Exception as e:
-        logger.error(f"Create alert failed: {e}")
-        raise HTTPException(status_code=503, detail="Database connection issue")
+        logger.error(f"[ALERT CREATE] Database/System error: {e}")
+        raise HTTPException(status_code=500, detail=f"System error: {str(e)}")
 
 
 # ✅ FIXED: email optional + safe + always returns list
@@ -200,12 +215,19 @@ def analytics(q: str):
     q = q.strip().lower()
     logger.info(f"[ANALYTICS] {q}")
 
-    result = analyze_price(q)
-
-    if "error" in result:
-        raise HTTPException(status_code=404, detail=result["error"])
-
-    return result
+    try:
+        result = analyze_price(q)
+        if "error" in result:
+            raise HTTPException(status_code=404, detail=result["error"])
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Analytics failure for {q}: {e}")
+        raise HTTPException(
+            status_code=503, 
+            detail="Analytics service temporarily unavailable (database connection issue)"
+        )
 
 
 # ===========================================================

@@ -226,19 +226,17 @@ async function getAlerts() {
     if (!isLoggedIn()) return [];
 
     try {
-        const alerts = await apiGet('/alerts');
-        // Transform backend format to frontend format if needed, but they are quite similar
-        // Backend: { id, email, query, target_price, is_active }
-        // Frontend expects: { id, product, targetPrice, active, createdAt }
-        // We need to map them.
+        const userData = getUserData();
+        const alerts = await apiGet('/alerts', { email: userData.email });
 
+        // Transform backend format to frontend format
         return alerts.map(a => ({
             id: a.id,
             product: a.query,
             targetPrice: a.target_price,
             email: a.email,
             active: a.is_active,
-            createdAt: new Date().toISOString() // Backend doesn't return createdAt for alerts yet, so we mock or need to add it to DB
+            createdAt: a.created_at || new Date().toISOString()
         }));
     } catch (e) {
         console.error('Failed to fetch alerts:', e);
@@ -272,10 +270,10 @@ async function deleteAlert(alertId) {
     if (!isLoggedIn()) return false;
 
     try {
-        await fetch(`${API_BASE_URL}/alerts/${alertId}`, {
+        const response = await fetch(`${API_BASE_URL}/alerts/${alertId}`, {
             method: 'DELETE'
         });
-        return true;
+        return response.ok;
     } catch (e) {
         console.error('Failed to delete alert:', e);
         return false;
@@ -291,10 +289,10 @@ async function updateAlertStatus(alertId, isActive) {
     if (!isLoggedIn()) return false;
 
     try {
-        const url = `${API_BASE_URL}/alerts/${alertId}/status?is_active=${isActive}`;
-        const res = await fetch(url, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' }
+        const res = await fetch(`${API_BASE_URL}/alerts/${alertId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ is_active: isActive })
         });
 
         if (!res.ok) throw new Error('Failed to update status');

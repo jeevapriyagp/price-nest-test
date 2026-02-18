@@ -138,7 +138,7 @@ def check_alerts_job():
 
                 send_email_alert(receiver_email, subject, body)
 
-                #storage.deactivate_alert(alert_id)
+                storage.deactivate_alert(alert_id)
                 print(f"Alert {alert_id} deactivated.\n")
 
             else:
