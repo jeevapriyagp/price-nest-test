@@ -9,5 +9,7 @@ python-dotenv
 psycopg2-binary
 pandas
 numpy
+bcrypt
 passlib[bcrypt]
 mangum
+

@@ -8,8 +8,6 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app.api import auth, products, alerts, wishlist, analytics
 
-from api import auth, products, alerts, wishlist, analytics
-
 # -----------------------
 # Logging
 # -----------------------
@@ -53,4 +51,3 @@ def read_root():
     return {"message": "Welcome to PriceNest API", "status": "online"}
 
 
-handler = Mangum(app)
