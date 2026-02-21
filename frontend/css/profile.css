@@ -132,6 +132,7 @@
 
 .form-actions .btn {
     flex: 1;
+    justify-content: center;
 }
 
 /* Actions Card */
