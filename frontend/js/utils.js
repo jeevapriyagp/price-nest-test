@@ -13,7 +13,7 @@ const API_BASE_URL = window.location.hostname === '127.0.0.1' || window.location
  * @returns {Promise<Object>} - JSON response
  */
 async function apiGet(endpoint, params = {}) {
-    const url = new URL(`${API_BASE_URL}${endpoint}`);
+    const url = new URL(`${API_BASE_URL}${endpoint}`, window.location.origin);
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
     const response = await fetch(url);
