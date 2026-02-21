@@ -70,11 +70,7 @@ except NameError:
 def read_root():
     return {"message": "Welcome to PriceNest API", "status": "online"}
 
-@app.get("/api/health")
-def health_check():
-    return {
-        "status": "online",
-        "environment": "vercel" if os.environ.get("VERCEL") == "1" else "local",
-        "database": "configured" if os.environ.get("DATABASE_URL") else "missing"
-    }
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
