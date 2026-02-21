@@ -14,3 +14,4 @@ passlib[bcrypt]
 mangum
 python-jose
 pyjwt
+python-dotenv
