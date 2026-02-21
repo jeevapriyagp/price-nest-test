@@ -109,9 +109,8 @@ def check_alerts_job():
                     print("✅ ALERT TRIGGERED")
                     
                     price_direction = "dropped" if (last_alerted_price is None or current_lowest < last_alerted_price) else "risen"
-                    emoji = "📉" if price_direction == "dropped" else "📈"
                     
-                    subject = f"{emoji} Price {price_direction.capitalize()}: {query} is now ₹{int(current_lowest):,}"
+                    subject = f"Price {price_direction.capitalize()}: {query} is now ₹{int(current_lowest):,}"
                     
                     body_text = (
                         f"Price Alert from PriceNest\n\n"
@@ -122,35 +121,36 @@ def check_alerts_job():
                         f"Thank you for choosing PriceNest."
                     )
                     
-                    # Professional HTML Template
+                    # Minimal Website-Inspired HTML Template
+                    # Using website colors: Primary #667eea, Background #0a0e27, Success #10b981
                     body_html = f"""
-                    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <div style="background-color: #2c3e50; padding: 25px; text-align: center; color: white;">
-                            <h1 style="margin: 0; font-size: 24px; letter-spacing: 1px;">PriceNest Alert</h1>
-                        </div>
-                        <div style="padding: 40px; background-color: #ffffff;">
-                            <p style="font-size: 16px; color: #444; line-height: 1.6;">Hello,</p>
-                            <p style="font-size: 16px; color: #444; line-height: 1.6;">We've detected a price change for a product you're tracking.</p>
+                    <div style="font-family: 'Inter', -apple-system, sans-serif; max-width: 550px; margin: auto; background-color: #0a0e27; color: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+                        <div style="padding: 30px; text-align: left;">
+                            <h1 style="margin: 0; font-size: 20px; font-weight: 700; color: #667eea;">PriceNest</h1>
                             
-                            <div style="background-color: #f8f9fa; border-left: 5px solid {'#27ae60' if price_direction == 'dropped' else '#e74c3c'}; padding: 25px; border-radius: 8px; margin: 30px 0;">
-                                <h2 style="margin-top: 0; font-size: 18px; color: #2c3e50;">{query}</h2>
-                                <p style="font-size: 32px; font-weight: bold; color: {'#27ae60' if price_direction == 'dropped' else '#e74c3c'}; margin: 15px 0;">
-                                    ₹{int(current_lowest):,} 
-                                    <span style="font-size: 16px; font-weight: normal; color: #7f8c8d;">({price_direction})</span>
-                                </p>
-                                <div style="font-size: 14px; color: #34495e;">
-                                    <p style="margin: 5px 0;"><strong>Target Price:</strong> ₹{int(target_price):,}</p>
-                                    <p style="margin: 5px 0;"><strong>Current Store:</strong> {best_product['source']}</p>
+                            <div style="margin-top: 30px;">
+                                <p style="font-size: 14px; color: #b8c1ec; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Price Update</p>
+                                <h2 style="margin: 0; font-size: 24px; font-weight: 600; line-height: 1.3;">{query}</h2>
+                                
+                                <div style="margin-top: 24px; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                                    <p style="margin: 0; font-size: 36px; font-weight: 700; color: {'#10b981' if price_direction == 'dropped' else '#ef4444'};">
+                                        ₹{int(current_lowest):,}
+                                    </p>
+                                    <p style="margin: 4px 0 0 0; font-size: 14px; color: #b8c1ec;">
+                                        {price_direction.capitalize()} from your target of ₹{int(target_price):,}
+                                    </p>
                                 </div>
                             </div>
-                            
-                            <div style="text-align: center; margin-top: 40px;">
-                                <a href="{best_product['link']}" style="background-color: #2980b9; color: #ffffff; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px; display: inline-block;">View Deal on {best_product['source']}</a>
+
+                            <div style="margin-top: 32px; text-align: center;">
+                                <a href="{best_product['link']}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; display: inline-block;">View Deal on {best_product['source']}</a>
                             </div>
                         </div>
-                        <div style="background-color: #f1f2f6; padding: 20px; text-align: center; font-size: 12px; color: #7f8c8d; border-top: 1px solid #e0e0e0;">
-                            <p style="margin: 0;">You are receiving this email because you set a price alert on PriceNest.</p>
-                            <p style="margin: 5px 0;">&copy; 2026 PriceNest Inc. All rights reserved.</p>
+                        
+                        <div style="padding: 20px 30px; background-color: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                            <p style="margin: 0; font-size: 12px; color: #6b7280;">
+                                You're receiving this because you set an alert for "{query}".
+                            </p>
                         </div>
                     </div>
                     """
