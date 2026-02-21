@@ -471,6 +471,10 @@ svg defs {
   transition: all var(--transition-base);
   white-space: nowrap;
   font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
 }
 
 .tab:hover {
