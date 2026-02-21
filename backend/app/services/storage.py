@@ -151,6 +151,7 @@ def add_alert(email, query, target_price, notify_method="email"):
             "email": alert.email,
             "query": alert.query,
             "target_price": alert.target_price,
+            "last_alerted_price": alert.last_alerted_price,
             "is_active": alert.is_active,
             "created_at": alert.created_at.isoformat() if alert.created_at else None
         }
@@ -168,6 +169,7 @@ def list_alerts(email: str):
                 "email": a.email,
                 "query": a.query,
                 "target_price": a.target_price,
+                "last_alerted_price": a.last_alerted_price,
                 "is_active": a.is_active,
                 "created_at": a.created_at.isoformat() if a.created_at else None
             } for a in alerts
@@ -186,6 +188,7 @@ def list_all_alerts():
                 "email": a.email,
                 "query": a.query,
                 "target_price": a.target_price,
+                "last_alerted_price": a.last_alerted_price,
                 "is_active": a.is_active,
                 "created_at": a.created_at.isoformat() if a.created_at else None
             } for a in alerts
@@ -208,6 +211,7 @@ def update_alert_status(alert_id: int, is_active: bool):
             "email": alert.email,
             "query": alert.query,
             "target_price": alert.target_price,
+            "last_alerted_price": alert.last_alerted_price,
             "is_active": alert.is_active,
             "created_at": alert.created_at.isoformat() if alert.created_at else None
         }
@@ -236,6 +240,19 @@ def deactivate_alert(alert_id: int):
             alert.is_active = False
             db.commit()
         return True
+    finally:
+        db.close()
+
+
+def update_alert_price(alert_id: int, last_price: float):
+    db: Session = SessionLocal()
+    try:
+        alert = db.query(Alert).filter(Alert.id == alert_id).first()
+        if alert:
+            alert.last_alerted_price = last_price
+            db.commit()
+            return True
+        return False
     finally:
         db.close()
 

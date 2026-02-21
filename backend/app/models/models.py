@@ -44,6 +44,7 @@ class Alert(Base):
     email = Column(String, index=True)
     query = Column(String, index=True)
     target_price = Column(Float)
+    last_alerted_price = Column(Float, nullable=True)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
