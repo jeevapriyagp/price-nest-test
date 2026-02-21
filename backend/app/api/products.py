@@ -19,15 +19,9 @@ def compare(q: str):
     q = q.strip().lower()
     logger.info(f"[COMPARE] {q}")
 
-    try:
-        cached = storage.get_products(q)
-        if cached:
-            last_update = cached[0].get("created_at")
-            if last_update and (datetime.utcnow() - last_update.replace(tzinfo=None)) < timedelta(hours=24):
-                logger.info(f"[CACHE HIT] {q}")
-                return {"query": q, "results": cached}
-    except Exception as e:
-        logger.error(f"Cache check failed: {e}")
+    # Cache check disabled per user request to always fetch from SerpAPI for compare tab.
+    # Results will still be saved to DB for history/analytics.
+
 
     future = EXECUTOR.submit(compare_product, q)
 
