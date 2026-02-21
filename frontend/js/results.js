@@ -8,7 +8,7 @@ let storeChart = null;
 let trendChart = null;
 let trendUnit = "hour"; // hour | day | week
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     // Get search query from URL
     currentQuery = getUrlParam('q');
 
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Update navigation
-    updateNavigation();
+    await updateNavigation();
 
     // Pre-fill alert email if logged in
     if (isLoggedIn()) {
@@ -52,14 +52,16 @@ document.addEventListener('DOMContentLoaded', function () {
 // NAVIGATION UPDATE
 // =====================================================
 
-function updateNavigation() {
+async function updateNavigation() {
     const navButtons = document.getElementById('navButtons');
 
     if (isLoggedIn()) {
         const userData = getUserData();
         const firstName = userData.firstName || 'User';
-        const alertsCount = getAlerts().length;
-        const wishlistCount = getWishlist().length;
+        const alerts = await getAlerts();
+        const alertsCount = alerts.length;
+        const wishlist = await getWishlist();
+        const wishlistCount = wishlist.length;
 
         navButtons.innerHTML = `
       <button class="nav-icon-btn" onclick="window.location.href='alerts.html'" title="Alerts">
@@ -191,19 +193,11 @@ async function loadProducts() {
         // Sync wishlist first so isInWishlist works correctly during display
         if (isLoggedIn()) {
             await syncWishlist();
-            updateNavigation();
+            await updateNavigation();
         }
 
-        // Exact match to working compare.js logic
-        const response = await fetch(
-            `http://127.0.0.1:8000/compare?q=${encodeURIComponent(currentQuery)}`
-        );
-
-        if (!response.ok) {
-            throw new Error(`Server returned ${response.status}: ${response.statusText}`);
-        }
-
-        const data = await response.json();
+        // Use shared apiGet helper (respects API_BASE_URL, no hardcoded URL)
+        const data = await apiGet('/compare', { q: currentQuery });
         productsData = data.results || [];
 
         displayProducts(productsData);
@@ -220,7 +214,7 @@ async function loadProducts() {
             </div>
             <div class="empty-state-title">Backend connection failed</div>
             <div class="empty-state-text">
-                Make sure the backend server is running on port 8000.
+                Make sure the backend server is reachable.
             </div>
             <button onclick="location.reload()" class="btn primary" style="margin-top:16px;">Try Again</button>
           </div>
@@ -315,10 +309,6 @@ async function toggleWishlist(productId) {
         if (success) btn.classList.add('active');
     }
 }
-
-// =====================================================
-// ANALYTICS
-// =====================================================
 
 // =====================================================
 // ANALYTICS

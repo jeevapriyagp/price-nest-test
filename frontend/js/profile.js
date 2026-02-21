@@ -2,35 +2,37 @@
 // PROFILE PAGE - INITIALIZATION
 // =====================================================
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Check authentication
-    if (!isLoggedIn()) {
-        window.location.href = 'login.html';
-        return;
-    }
+document.addEventListener('DOMContentLoaded', async function () {
+  // Check authentication
+  if (!isLoggedIn()) {
+    window.location.href = 'login.html';
+    return;
+  }
 
-    // Update navigation
-    updateNavigation();
+  // Update navigation
+  await updateNavigation();
 
-    // Load profile data
-    loadProfile();
+  // Load profile data
+  await loadProfile();
 
-    // Initialize form
-    initializeForm();
+  // Initialize form
+  initializeForm();
 });
 
 // =====================================================
 // NAVIGATION UPDATE
 // =====================================================
 
-function updateNavigation() {
-    const navButtons = document.getElementById('navButtons');
-    const userData = getUserData();
-    const firstName = userData.firstName || 'User';
-    const alertsCount = getAlerts().length;
-    const wishlistCount = getWishlist().length;
+async function updateNavigation() {
+  const navButtons = document.getElementById('navButtons');
+  const userData = getUserData();
+  const firstName = userData.firstName || 'User';
+  const alerts = await getAlerts();
+  const alertsCount = alerts.length;
+  const wishlist = await getWishlist();
+  const wishlistCount = wishlist.length;
 
-    navButtons.innerHTML = `
+  navButtons.innerHTML = `
     <button class="nav-icon-btn" onclick="window.location.href='alerts.html'" title="Alerts">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
@@ -60,37 +62,39 @@ function updateNavigation() {
 // LOAD PROFILE DATA
 // =====================================================
 
-function loadProfile() {
-    const userData = getUserData();
+async function loadProfile() {
+  const userData = getUserData();
 
-    if (!userData) {
-        window.location.href = 'login.html';
-        return;
-    }
+  if (!userData) {
+    window.location.href = 'login.html';
+    return;
+  }
 
-    // Update profile display
-    document.getElementById('profileName').textContent =
-        `${userData.firstName || ''} ${userData.lastName || ''}`.trim() || 'User';
-    document.getElementById('profileEmail').textContent = userData.email || '';
+  // Update profile display
+  document.getElementById('profileName').textContent =
+    `${userData.firstName || ''} ${userData.lastName || ''}`.trim() || 'User';
+  document.getElementById('profileEmail').textContent = userData.email || '';
 
-    // Update stats
-    document.getElementById('alertsCount').textContent = getAlerts().length;
-    document.getElementById('wishlistCount').textContent = getWishlist().length;
+  // Update stats (await async functions)
+  const alerts = await getAlerts();
+  document.getElementById('alertsCount').textContent = alerts.length;
+  const wishlist = await getWishlist();
+  document.getElementById('wishlistCount').textContent = wishlist.length;
 
-    // Calculate member since
-    if (userData.timestamp) {
-        const memberDate = new Date(userData.timestamp);
-        const monthYear = memberDate.toLocaleDateString('en-IN', {
-            month: 'short',
-            year: 'numeric'
-        });
-        document.getElementById('memberSince').textContent = monthYear;
-    }
+  // Calculate member since
+  if (userData.timestamp) {
+    const memberDate = new Date(userData.timestamp);
+    const monthYear = memberDate.toLocaleDateString('en-IN', {
+      month: 'short',
+      year: 'numeric'
+    });
+    document.getElementById('memberSince').textContent = monthYear;
+  }
 
-    // Populate form
-    document.getElementById('firstName').value = userData.firstName || '';
-    document.getElementById('lastName').value = userData.lastName || '';
-    document.getElementById('email').value = userData.email || '';
+  // Populate form
+  document.getElementById('firstName').value = userData.firstName || '';
+  document.getElementById('lastName').value = userData.lastName || '';
+  document.getElementById('email').value = userData.email || '';
 }
 
 // =====================================================
@@ -98,31 +102,36 @@ function loadProfile() {
 // =====================================================
 
 function initializeForm() {
-    const form = document.getElementById('profileForm');
+  const form = document.getElementById('profileForm');
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
-        const userData = getUserData();
+    const userData = getUserData();
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = userData.email; // email is not editable — used as identifier
 
-        // Update user data
-        userData.firstName = document.getElementById('firstName').value;
-        userData.lastName = document.getElementById('lastName').value;
-        userData.email = document.getElementById('email').value;
+    try {
+      // Persist to backend
+      const result = await apiPut('/auth/profile', {
+        email: email,
+        first_name: firstName,
+        last_name: lastName
+      });
 
-        // Save to storage
-        if (localStorage.getItem('userData')) {
-            localStorage.setItem('userData', JSON.stringify(userData));
-        } else {
-            sessionStorage.setItem('userData', JSON.stringify(userData));
-        }
+      // Also update local session data
+      userData.firstName = result.user.first_name;
+      userData.lastName = result.user.last_name;
+      sessionStorage.setItem('userData', JSON.stringify(userData));
 
-        showNotification('Profile updated successfully!', 'success');
-
-        // Reload profile display
-        loadProfile();
-        updateNavigation();
-    });
+      showNotification('Profile updated successfully!', 'success');
+      await loadProfile();
+      await updateNavigation();
+    } catch (err) {
+      showNotification('Failed to update profile: ' + err.message, 'error');
+    }
+  });
 }
 
 // =====================================================
@@ -130,7 +139,7 @@ function initializeForm() {
 // =====================================================
 
 function handleLogout() {
-    if (confirm('Are you sure you want to logout?')) {
-        logout();
-    }
+  if (confirm('Are you sure you want to logout?')) {
+    logout();
+  }
 }

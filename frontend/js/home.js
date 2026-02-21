@@ -3,19 +3,21 @@
 // =====================================================
 
 // Update navigation based on authentication state
-function updateNavigation() {
-    const navButtons = document.getElementById('navButtons');
+async function updateNavigation() {
+  const navButtons = document.getElementById('navButtons');
 
-    if (isLoggedIn()) {
-        const userData = getUserData();
-        const firstName = userData.firstName || 'User';
+  if (isLoggedIn()) {
+    const userData = getUserData();
+    const firstName = userData.firstName || 'User';
 
-        // Get counts for badges
-        const alertsCount = getAlerts().length;
-        const wishlistCount = getWishlist().length;
+    // Get counts for badges
+    const alerts = await getAlerts();
+    const alertsCount = alerts.length;
+    const wishlist = await getWishlist();
+    const wishlistCount = wishlist.length;
 
-        // Logged in navigation
-        navButtons.innerHTML = `
+    // Logged in navigation
+    navButtons.innerHTML = `
       <button class="nav-icon-btn" onclick="window.location.href='alerts.html'" title="Alerts">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
@@ -39,13 +41,13 @@ function updateNavigation() {
         ${firstName}
       </button>
     `;
-    } else {
-        // Logged out navigation
-        navButtons.innerHTML = `
+  } else {
+    // Logged out navigation
+    navButtons.innerHTML = `
       <a href="login.html"><button class="btn">Login</button></a>
       <a href="signup.html"><button class="btn primary">Sign Up</button></a>
     `;
-    }
+  }
 }
 
 // =====================================================
@@ -53,30 +55,30 @@ function updateNavigation() {
 // =====================================================
 
 function handleSearch() {
-    const searchInput = document.getElementById('searchInput');
-    const query = searchInput.value.trim();
+  const searchInput = document.getElementById('searchInput');
+  const query = searchInput.value.trim();
 
-    if (!query) {
-        showNotification('Please enter a product name', 'warning');
-        return;
-    }
+  if (!query) {
+    showNotification('Please enter a product name', 'warning');
+    return;
+  }
 
-    // Redirect to results page with query parameter
-    window.location.href = `results.html?q=${encodeURIComponent(query)}`;
+  // Redirect to results page with query parameter
+  window.location.href = `results.html?q=${encodeURIComponent(query)}`;
 }
 
 // Allow Enter key to trigger search
-document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.getElementById('searchInput');
+document.addEventListener('DOMContentLoaded', async function () {
+  const searchInput = document.getElementById('searchInput');
 
-    if (searchInput) {
-        searchInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                handleSearch();
-            }
-        });
-    }
+  if (searchInput) {
+    searchInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        handleSearch();
+      }
+    });
+  }
 
-    // Update navigation on page load
-    updateNavigation();
+  // Update navigation on page load
+  await updateNavigation();
 });

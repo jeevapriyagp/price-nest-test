@@ -2,7 +2,9 @@
 // API CONFIGURATION & HELPERS
 // =====================================================
 
-const API_BASE_URL = 'http://127.0.0.1:8000';
+const API_BASE_URL = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
+    ? 'http://127.0.0.1:8000/api'
+    : '/api';
 
 /**
  * Helper for GET requests to the backend
@@ -35,6 +37,31 @@ async function apiGet(endpoint, params = {}) {
 async function apiPost(endpoint, body) {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+        let errMsg = `API Error: ${response.statusText}`;
+        try {
+            const err = await response.json();
+            errMsg = err.detail || errMsg;
+        } catch (_) { }
+        throw new Error(errMsg);
+    }
+
+    return await response.json();
+}
+
+/**
+ * Helper for PUT requests to the backend
+ * @param {string} endpoint - API endpoint
+ * @param {Object} body - Request body
+ * @returns {Promise<Object>} - JSON response
+ */
+async function apiPut(endpoint, body) {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
     });
@@ -90,7 +117,6 @@ function getUserData() {
  * Logout user and clear session
  */
 function logout() {
-    localStorage.removeItem('userData');
     sessionStorage.removeItem('userData');
     window.location.href = 'index.html';
 }
@@ -309,9 +335,10 @@ async function updateAlertStatus(alertId, isActive) {
 
 // Local cache of wishlist product IDs to avoid frequent API calls for button states
 let wishlistCache = [];
+let wishlistSynced = false;
 
 /**
- * Sync wishlist from backend
+ * Sync wishlist from backend (always fetches fresh data)
  * @returns {Promise<Array>} - Array of product objects
  */
 async function syncWishlist() {
@@ -322,6 +349,7 @@ async function syncWishlist() {
         const data = await apiGet('/wishlist', { email: userData.email });
         const wishlist = data.wishlist || [];
         wishlistCache = wishlist.map(p => p.id);
+        wishlistSynced = true;
         return wishlist;
     } catch (e) {
         console.error('Failed to sync wishlist:', e);
@@ -330,10 +358,17 @@ async function syncWishlist() {
 }
 
 /**
- * Get wishlist (from backend if needed)
+ * Get wishlist — uses cache if already synced, otherwise fetches from backend.
  * @returns {Promise<Array>} - Array of product objects
  */
 async function getWishlist() {
+    // If we've already synced this session, return a lightweight re-fetch
+    // only when the component actually needs the full list (wishlist page).
+    // For nav badge counts this avoids a redundant API round-trip.
+    if (wishlistSynced) {
+        // Return cached product stubs (id only) — enough for badge counts
+        return wishlistCache.map(id => ({ id }));
+    }
     return await syncWishlist();
 }
 
@@ -344,15 +379,18 @@ async function getWishlist() {
 async function addToWishlist(product) {
     if (!isLoggedIn()) return false;
 
+    // Normalize to int to keep wishlistCache consistent
+    const pid = typeof product.id === 'string' ? parseInt(product.id) : product.id;
+
     try {
         const userData = getUserData();
         await apiPost('/wishlist', {
             email: userData.email,
-            product_id: product.id
+            product_id: pid
         });
 
-        if (!wishlistCache.includes(product.id)) {
-            wishlistCache.push(product.id);
+        if (!wishlistCache.includes(pid)) {
+            wishlistCache.push(pid);
         }
 
         showNotification('Added to wishlist!', 'success');
@@ -375,7 +413,6 @@ async function removeFromWishlist(productId) {
 
     try {
         const userData = getUserData();
-        // The API expects a WishlistRequest with email and product_id
         await fetch(`${API_BASE_URL}/wishlist`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
@@ -386,6 +423,8 @@ async function removeFromWishlist(productId) {
         });
 
         wishlistCache = wishlistCache.filter(id => id !== pid);
+        // Mark as needing re-sync so full product list is refreshed next time
+        wishlistSynced = false;
         showNotification('Removed from wishlist', 'success');
         return true;
     } catch (e) {

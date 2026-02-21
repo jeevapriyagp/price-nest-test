@@ -1,8 +1,7 @@
-from serpapi import GoogleSearch
 import re
 from urllib.parse import urlparse
-
-SERPAPI_KEY = "1d6065c3bb9a427c73b6c5d96db1ac14691f1d732a79187d7c8b5e396b9e455f"
+from serpapi import GoogleSearch
+from ..core.config import SERPAPI_KEY
 
 
 # --------------------------------------------------

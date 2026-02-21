@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from .database import Base
+from ..core.database import Base
 
 
 # -----------------------------
@@ -45,6 +45,7 @@ class Alert(Base):
     query = Column(String, index=True)
     target_price = Column(Float)
     is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
 
 
 # -----------------------------

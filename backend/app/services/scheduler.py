@@ -1,22 +1,18 @@
 import smtplib
-import os
 from email.mime.text import MIMEText
 from sqlalchemy import func
 
-from backend.backend_scrapper import compare_product
-from backend import storage
-from backend.database import SessionLocal
-from backend.models import PriceHistory
+from .scraper import compare_product
+from . import storage
+from ..core.database import SessionLocal
+from ..models.models import PriceHistory
+from ..core.config import EMAIL_USER, EMAIL_PASS
 
-
-# =========================
-# EMAIL CONFIG (GMAIL)
-# =========================
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
-EMAIL_SENDER = os.getenv("EMAIL_USER")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASS")
+EMAIL_SENDER = EMAIL_USER
+EMAIL_PASSWORD = EMAIL_PASS
 
 
 # =========================

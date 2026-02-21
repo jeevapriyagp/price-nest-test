@@ -4,12 +4,10 @@ pydantic
 google-search-results
 python-multipart
 sqlalchemy
-alembic
 pytest
 python-dotenv
 psycopg2-binary
-apscheduler
 pandas
 numpy
 passlib[bcrypt]
-python-jose[cryptography]
+mangum

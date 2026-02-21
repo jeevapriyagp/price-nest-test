@@ -23,7 +23,7 @@ if (loginForm) {
     }
 
     // Actual login
-    fetch('http://127.0.0.1:8000/auth/login', {
+    fetch(`${API_BASE_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -48,11 +48,7 @@ if (loginForm) {
           timestamp: new Date().toISOString()
         };
 
-        if (remember) {
-          localStorage.setItem('userData', JSON.stringify(userData));
-        } else {
-          sessionStorage.setItem('userData', JSON.stringify(userData));
-        }
+        sessionStorage.setItem('userData', JSON.stringify(userData));
 
         setTimeout(() => {
           window.location.href = 'index.html';
@@ -126,7 +122,7 @@ if (signupForm) {
     }
 
     // Actual signup
-    fetch('http://127.0.0.1:8000/auth/signup', {
+    fetch(`${API_BASE_URL}/auth/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -156,7 +152,7 @@ if (signupForm) {
           timestamp: new Date().toISOString()
         };
 
-        localStorage.setItem('userData', JSON.stringify(userData));
+        sessionStorage.setItem('userData', JSON.stringify(userData));
 
         setTimeout(() => {
           window.location.href = 'index.html';
@@ -228,94 +224,3 @@ function calculatePasswordStrength(password) {
   }
 }
 
-// Notification system
-function showNotification(message, type = 'info') {
-  // Remove existing notification if any
-  const existingNotification = document.querySelector('.notification');
-  if (existingNotification) {
-    existingNotification.remove();
-  }
-
-  // Create notification element
-  const notification = document.createElement('div');
-  notification.className = `notification notification-${type}`;
-  notification.textContent = message;
-
-  // Add styles
-  const styles = {
-    position: 'fixed',
-    top: '20px',
-    right: '20px',
-    padding: '16px 24px',
-    borderRadius: '12px',
-    color: 'white',
-    fontWeight: '500',
-    fontSize: '14px',
-    zIndex: '10000',
-    animation: 'slideInRight 0.3s ease-out',
-    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
-    maxWidth: '400px'
-  };
-
-  Object.assign(notification.style, styles);
-
-  // Set background color based on type
-  if (type === 'success') {
-    notification.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-  } else if (type === 'error') {
-    notification.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
-  } else {
-    notification.style.background = 'linear-gradient(135deg, #667eea, #764ba2)';
-  }
-
-  // Add animation keyframes if not already added
-  if (!document.querySelector('#notification-animations')) {
-    const styleSheet = document.createElement('style');
-    styleSheet.id = 'notification-animations';
-    styleSheet.textContent = `
-      @keyframes slideInRight {
-        from {
-          opacity: 0;
-          transform: translateX(100px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      @keyframes slideOutRight {
-        from {
-          opacity: 1;
-          transform: translateX(0);
-        }
-        to {
-          opacity: 0;
-          transform: translateX(100px);
-        }
-      }
-    `;
-    document.head.appendChild(styleSheet);
-  }
-
-  // Add to page
-  document.body.appendChild(notification);
-
-  // Remove after 4 seconds
-  setTimeout(() => {
-    notification.style.animation = 'slideOutRight 0.3s ease-out';
-    setTimeout(() => {
-      notification.remove();
-    }, 300);
-  }, 4000);
-}
-
-// =====================================================
-// SOCIAL LOGIN HANDLERS (Placeholders)
-// =====================================================
-const socialButtons = document.querySelectorAll('.btn-social');
-socialButtons.forEach(button => {
-  button.addEventListener('click', function () {
-    const provider = this.textContent.trim();
-    showNotification(`${provider} login is not yet implemented`, 'info');
-  });
-});

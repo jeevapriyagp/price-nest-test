@@ -2,7 +2,7 @@
 // WISHLIST PAGE - INITIALIZATION
 // =====================================================
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
   // Check authentication
   if (!isLoggedIn()) {
     window.location.href = 'login.html';
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Update navigation
-  updateNavigation();
+  await updateNavigation();
 
   // Load wishlist
   loadWishlistItems();
@@ -20,12 +20,14 @@ document.addEventListener('DOMContentLoaded', function () {
 // NAVIGATION UPDATE
 // =====================================================
 
-function updateNavigation() {
+async function updateNavigation() {
   const navButtons = document.getElementById('navButtons');
   const userData = getUserData();
   const firstName = userData.firstName || 'User';
-  const alertsCount = getAlerts().length;
-  const wishlistCount = getWishlist().length;
+  const alerts = await getAlerts();
+  const alertsCount = alerts.length;
+  const wishlist = await getWishlist();
+  const wishlistCount = wishlist.length;
 
   navButtons.innerHTML = `
     <button class="nav-icon-btn" onclick="window.location.href='alerts.html'" title="Alerts">
@@ -62,7 +64,10 @@ async function loadWishlistItems() {
   if (!container) return;
 
   container.innerHTML = '<div class="spinner"></div>';
-  const wishlist = await getWishlist();
+  // Use syncWishlist (not getWishlist) to always get full product objects
+  // getWishlist() returns ID-only stubs when cache is warm, which is enough
+  // for badge counts but not for rendering cards.
+  const wishlist = await syncWishlist();
 
   if (wishlist.length === 0) {
     container.innerHTML = `
@@ -124,6 +129,6 @@ async function handleRemoveItem(productId) {
   if (confirm('Remove this item from your wishlist?')) {
     await removeFromWishlist(productId);
     await loadWishlistItems();
-    updateNavigation();
+    await updateNavigation();
   }
 }

@@ -30,8 +30,31 @@ def fetch_price_history(query: str) -> pd.DataFrame:
 def analyze_price(query: str):
     df = fetch_price_history(query)
 
-    if df.empty or len(df) < 2:
-        return {"error": "Not enough price history available"}
+    if df.empty:
+        return {"error": "No price history available yet"}
+
+    # --- Single-entry fallback ---
+    if len(df) < 2:
+        row = df.iloc[0]
+        price = int(row["price"])
+        store = row["store"]
+        return {
+            "summary": {
+                "lowest_price": price,
+                "highest_price": price,
+                "average_price": price,
+                "price_range": f"₹{price}",
+                "cheapest_store": store
+            },
+            "store_prices": {store: price},
+            "price_trend": df.to_dict(orient="records"),
+            "volatility": {
+                "score": 0,
+                "stability": "🟢 Stable"
+            },
+            "best_time_to_buy": "Only one data point available — check back after more searches for trend info",
+            "store_consistency": {store: 1}
+        }
 
     lowest_price = int(df["price"].min())
     highest_price = int(df["price"].max())
