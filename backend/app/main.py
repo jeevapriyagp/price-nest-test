@@ -1,3 +1,4 @@
+import os
 import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -36,11 +37,16 @@ app.add_middleware(
 # -----------------------
 # Routes
 # -----------------------
-app.include_router(auth.router, prefix="/api")
-app.include_router(products.router, prefix="/api")
-app.include_router(alerts.router, prefix="/api")
-app.include_router(wishlist.router, prefix="/api")
-app.include_router(analytics.router, prefix="/api")
+
+# If running on Vercel, the /api prefix is already handled by vercel.json routing
+# When running locally, we keep the /api prefix for convenience
+API_PREFIX = "" if os.environ.get("VERCEL") == "1" else "/api"
+
+app.include_router(auth.router, prefix=API_PREFIX)
+app.include_router(products.router, prefix=API_PREFIX)
+app.include_router(alerts.router, prefix=API_PREFIX)
+app.include_router(wishlist.router, prefix=API_PREFIX)
+app.include_router(analytics.router, prefix=API_PREFIX)
 
 
 @app.get("/")
