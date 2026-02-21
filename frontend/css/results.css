@@ -29,7 +29,6 @@
 .products-grid .spinner {
     grid-column: 1 / -1;
     justify-self: center;
-    width: 100%;
 }
 
 .product-card {
