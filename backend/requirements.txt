@@ -10,4 +10,5 @@ psycopg2-binary
 pandas
 numpy
 passlib[bcrypt]
+bcrypt
 mangum

@@ -12,4 +12,5 @@ numpy
 bcrypt
 passlib[bcrypt]
 mangum
-
+python-jose
+pyjwt

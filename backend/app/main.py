@@ -51,3 +51,4 @@ def read_root():
     return {"message": "Welcome to PriceNest API", "status": "online"}
 
 
+handler = Mangum(app)
