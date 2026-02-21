@@ -25,6 +25,13 @@
     margin-top: var(--spacing-lg);
 }
 
+.products-grid .empty-state,
+.products-grid .spinner {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+}
+
 .product-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -418,7 +425,8 @@
 
 /* Skeleton Loader */
 .skeleton {
-    background: #2d3748; /* Darker base for dark mode compatibility */
+    background: #2d3748;
+    /* Darker base for dark mode compatibility */
     background: linear-gradient(110deg, #2d3748 8%, #4a5568 18%, #2d3748 33%);
     border-radius: 5px;
     background-size: 200% 100%;
