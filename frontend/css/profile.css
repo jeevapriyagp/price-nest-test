@@ -82,10 +82,56 @@
     padding: var(--spacing-xl);
 }
 
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
 .settings-card h3 {
     font-size: 20px;
     font-weight: 600;
+    margin: 0;
+}
+
+.settings-content {
+    transition: all var(--transition-base);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.display-group {
     margin-bottom: var(--spacing-lg);
+}
+
+.display-group label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.display-value {
+    font-size: 16px;
+    color: var(--text-primary);
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+}
+
+.form-actions .btn {
+    flex: 1;
 }
 
 /* Actions Card */

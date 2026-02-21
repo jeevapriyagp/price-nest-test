@@ -70,10 +70,20 @@ async function loadProfile() {
     return;
   }
 
-  // Update profile display
+  // Update profile header
   document.getElementById('profileName').textContent =
     `${userData.firstName || ''} ${userData.lastName || ''}`.trim() || 'User';
   document.getElementById('profileEmail').textContent = userData.email || '';
+
+  // Update display values
+  document.getElementById('dispFirstName').textContent = userData.firstName || '-';
+  document.getElementById('dispLastName').textContent = userData.lastName || '-';
+  document.getElementById('dispEmail').textContent = userData.email || '-';
+
+  // Populate form inputs
+  document.getElementById('firstName').value = userData.firstName || '';
+  document.getElementById('lastName').value = userData.lastName || '';
+  document.getElementById('email').value = userData.email || '';
 
   // Update stats (await async functions)
   const alerts = await getAlerts();
@@ -90,11 +100,28 @@ async function loadProfile() {
     });
     document.getElementById('memberSince').textContent = monthYear;
   }
+}
 
-  // Populate form
-  document.getElementById('firstName').value = userData.firstName || '';
-  document.getElementById('lastName').value = userData.lastName || '';
-  document.getElementById('email').value = userData.email || '';
+// =====================================================
+// EDIT MODE TOGGLE
+// =====================================================
+
+function toggleEditMode(isEditing) {
+  const profileView = document.getElementById('profileView');
+  const profileForm = document.getElementById('profileForm');
+  const editBtn = document.getElementById('editDetailsBtn');
+
+  if (isEditing) {
+    profileView.classList.add('hidden');
+    profileForm.classList.remove('hidden');
+    editBtn.classList.add('hidden');
+  } else {
+    profileView.classList.remove('hidden');
+    profileForm.classList.add('hidden');
+    editBtn.classList.remove('hidden');
+    // Reset form to latest data
+    loadProfile();
+  }
 }
 
 // =====================================================
@@ -110,7 +137,7 @@ function initializeForm() {
     const userData = getUserData();
     const firstName = document.getElementById('firstName').value.trim();
     const lastName = document.getElementById('lastName').value.trim();
-    const email = userData.email; // email is not editable — used as identifier
+    const email = userData.email;
 
     try {
       // Persist to backend
@@ -120,12 +147,17 @@ function initializeForm() {
         last_name: lastName
       });
 
-      // Also update local session data
+      // Update session data
       userData.firstName = result.user.first_name;
       userData.lastName = result.user.last_name;
       sessionStorage.setItem('userData', JSON.stringify(userData));
 
       showNotification('Profile updated successfully!', 'success');
+
+      // Exit edit mode first
+      toggleEditMode(false);
+
+      // Reload UI
       await loadProfile();
       await updateNavigation();
     } catch (err) {
