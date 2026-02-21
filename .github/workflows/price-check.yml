@@ -24,6 +24,12 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: Run database migration
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python backend/scripts/migrate_db.py
+
       - name: Run price checker
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
