@@ -30,86 +30,83 @@
     font-size: 16px;
 }
 
-/* Alerts Grid */
-.alerts-grid {
-    display: grid;
-    gap: var(--spacing-lg);
-    max-width: 800px;
+/* Alerts Table */
+.table-container {
+    width: 100%;
+    max-width: 900px;
     margin: 0 auto;
-}
-
-.alert-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    transition: all var(--transition-base);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-lg);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-.alert-card:hover {
-    background: var(--bg-card-hover);
-    border-color: var(--border-color-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+.alerts-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
 }
 
-.alert-info {
-    flex: 1;
-}
-
-.alert-product {
-    font-size: 18px;
+.alerts-table th {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-secondary);
+    font-size: 13px;
     font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: var(--spacing-sm);
-}
-
-.alert-details {
-    display: flex;
-    gap: var(--spacing-lg);
-    flex-wrap: wrap;
-}
-
-.alert-detail {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.alert-detail-label {
-    font-size: 12px;
-    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.alert-detail-value {
-    font-size: 16px;
-    font-weight: 600;
+.alerts-table td {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.alerts-table tr:last-child td {
+    border-bottom: none;
+}
+
+.alerts-table tr:hover {
+    background: var(--bg-card-hover);
+}
+
+.product-name-cell {
+    width: 40%;
+}
+
+.product-title {
+    font-weight: 500;
     color: var(--text-primary);
 }
 
-.alert-detail-value.price {
+.price-value {
+    font-weight: 600;
     background: var(--primary-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
+.text-right {
+    text-align: right;
+}
+
 .alert-actions {
     display: flex;
     gap: var(--spacing-sm);
+    justify-content: flex-end;
 }
 
 .alert-actions button {
-    padding: 10px;
+    padding: 8px;
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
+    color: var(--text-secondary);
     cursor: pointer;
     transition: all var(--transition-base);
     display: flex;
@@ -120,22 +117,14 @@
 .alert-actions button:hover {
     background: var(--bg-card-hover);
     border-color: var(--border-color-hover);
+    color: var(--text-primary);
     transform: translateY(-2px);
 }
 
 .alert-actions button.delete:hover {
-    background: rgba(239, 68, 68, 0.2);
+    background: rgba(239, 68, 68, 0.1);
     border-color: var(--error-color);
-}
-
-.alert-actions button svg {
-    width: 18px;
-    height: 18px;
-    stroke: var(--text-secondary);
-}
-
-.alert-actions button.delete:hover svg {
-    stroke: var(--error-color);
+    color: var(--error-color);
 }
 
 .alert-status {
@@ -146,16 +135,15 @@
     border-radius: 12px;
     font-size: 12px;
     font-weight: 600;
-    margin-top: var(--spacing-sm);
 }
 
 .alert-status.active {
-    background: rgba(16, 185, 129, 0.2);
+    background: rgba(16, 185, 129, 0.1);
     color: var(--success-color);
 }
 
 .alert-status.inactive {
-    background: rgba(107, 114, 128, 0.2);
+    background: rgba(107, 114, 128, 0.1);
     color: var(--text-muted);
 }
 

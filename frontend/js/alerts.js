@@ -80,32 +80,64 @@ async function loadAlerts() {
   }
 
   container.innerHTML = `
-    <div class="alerts-grid">
-      ${alerts.map(alert => createAlertCard(alert)).join('')}
+    <div class="table-container">
+      <table class="alerts-table">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Target Price</th>
+            <th>Status</th>
+            <th class="text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${alerts.map(alert => createAlertRow(alert)).join('')}
+        </tbody>
+      </table>
     </div>
   `;
 }
 
 
 // =====================================================
-// CARD
+// ROW
 // =====================================================
 
-function createAlertCard(alert) {
+function createAlertRow(alert) {
+  const statusClass = alert.active ? 'active' : 'inactive';
+  const statusLabel = alert.active ? 'Active' : 'Inactive';
+
   return `
-    <div class="alert-card">
-      <h3>${alert.product || 'Unknown Product'}</h3>
-      <p>Target: ₹${alert.targetPrice}</p>
-      <p>Status: ${alert.active ? 'Active' : 'Inactive'}</p>
-
-      <button onclick="toggleAlertStatus(${alert.id}, ${alert.active})">
-        ${alert.active ? 'Pause' : 'Activate'}
-      </button>
-
-      <button onclick="handleDeleteAlert(${alert.id})">
-        Delete
-      </button>
-    </div>
+    <tr>
+      <td class="product-name-cell">
+        <span class="product-title">${alert.product || 'Unknown Product'}</span>
+      </td>
+      <td>
+        <span class="price-value">₹${alert.targetPrice}</span>
+      </td>
+      <td>
+        <span class="alert-status ${statusClass}">
+          <span class="alert-status-dot"></span>
+          ${statusLabel}
+        </span>
+      </td>
+      <td class="text-right">
+        <div class="alert-actions">
+          <button onclick="toggleAlertStatus(${alert.id}, ${alert.active})" title="${alert.active ? 'Pause' : 'Activate'}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              ${alert.active ? '<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>' : '<polygon points="5 3 19 12 5 21 5 3"></polygon>'}
+            </svg>
+          </button>
+          <button class="delete" onclick="handleDeleteAlert(${alert.id})" title="Delete">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 6h18"></path>
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </td>
+    </tr>
   `;
 }
 
