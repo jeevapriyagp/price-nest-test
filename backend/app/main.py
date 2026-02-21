@@ -4,7 +4,6 @@ import logging
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from mangum import Mangum
 
 # -----------------------
 # Path Fix for Vercel
@@ -79,5 +78,3 @@ def health_check():
         "database": "configured" if os.environ.get("DATABASE_URL") else "missing"
     }
 
-
-handler = Mangum(app)
