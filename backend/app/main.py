@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 
-from .api import auth, products, alerts, wishlist, analytics
+from api import auth, products, alerts, wishlist, analytics
 
 # -----------------------
 # Logging

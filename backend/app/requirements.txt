@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pydantic
+google-search-results
+python-multipart
+sqlalchemy
+pytest
+python-dotenv
+psycopg2-binary
+pandas
+numpy
+passlib[bcrypt]
+mangum
