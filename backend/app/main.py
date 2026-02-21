@@ -3,10 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 
-import sys, os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from app.api import auth, products, alerts, wishlist, analytics
+from .api import auth, products, alerts, wishlist, analytics
 
 # -----------------------
 # Logging
