@@ -5,3 +5,4 @@ __pycache__/
 *.sqlite
 git_status.txt
 git_status_output.txt
+backend/.env

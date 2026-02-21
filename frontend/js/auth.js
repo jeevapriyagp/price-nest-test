@@ -8,7 +8,8 @@ if (loginForm) {
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const remember = document.getElementById('remember').checked;
+    const rememberEl = document.getElementById('remember');
+    const remember = rememberEl ? rememberEl.checked : false;
 
     // Form validation
     if (!email || !password) {
