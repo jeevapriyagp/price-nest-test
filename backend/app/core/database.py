@@ -7,6 +7,9 @@ if not DATABASE_URL:
 
 # Clean the URL - remove channel_binding param that psycopg2 doesn't support
 clean_url = DATABASE_URL
+if clean_url.startswith("postgres://"):
+    clean_url = clean_url.replace("postgres://", "postgresql://", 1)
+
 if "channel_binding" in clean_url:
     import re
     clean_url = re.sub(r'[&?]channel_binding=[^&]*', '', clean_url)
