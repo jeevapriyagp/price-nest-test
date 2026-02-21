@@ -66,7 +66,16 @@ async function loadAlerts() {
   const alerts = await getAlerts();
 
   if (!alerts || alerts.length === 0) {
-    container.innerHTML = `<p>No alerts yet</p>`;
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">🔔</div>
+        <h3 class="empty-state-title">No alerts yet</h3>
+        <p class="empty-state-text">You haven't set any price alerts. Search for products to start tracking prices!</p>
+        <button class="btn primary" onclick="window.location.href='index.html'">
+          Search Products
+        </button>
+      </div>
+    `;
     return;
   }
 
