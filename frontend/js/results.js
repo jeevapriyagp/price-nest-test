@@ -6,7 +6,7 @@ let currentQuery = '';
 let productsData = [];
 let storeChart = null;
 let trendChart = null;
-let trendUnit = "hour"; // hour | day | week
+// trendUnit is removed, fixed to weekly
 
 document.addEventListener('DOMContentLoaded', async function () {
     // Get search query from URL
@@ -314,26 +314,7 @@ async function toggleWishlist(productId) {
 // ANALYTICS
 // =====================================================
 
-function setTrendUnit(unit) {
-    trendUnit = unit;
-    loadAnalytics();
-}
-
-function toggleUnitButtons(unit) {
-    const units = ['hour', 'day', 'week'];
-    units.forEach(u => {
-        const btn = document.getElementById(`unit-${u}`);
-        if (btn) {
-            if (u === unit) {
-                btn.classList.add('primary');
-                btn.classList.remove('outline');
-            } else {
-                btn.classList.add('outline');
-                btn.classList.remove('primary');
-            }
-        }
-    });
-}
+// Removed toggleUnitButtons and setTrendUnit
 
 async function loadAnalytics() {
     console.log('Starting loadAnalytics for:', currentQuery);
@@ -343,7 +324,6 @@ async function loadAnalytics() {
     statValues.forEach(sv => sv.textContent = '...');
 
     try {
-        toggleUnitButtons(trendUnit);
         const data = await apiGet('/analytics', { q: currentQuery });
         console.log('Analytics data received:', data);
 
@@ -414,13 +394,11 @@ async function loadAnalytics() {
             const bucketed = {};
             history.forEach(h => {
                 const d = new Date(h.timestamp);
-                if (trendUnit === "hour") d.setMinutes(0, 0, 0);
-                else if (trendUnit === "day") d.setHours(0, 0, 0, 0);
-                else if (trendUnit === "week") {
-                    const day = d.getDay() || 7;
-                    d.setDate(d.getDate() - day + 1);
-                    d.setHours(0, 0, 0, 0);
-                }
+                // Group by week
+                const day = d.getDay() || 7;
+                d.setDate(d.getDate() - day + 1);
+                d.setHours(0, 0, 0, 0);
+
                 const key = `${h.store}_${d.toISOString()}`;
                 if (!bucketed[key]) bucketed[key] = { store: h.store, time: d, prices: [] };
                 bucketed[key].prices.push(h.price);
@@ -463,8 +441,8 @@ async function loadAnalytics() {
                             x: {
                                 type: "time",
                                 time: {
-                                    unit: trendUnit === "week" ? "day" : trendUnit,
-                                    tooltipFormat: trendUnit === "hour" ? "MMM d, HH:mm" : trendUnit === "day" ? "MMM d" : "'Week of' MMM d"
+                                    unit: "day",
+                                    tooltipFormat: "'Week of' MMM d"
                                 },
                                 ticks: { color: '#b8c1ec', font: { size: 11 } },
                                 grid: { display: false }
