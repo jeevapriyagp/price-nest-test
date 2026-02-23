@@ -388,27 +388,21 @@ async function loadAnalytics() {
         const summary = data.summary;
         const history = data.price_trend;
 
-        // 1. Update Summary Cards — from CURRENT live productsData
+        // 1. Update Summary Cards — from DATABASE analytics
         try {
+            document.querySelector('#lowestPrice .stat-value').textContent = formatCurrency(summary.lowest_price);
+            document.querySelector('#avgPrice .stat-value').textContent = formatCurrency(summary.average_price);
+
+            // Price Range: DB lowest → current live lowest (or DB highest if no live data)
             const livePrices = productsData.map(p => p.price_numeric).filter(p => p > 0);
-            if (livePrices.length > 0) {
-                const liveMin = Math.min(...livePrices);
-                const liveMax = Math.max(...livePrices);
-                const liveAvg = Math.round(livePrices.reduce((a, c) => a + c, 0) / livePrices.length);
+            const currentLowest = livePrices.length > 0 ? Math.min(...livePrices) : summary.highest_price;
+            document.querySelector('#priceRange .stat-value').textContent = `${formatCurrency(summary.lowest_price)} - ${formatCurrency(currentLowest)}`;
 
-                // Stability: coefficient of variation across current store prices
-                const mean = liveAvg;
-                const stdDev = Math.sqrt(livePrices.map(p => (p - mean) ** 2).reduce((a, c) => a + c, 0) / livePrices.length);
-                const cv = mean > 0 ? stdDev / mean : 0;
-                const stability = cv < 0.05 ? '🟢 Stable' : cv < 0.15 ? '🟡 Moderate' : '🔴 Highly Volatile';
+            // Stability from DB volatility
+            document.querySelector('#stabilityScore .stat-value').textContent = data.volatility.stability;
 
-                document.querySelector('#lowestPrice .stat-value').textContent = formatCurrency(liveMin);
-                document.querySelector('#avgPrice .stat-value').textContent = formatCurrency(liveAvg);
-                document.querySelector('#priceRange .stat-value').textContent = `${formatCurrency(liveMin)} - ${formatCurrency(liveMax)}`;
-                document.querySelector('#stabilityScore .stat-value').textContent = stability;
-                if (document.getElementById('currentBestPrice')) {
-                    document.getElementById('currentBestPrice').textContent = formatCurrency(liveMin);
-                }
+            if (document.getElementById('currentBestPrice')) {
+                document.getElementById('currentBestPrice').textContent = formatCurrency(summary.lowest_price);
             }
         } catch (cardErr) {
             console.error('Error updating summary cards:', cardErr);
