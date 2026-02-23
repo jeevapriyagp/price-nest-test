@@ -264,36 +264,20 @@
     margin-bottom: 8px;
 }
 
-.insight-consistency-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 16px;
-}
 
 .toggle-group .btn-sm {
     padding: 6px 12px;
     font-size: 12px;
 }
 
-.insight-section h3,
-.table-section h3 {
+.insight-section h3 {
     font-size: 18px;
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 16px;
 }
 
-#storeTable th {
-    color: var(--text-secondary);
-    border-bottom: 1px solid var(--border-color);
-}
 
-@media (max-width: 900px) {
-    .analytics-container>div[style*="grid-template-columns: 1fr 1fr"] {
-        grid-template-columns: 1fr !important;
-    }
-}
 
 /* =====================================================
    ALERT FORM
@@ -392,35 +376,6 @@
     }
 }
 
-/* Table Styles */
-.analytics-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.analytics-table th,
-.analytics-table td {
-    padding: 12px 16px;
-    text-align: left;
-    font-size: 13px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.analytics-table th:last-child,
-.analytics-table td:last-child {
-    text-align: right;
-}
-
-.analytics-table th {
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--text-secondary);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.analytics-table tr:last-child td {
-    border-bottom: none;
-}
 
 /* Skeleton Loader */
 .skeleton {

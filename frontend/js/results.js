@@ -572,30 +572,6 @@ async function loadAnalytics() {
 
         // 4. Best Time-to-Buy
         document.getElementById("buyInsight").innerText = data.best_time_to_buy || "No insight available";
-
-        // 5. Store Consistency
-        try {
-            const cheapestCount = data.store_consistency || {};
-            const tbody = document.querySelector("#storeTable tbody");
-            if (tbody) {
-                tbody.innerHTML = "";
-                const entries = Object.entries(cheapestCount);
-                if (entries.length === 0) {
-                    tbody.innerHTML = "<tr><td colspan='2' style='text-align:center'>No consistency data</td></tr>";
-                } else {
-                    entries.forEach(([store, count]) => {
-                        tbody.innerHTML += `
-                            <tr>
-                                <td>${store}</td>
-                                <td>${count}</td>
-                            </tr>
-                        `;
-                    });
-                }
-            }
-        } catch (tableErr) {
-            console.error('Error updating store table:', tableErr);
-        }
     } catch (err) {
         console.error('Failed to load analytics:', err);
 
@@ -603,8 +579,6 @@ async function loadAnalytics() {
             showNotification('No historical data available for this product yet.', 'info');
             document.querySelectorAll('.stat-value').forEach(sv => sv.textContent = 'N/A');
             document.getElementById("buyInsight").innerText = "Wait for more price updates to see insights.";
-            const tbody = document.querySelector("#storeTable tbody");
-            if (tbody) tbody.innerHTML = "<tr><td colspan='2' style='text-align:center'>No consistency data</td></tr>";
         } else {
             showNotification(err.message, 'error');
             // Update UI to show error state

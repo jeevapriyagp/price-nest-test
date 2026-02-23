@@ -33,28 +33,12 @@ def analyze_price(query: str):
     if df.empty:
         return {"error": "No price history available yet"}
 
-    # --- Single-entry fallback ---
-    if len(df) < 2:
-        row = df.iloc[0]
-        price = int(row["price"])
-        store = row["store"]
-        return {
-            "summary": {
-                "lowest_price": price,
-                "highest_price": price,
-                "average_price": price,
-                "price_range": f"₹{price}",
-                "cheapest_store": store
-            },
-            "store_prices": {store: price},
-            "price_trend": df.to_dict(orient="records"),
-            "volatility": {
-                "score": 0,
-                "stability": "🟢 Stable"
-            },
-            "best_time_to_buy": "Only one data point available — check back after more searches for trend info",
-            "store_consistency": {store: 1}
-        }
+    # --- Group into 1-hour windows (Search Events) ---
+    # This prevents miscomparing stores from the same search that have slightly different timestamps
+    df["event_id"] = df["timestamp"].dt.floor("1H")
+    
+    # Get min price per event (the "Best Deal" at that point in time)
+    event_mins = df.groupby("event_id")["price"].min().sort_index()
 
     lowest_price = int(df["price"].min())
     highest_price = int(df["price"].max())
@@ -76,8 +60,8 @@ def analyze_price(query: str):
 
     price_trend = df.to_dict(orient="records")
 
-    volatility_score = round(df["price"].std(), 2)
-
+    # Volatility logic based on overall variance
+    volatility_score = round(df["price"].std(), 2) if len(df) > 1 else 0
     if volatility_score < 500:
         stability = "🟢 Stable"
     elif volatility_score < 1500:
@@ -85,30 +69,20 @@ def analyze_price(query: str):
     else:
         stability = "🔴 Highly Volatile"
 
-    insight = "Not enough recent data"
-    recent = df[df["timestamp"] >= datetime.utcnow() - timedelta(days=7)]
-
-    if len(recent) >= 2:
-        diff = int(recent.iloc[-1]["price"] - recent.iloc[0]["price"])
+    # --- Refined Best Time-to-Buy Logic ---
+    insight = "Only one search event found — search again later to see price movement"
+    
+    if len(event_mins) >= 2:
+        latest_best = int(event_mins.iloc[-1])
+        earliest_best = int(event_mins.iloc[0])
+        diff = latest_best - earliest_best
+        
         if diff < 0:
-            insight = f"Prices dropped by ₹{abs(diff)} in the last 7 days"
+            insight = f"Prices have dropped by ₹{abs(diff)} since your first search! Good time to buy."
         elif diff > 0:
-            insight = f"Prices increased by ₹{diff} in the last 7 days"
+            insight = f"Prices have increased by ₹{diff} since your first search."
         else:
-            insight = "Prices remained stable in the last 7 days"
-
-    cheapest_per_timestamp = (
-        df.sort_values("price")
-        .groupby("timestamp")
-        .first()
-    )
-
-    store_consistency = (
-        cheapest_per_timestamp
-        .groupby("store")
-        .size()
-        .to_dict()
-    )
+            insight = "Prices are currently equal to the earliest recorded price."
 
     return {
         "summary": {
@@ -124,6 +98,5 @@ def analyze_price(query: str):
             "score": volatility_score,
             "stability": stability
         },
-        "best_time_to_buy": insight,
-        "store_consistency": store_consistency
+        "best_time_to_buy": insight
     }
