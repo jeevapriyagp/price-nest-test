@@ -328,13 +328,44 @@ async function loadAnalytics() {
         console.log('Analytics data received:', data);
 
         if (!data.summary || !data.price_trend || data.price_trend.length === 0) {
-            console.warn('Empty analytics data');
-            showNotification('No historical data available for this product yet.', 'info');
-
-            // Set stats to "N/A"
+            console.warn('Empty analytics data — will still draw live store chart');
+            showNotification('No historical data available yet. Showing current search prices.', 'info');
             document.querySelectorAll('.stat-value').forEach(sv => sv.textContent = 'N/A');
+
+            // Still draw the store bar chart from live productsData
+            try {
+                if (storeChart) storeChart.destroy();
+                const liveStoreMap = {};
+                productsData.forEach(p => {
+                    const store = p.source;
+                    const price = p.price_numeric || 0;
+                    if (!liveStoreMap[store] || price < liveStoreMap[store]) liveStoreMap[store] = price;
+                });
+                const storeLabels = Object.keys(liveStoreMap);
+                const storeData = Object.values(liveStoreMap);
+                if (storeLabels.length > 0) {
+                    storeChart = new Chart(document.getElementById("storeChart"), {
+                        type: "bar",
+                        data: {
+                            labels: storeLabels,
+                            datasets: [{ data: storeData, backgroundColor: "#6366f1", borderRadius: 6, maxBarThickness: 32, categoryPercentage: 0.7 }]
+                        },
+                        options: {
+                            responsive: true, maintainAspectRatio: false,
+                            plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => formatCurrency(ctx.parsed.y) } } },
+                            scales: {
+                                y: { ticks: { callback: v => formatCurrency(v), color: '#b8c1ec', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                                x: { ticks: { color: '#b8c1ec', font: { size: 11 } }, grid: { display: false } }
+                            }
+                        }
+                    });
+                }
+            } catch (e) { console.error('Store chart error (no history):', e); }
+
+            document.getElementById("buyInsight").innerText = "Search more times to build trend insights.";
             return;
         }
+
 
         const summary = data.summary;
         const history = data.price_trend;
@@ -352,11 +383,22 @@ async function loadAnalytics() {
             console.error('Error updating summary cards:', cardErr);
         }
 
-        // 2. Store Chart
+        // 2. Store Chart — built from CURRENT live search results (productsData), not DB
         try {
             if (storeChart) storeChart.destroy();
-            const storeLabels = Object.keys(data.store_prices || {});
-            const storeData = Object.values(data.store_prices || {});
+
+            // Group live results by store → take the lowest price per store
+            const liveStoreMap = {};
+            productsData.forEach(p => {
+                const store = p.source;
+                const price = p.price_numeric || 0;
+                if (!liveStoreMap[store] || price < liveStoreMap[store]) {
+                    liveStoreMap[store] = price;
+                }
+            });
+
+            const storeLabels = Object.keys(liveStoreMap);
+            const storeData = Object.values(liveStoreMap);
 
             if (storeLabels.length > 0) {
                 storeChart = new Chart(document.getElementById("storeChart"), {
@@ -389,54 +431,51 @@ async function loadAnalytics() {
             console.error('Error creating store chart:', chart1Err);
         }
 
-        // 3. Trend Chart (Weekly)
+        // 3. Trend Chart — auto-scales to actual data range, no artificial empty padding
         try {
-            // --- Weekly bucketing: group each store's prices by ISO week start (Monday) ---
-            const bucketed = {};
-            history.forEach(h => {
-                const d = new Date(h.timestamp);
-                // Snap to Monday of that week
-                const dayOfWeek = d.getDay() === 0 ? 7 : d.getDay(); // Sunday=7
-                d.setDate(d.getDate() - dayOfWeek + 1);
-                d.setHours(0, 0, 0, 0);
+            const allTimestamps = history.map(h => new Date(h.timestamp).getTime());
+            const earliest = Math.min(...allTimestamps);
+            const latest = Math.max(...allTimestamps);
+            const spanDays = (latest - earliest) / (1000 * 60 * 60 * 24);
 
-                const key = `${h.store}||${d.toISOString()}`;
-                if (!bucketed[key]) bucketed[key] = { store: h.store, weekStart: new Date(d), prices: [] };
-                bucketed[key].prices.push(h.price);
-            });
+            // Choose granularity: daily when data is ≤ 14 days old, weekly otherwise
+            const useWeekly = spanDays > 14;
 
             const grouped = {};
-            Object.values(bucketed).forEach(b => {
-                const avgPrice = b.prices.reduce((a, c) => a + c, 0) / b.prices.length;
-                if (!grouped[b.store]) grouped[b.store] = [];
-                // Use numeric timestamp for x-value for better compatibility with date-fns adapter
-                grouped[b.store].push({ x: b.weekStart.getTime(), y: Math.round(avgPrice) });
+            history.forEach(h => {
+                const d = new Date(h.timestamp);
+                let bucketKey;
+
+                if (useWeekly) {
+                    // Snap to Monday of that week
+                    const dow = d.getDay() === 0 ? 7 : d.getDay();
+                    d.setDate(d.getDate() - dow + 1);
+                    d.setHours(0, 0, 0, 0);
+                    bucketKey = `${h.store}||W||${d.toISOString()}`;
+                } else {
+                    // Snap to start of day
+                    d.setHours(0, 0, 0, 0);
+                    bucketKey = `${h.store}||D||${d.toISOString()}`;
+                }
+
+                if (!grouped[bucketKey]) grouped[bucketKey] = { store: h.store, ts: d.getTime(), prices: [] };
+                grouped[bucketKey].prices.push(h.price);
             });
 
-            // --- Determine the x-axis range: earliest data point minus padding, up to now ---
-            const allDates = Object.values(grouped).flatMap(pts => pts.map(p => p.x));
-            const earliestData = allDates.length > 0
-                ? new Date(Math.min(...allDates.map(d => d)))
-                : new Date();
-
-            // Show at least 8 weeks of history context
-            const eightWeeksAgo = new Date();
-            eightWeeksAgo.setDate(eightWeeksAgo.getDate() - 56);
-            // Use numeric timestamp for min/max
-            const xMin = (earliestData < eightWeeksAgo ? earliestData : eightWeeksAgo).getTime();
-
-            // Add one extra week padding after today
-            const xMax = new Date();
-            xMax.setDate(xMax.getDate() + 7);
-            // Use numeric timestamp for min/max
-            const xMaxTimestamp = xMax.getTime();
+            // Build per-store datasets (averaged per bucket)
+            const storeMap = {};
+            Object.values(grouped).forEach(b => {
+                const avg = Math.round(b.prices.reduce((a, c) => a + c, 0) / b.prices.length);
+                if (!storeMap[b.store]) storeMap[b.store] = [];
+                storeMap[b.store].push({ x: b.ts, y: avg });
+            });
 
             const colors = ["#22c55e", "#3b82f6", "#f97316"];
-            const datasets = Object.entries(grouped).map(([store, values], i) => ({
+            const datasets = Object.entries(storeMap).map(([store, pts], i) => ({
                 label: store,
-                data: values.sort((a, b) => a.x - b.x),
+                data: pts.sort((a, b) => a.x - b.x),
                 borderColor: colors[i % colors.length],
-                backgroundColor: colors[i % colors.length] + '33',
+                backgroundColor: colors[i % colors.length] + '22',
                 showLine: true,
                 spanGaps: true,
                 fill: true,
@@ -451,6 +490,11 @@ async function loadAnalytics() {
 
             if (trendChart) trendChart.destroy();
             if (datasets.length > 0) {
+                const timeUnit = useWeekly ? "week" : "day";
+                const tooltipTitle = useWeekly
+                    ? items => `Week of ${new Date(items[0].parsed.x).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}`
+                    : items => new Date(items[0].parsed.x).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
+
                 trendChart = new Chart(document.getElementById("trendChart"), {
                     type: "line",
                     data: { datasets },
@@ -460,16 +504,10 @@ async function loadAnalytics() {
                         parsing: false,
                         interaction: { mode: 'index', intersect: false },
                         plugins: {
-                            legend: {
-                                position: "top",
-                                labels: { color: '#b8c1ec', boxWidth: 16, font: { size: 11 } }
-                            },
+                            legend: { position: "top", labels: { color: '#b8c1ec', boxWidth: 16, font: { size: 11 } } },
                             tooltip: {
                                 callbacks: {
-                                    title: items => {
-                                        const d = new Date(items[0].parsed.x);
-                                        return `Week of ${d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}`;
-                                    },
+                                    title: tooltipTitle,
                                     label: ctx => `${ctx.dataset.label}: ${formatCurrency(ctx.parsed.y)}`
                                 }
                             }
@@ -477,12 +515,9 @@ async function loadAnalytics() {
                         scales: {
                             x: {
                                 type: "time",
-                                min: xMin,
-                                max: xMaxTimestamp,
                                 time: {
-                                    unit: "week",
-                                    // isoWeekday is not needed for date-fns adapter
-                                    displayFormats: { week: "MMM d" } // date-fns format string
+                                    unit: timeUnit,
+                                    displayFormats: { day: "MMM d", week: "MMM d" }
                                 },
                                 ticks: { color: '#b8c1ec', font: { size: 11 }, maxTicksLimit: 8 },
                                 grid: { display: false }
@@ -496,6 +531,9 @@ async function loadAnalytics() {
                         }
                     }
                 });
+            } else {
+                document.getElementById("trendChart").parentElement.innerHTML =
+                    `<p style="color:#b8c1ec;text-align:center;padding:40px 0">No price history yet — search again later to build a trend.</p>`;
             }
         } catch (chart2Err) {
             console.error('Error creating trend chart:', chart2Err);
