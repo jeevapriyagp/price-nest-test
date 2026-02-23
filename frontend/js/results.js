@@ -409,25 +409,27 @@ async function loadAnalytics() {
             Object.values(bucketed).forEach(b => {
                 const avgPrice = b.prices.reduce((a, c) => a + c, 0) / b.prices.length;
                 if (!grouped[b.store]) grouped[b.store] = [];
-                grouped[b.store].push({ x: b.weekStart, y: Math.round(avgPrice) });
+                // Use numeric timestamp for x-value for better compatibility with date-fns adapter
+                grouped[b.store].push({ x: b.weekStart.getTime(), y: Math.round(avgPrice) });
             });
 
             // --- Determine the x-axis range: earliest data point minus padding, up to now ---
             const allDates = Object.values(grouped).flatMap(pts => pts.map(p => p.x));
             const earliestData = allDates.length > 0
-                ? new Date(Math.min(...allDates.map(d => d.getTime())))
+                ? new Date(Math.min(...allDates.map(d => d)))
                 : new Date();
 
             // Show at least 8 weeks of history context
             const eightWeeksAgo = new Date();
             eightWeeksAgo.setDate(eightWeeksAgo.getDate() - 56);
-            const xMin = earliestData < eightWeeksAgo ? earliestData : eightWeeksAgo;
+            // Use numeric timestamp for min/max
+            const xMin = (earliestData < eightWeeksAgo ? earliestData : eightWeeksAgo).getTime();
 
             // Add one extra week padding after today
             const xMax = new Date();
             xMax.setDate(xMax.getDate() + 7);
-
-            const uniqueWeeks = new Set(Object.values(grouped).flatMap(pts => pts.map(p => p.x.toISOString())));
+            // Use numeric timestamp for min/max
+            const xMaxTimestamp = xMax.getTime();
 
             const colors = ["#22c55e", "#3b82f6", "#f97316"];
             const datasets = Object.entries(grouped).map(([store, values], i) => ({
@@ -476,11 +478,11 @@ async function loadAnalytics() {
                             x: {
                                 type: "time",
                                 min: xMin,
-                                max: xMax,
+                                max: xMaxTimestamp,
                                 time: {
                                     unit: "week",
-                                    isoWeekday: true,
-                                    displayFormats: { week: "MMM d" }
+                                    // isoWeekday is not needed for date-fns adapter
+                                    displayFormats: { week: "MMM d" } // date-fns format string
                                 },
                                 ticks: { color: '#b8c1ec', font: { size: 11 }, maxTicksLimit: 8 },
                                 grid: { display: false }
