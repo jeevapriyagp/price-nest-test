@@ -584,8 +584,6 @@ async function loadAnalytics() {
             // Update UI to show error state
             document.querySelectorAll('.stat-value').forEach(sv => sv.textContent = 'Error');
             document.getElementById("buyInsight").innerText = "Unable to load analytics data.";
-            const tbody = document.querySelector("#storeTable tbody");
-            if (tbody) tbody.innerHTML = "<tr><td colspan='2' style='text-align:center; color: var(--error)'>Service Unavailable</td></tr>";
         }
     }
 }

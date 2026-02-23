@@ -35,7 +35,7 @@ def analyze_price(query: str):
 
     # --- Group into 1-hour windows (Search Events) ---
     # This prevents miscomparing stores from the same search that have slightly different timestamps
-    df["event_id"] = df["timestamp"].dt.floor("1H")
+    df["event_id"] = df["timestamp"].dt.floor("1h")
     
     # Get min price per event (the "Best Deal" at that point in time)
     event_mins = df.groupby("event_id")["price"].min().sort_index()
@@ -58,7 +58,7 @@ def analyze_price(query: str):
         for _, row in latest_prices.iterrows()
     }
 
-    price_trend = df.to_dict(orient="records")
+    price_trend = df.drop(columns=["event_id"]).to_dict(orient="records")
 
     # Volatility logic based on overall variance
     volatility_score = round(df["price"].std(), 2) if len(df) > 1 else 0
