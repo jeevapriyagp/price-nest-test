@@ -389,18 +389,19 @@ async function loadAnalytics() {
             console.error('Error creating store chart:', chart1Err);
         }
 
-        // 3. Trend Chart
+        // 3. Trend Chart (Weekly)
         try {
+            // --- Weekly bucketing: group each store's prices by ISO week start (Monday) ---
             const bucketed = {};
             history.forEach(h => {
                 const d = new Date(h.timestamp);
-                // Group by week
-                const day = d.getDay() || 7;
-                d.setDate(d.getDate() - day + 1);
+                // Snap to Monday of that week
+                const dayOfWeek = d.getDay() === 0 ? 7 : d.getDay(); // Sunday=7
+                d.setDate(d.getDate() - dayOfWeek + 1);
                 d.setHours(0, 0, 0, 0);
 
-                const key = `${h.store}_${d.toISOString()}`;
-                if (!bucketed[key]) bucketed[key] = { store: h.store, time: d, prices: [] };
+                const key = `${h.store}||${d.toISOString()}`;
+                if (!bucketed[key]) bucketed[key] = { store: h.store, weekStart: new Date(d), prices: [] };
                 bucketed[key].prices.push(h.price);
             });
 
@@ -408,23 +409,42 @@ async function loadAnalytics() {
             Object.values(bucketed).forEach(b => {
                 const avgPrice = b.prices.reduce((a, c) => a + c, 0) / b.prices.length;
                 if (!grouped[b.store]) grouped[b.store] = [];
-                grouped[b.store].push({ x: b.time, y: Math.round(avgPrice) });
+                grouped[b.store].push({ x: b.weekStart, y: Math.round(avgPrice) });
             });
+
+            // --- Determine the x-axis range: earliest data point minus padding, up to now ---
+            const allDates = Object.values(grouped).flatMap(pts => pts.map(p => p.x));
+            const earliestData = allDates.length > 0
+                ? new Date(Math.min(...allDates.map(d => d.getTime())))
+                : new Date();
+
+            // Show at least 8 weeks of history context
+            const eightWeeksAgo = new Date();
+            eightWeeksAgo.setDate(eightWeeksAgo.getDate() - 56);
+            const xMin = earliestData < eightWeeksAgo ? earliestData : eightWeeksAgo;
+
+            // Add one extra week padding after today
+            const xMax = new Date();
+            xMax.setDate(xMax.getDate() + 7);
+
+            const uniqueWeeks = new Set(Object.values(grouped).flatMap(pts => pts.map(p => p.x.toISOString())));
 
             const colors = ["#22c55e", "#3b82f6", "#f97316"];
             const datasets = Object.entries(grouped).map(([store, values], i) => ({
                 label: store,
                 data: values.sort((a, b) => a.x - b.x),
                 borderColor: colors[i % colors.length],
-                backgroundColor: colors[i % colors.length],
+                backgroundColor: colors[i % colors.length] + '33',
                 showLine: true,
                 spanGaps: true,
-                fill: false,
+                fill: true,
                 tension: 0.4,
                 borderWidth: 2,
-                pointRadius: values.length <= 2 ? 5 : 3,
-                pointHoverRadius: 6,
-                pointBackgroundColor: "#ffffff"
+                pointRadius: 5,
+                pointHoverRadius: 8,
+                pointBackgroundColor: "#ffffff",
+                pointBorderColor: colors[i % colors.length],
+                pointBorderWidth: 2
             }));
 
             if (trendChart) trendChart.destroy();
@@ -436,18 +456,41 @@ async function loadAnalytics() {
                         responsive: true,
                         maintainAspectRatio: false,
                         parsing: false,
-                        plugins: { legend: { position: "top", labels: { color: '#b8c1ec', boxWidth: 16, font: { size: 11 } } } },
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: {
+                                position: "top",
+                                labels: { color: '#b8c1ec', boxWidth: 16, font: { size: 11 } }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: items => {
+                                        const d = new Date(items[0].parsed.x);
+                                        return `Week of ${d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}`;
+                                    },
+                                    label: ctx => `${ctx.dataset.label}: ${formatCurrency(ctx.parsed.y)}`
+                                }
+                            }
+                        },
                         scales: {
                             x: {
                                 type: "time",
+                                min: xMin,
+                                max: xMax,
                                 time: {
-                                    unit: "day",
-                                    tooltipFormat: "'Week of' MMM d"
+                                    unit: "week",
+                                    isoWeekday: true,
+                                    displayFormats: { week: "MMM d" }
                                 },
-                                ticks: { color: '#b8c1ec', font: { size: 11 } },
+                                ticks: { color: '#b8c1ec', font: { size: 11 }, maxTicksLimit: 8 },
                                 grid: { display: false }
                             },
-                            y: { beginAtZero: false, grace: "5%", ticks: { callback: v => formatCurrency(v), color: '#b8c1ec', font: { size: 11 } }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                            y: {
+                                beginAtZero: false,
+                                grace: "10%",
+                                ticks: { callback: v => formatCurrency(v), color: '#b8c1ec', font: { size: 11 } },
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                            }
                         }
                     }
                 });
