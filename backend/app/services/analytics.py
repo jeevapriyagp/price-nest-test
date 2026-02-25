@@ -20,7 +20,10 @@ def fetch_price_history(query: str) -> pd.DataFrame:
         # Map products columns to the shape analytics expects
         df["timestamp"] = pd.to_datetime(df["created_at"])
         df["store"] = df["source"]
-        df["price"] = df["price_numeric"]
+        # Explicitly cast to numeric — prevents min/max running lexicographically
+        # on mixed-type columns, which causes wrong price range values
+        df["price"] = pd.to_numeric(df["price_numeric"], errors="coerce")
+        df = df.dropna(subset=["price"])  # drop any rows where price failed to parse
         return df[["timestamp", "store", "price"]]
     except Exception as e:
         logger.error(f"Error fetching products for analytics ({query}): {e}")
@@ -71,8 +74,6 @@ def analyze_price(query: str):
     # "Current price" = lowest price from the most recent scrape batch.
     # We define the latest scrape batch as all rows within 10 minutes
     # of the most recent timestamp in the DB for this query.
-    # This ensures we compare against what the user just scraped,
-    # not a stale per-store value from days ago.
     insight = "Not enough data yet — search again later to track price movement."
 
     if len(df) > 1:
