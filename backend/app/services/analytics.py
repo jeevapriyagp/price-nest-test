@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime
 import logging
 
 from . import storage
@@ -8,19 +8,22 @@ logger = logging.getLogger("pricenest")
 
 
 # ---------------------------------------------------------
-# Fetch Price History from PostgreSQL (CASE-INSENSITIVE)
+# Fetch Products from PostgreSQL and reshape for analytics
 # ---------------------------------------------------------
 def fetch_price_history(query: str) -> pd.DataFrame:
     try:
-        rows = storage.get_price_history(query)
+        rows = storage.get_products(query)
         if not rows:
             return pd.DataFrame()
 
         df = pd.DataFrame(rows)
-        df["timestamp"] = pd.to_datetime(df["timestamp"])
-        return df
+        # Map products columns to the shape analytics expects
+        df["timestamp"] = pd.to_datetime(df["created_at"])
+        df["store"] = df["source"]
+        df["price"] = df["price_numeric"]
+        return df[["timestamp", "store", "price"]]
     except Exception as e:
-        logger.error(f"Error fetching price history for {query}: {e}")
+        logger.error(f"Error fetching products for analytics ({query}): {e}")
         return pd.DataFrame()
 
 
@@ -31,12 +34,11 @@ def analyze_price(query: str):
     df = fetch_price_history(query)
 
     if df.empty:
-        return {"error": "No price history available yet"}
+        return {"error": "No price data available yet"}
 
     # --- Group into 1-hour windows (Search Events) ---
-    # This prevents miscomparing stores from the same search that have slightly different timestamps
     df["event_id"] = df["timestamp"].dt.floor("1h")
-    
+
     # Get min price per event (the "Best Deal" at that point in time)
     event_mins = df.groupby("event_id")["price"].min().sort_index()
 
@@ -71,12 +73,12 @@ def analyze_price(query: str):
 
     # --- Refined Best Time-to-Buy Logic ---
     insight = "Only one search event found — search again later to see price movement"
-    
+
     if len(event_mins) >= 2:
         latest_best = int(event_mins.iloc[-1])
         earliest_best = int(event_mins.iloc[0])
         diff = latest_best - earliest_best
-        
+
         if diff < 0:
             insight = f"Prices have dropped by ₹{abs(diff)} since your first search! Good time to buy."
         elif diff > 0:

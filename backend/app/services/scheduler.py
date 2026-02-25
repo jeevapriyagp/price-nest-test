@@ -1,11 +1,9 @@
 import smtplib
 from email.mime.text import MIMEText
-from sqlalchemy import func
 
 from .scraper import compare_product
 from . import storage
 from ..core.database import SessionLocal
-from ..models.models import PriceHistory
 from ..core.config import EMAIL_USER, EMAIL_PASS
 
 SMTP_SERVER = "smtp.gmail.com"

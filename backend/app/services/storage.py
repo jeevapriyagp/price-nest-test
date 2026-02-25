@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Optional
 
 from ..core.database import SessionLocal
-from ..models.models import Product, PriceHistory, Alert, User, Wishlist
+from ..models.models import Product, Alert, User, Wishlist
 
 
 def normalize_query(q: str) -> str:
@@ -45,15 +45,6 @@ def upsert_product(query, results):
                 )
                 db.add(product)
                 product_objects.append(product)
-
-            # Always add to history when valid
-            history = PriceHistory(
-                query=query,
-                source=r["source"],
-                price=r["price_numeric"],
-                timestamp=datetime.utcnow()
-            )
-            db.add(history)
 
         db.commit()
         # Refresh to get IDs
@@ -105,27 +96,6 @@ def get_product(query):
     query = normalize_query(query)
     try:
         return db.query(Product).filter(Product.query == query).first()
-    finally:
-        db.close()
-
-
-def get_price_history(query):
-    db: Session = SessionLocal()
-    query = normalize_query(query)
-    try:
-        rows = (
-            db.query(PriceHistory)
-            .filter(PriceHistory.query == query)
-            .order_by(PriceHistory.timestamp)
-            .all()
-        )
-        return [
-            {
-                "timestamp": r.timestamp,
-                "store": r.source,
-                "price": r.price
-            } for r in rows
-        ]
     finally:
         db.close()
 

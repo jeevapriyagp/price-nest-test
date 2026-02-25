@@ -20,20 +20,6 @@ class Product(Base):
     price = Column(Float)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-
-# -----------------------------
-# PRICE HISTORY
-# -----------------------------
-class PriceHistory(Base):
-    __tablename__ = "price_history"
-
-    id = Column(Integer, primary_key=True, index=True)
-    query = Column(String, index=True)
-    source = Column(String)
-    price = Column(Float)
-    timestamp = Column(DateTime, default=datetime.utcnow)
-
-
 # -----------------------------
 # ALERTS
 # -----------------------------
@@ -48,7 +34,6 @@ class Alert(Base):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-
 # -----------------------------
 # USERS
 # -----------------------------
@@ -60,7 +45,6 @@ class User(Base):
     last_name = Column(String)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
-
 
 # -----------------------------
 # WISHLIST
