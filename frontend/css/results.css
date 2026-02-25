@@ -195,10 +195,11 @@
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     backdrop-filter: blur(4px);
+    height: 420px;
 }
 
 .chart-container canvas {
-    max-height: 280px;
+    max-height: 420px;
 }
 
 .stats-grid {
@@ -359,6 +360,7 @@
 
     .chart-container {
         padding: var(--spacing-md);
+        height: 360px;
     }
 }
 
