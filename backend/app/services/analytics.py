@@ -1,6 +1,6 @@
 import pandas as pd
-from datetime import datetime
 import logging
+from datetime import timedelta
 
 from . import storage
 
@@ -68,12 +68,19 @@ def analyze_price(query: str):
         stability = "🔴 Highly Volatile"
 
     # --- Best Time-to-Buy Logic ---
-    # Compares the current lowest price (latest scrape) vs historical average.
-    # If the current best deal is below the historical average, it's a good time to buy.
-    current_lowest = int(latest_prices["price"].min())
+    # "Current price" = lowest price from the most recent scrape batch.
+    # We define the latest scrape batch as all rows within 10 minutes
+    # of the most recent timestamp in the DB for this query.
+    # This ensures we compare against what the user just scraped,
+    # not a stale per-store value from days ago.
     insight = "Not enough data yet — search again later to track price movement."
 
     if len(df) > 1:
+        latest_timestamp = df["timestamp"].max()
+        cutoff = latest_timestamp - timedelta(minutes=10)
+        current_scrape_df = df[df["timestamp"] >= cutoff]
+        current_lowest = int(current_scrape_df["price"].min())
+
         diff = current_lowest - avg_price
         pct = round((diff / avg_price) * 100, 1)
 
