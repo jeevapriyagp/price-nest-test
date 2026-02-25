@@ -1,6 +1,6 @@
 import pandas as pd
+from datetime import datetime
 import logging
-from datetime import timedelta
 
 from . import storage
 
@@ -20,10 +20,7 @@ def fetch_price_history(query: str) -> pd.DataFrame:
         # Map products columns to the shape analytics expects
         df["timestamp"] = pd.to_datetime(df["created_at"])
         df["store"] = df["source"]
-        # Explicitly cast to numeric — prevents min/max running lexicographically
-        # on mixed-type columns, which causes wrong price range values
-        df["price"] = pd.to_numeric(df["price_numeric"], errors="coerce")
-        df = df.dropna(subset=["price"])  # drop any rows where price failed to parse
+        df["price"] = df["price_numeric"]
         return df[["timestamp", "store", "price"]]
     except Exception as e:
         logger.error(f"Error fetching products for analytics ({query}): {e}")
@@ -71,17 +68,12 @@ def analyze_price(query: str):
         stability = "🔴 Highly Volatile"
 
     # --- Best Time-to-Buy Logic ---
-    # "Current price" = lowest price from the most recent scrape batch.
-    # We define the latest scrape batch as all rows within 10 minutes
-    # of the most recent timestamp in the DB for this query.
+    # Compares the current lowest price (latest scrape) vs historical average.
+    # If the current best deal is below the historical average, it's a good time to buy.
+    current_lowest = int(latest_prices["price"].min())
     insight = "Not enough data yet — search again later to track price movement."
 
     if len(df) > 1:
-        latest_timestamp = df["timestamp"].max()
-        cutoff = latest_timestamp - timedelta(minutes=10)
-        current_scrape_df = df[df["timestamp"] >= cutoff]
-        current_lowest = int(current_scrape_df["price"].min())
-
         diff = current_lowest - avg_price
         pct = round((diff / avg_price) * 100, 1)
 
