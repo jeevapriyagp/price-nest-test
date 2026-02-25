@@ -36,11 +36,7 @@ def analyze_price(query: str):
     if df.empty:
         return {"error": "No price data available yet"}
 
-    # --- Group into 1-hour windows (Search Events) ---
-    df["event_id"] = df["timestamp"].dt.floor("1h")
-
-    # Get min price per event (the "Best Deal" at that point in time)
-    event_mins = df.groupby("event_id")["price"].min().sort_index()
+    df = df.sort_values("timestamp")
 
     lowest_price = int(df["price"].min())
     highest_price = int(df["price"].max())
@@ -60,7 +56,7 @@ def analyze_price(query: str):
         for _, row in latest_prices.iterrows()
     }
 
-    price_trend = df.drop(columns=["event_id"]).to_dict(orient="records")
+    price_trend = df.to_dict(orient="records")
 
     # Volatility logic based on overall variance
     volatility_score = round(df["price"].std(), 2) if len(df) > 1 else 0
@@ -71,20 +67,24 @@ def analyze_price(query: str):
     else:
         stability = "🔴 Highly Volatile"
 
-    # --- Refined Best Time-to-Buy Logic ---
-    insight = "Only one search event found — search again later to see price movement"
+    # --- Best Time-to-Buy Logic ---
+    # Compares the current lowest price (latest scrape) vs historical average.
+    # If the current best deal is below the historical average, it's a good time to buy.
+    current_lowest = int(latest_prices["price"].min())
+    insight = "Not enough data yet — search again later to track price movement."
 
-    if len(event_mins) >= 2:
-        latest_best = int(event_mins.iloc[-1])
-        earliest_best = int(event_mins.iloc[0])
-        diff = latest_best - earliest_best
+    if len(df) > 1:
+        diff = current_lowest - avg_price
+        pct = round((diff / avg_price) * 100, 1)
 
-        if diff < 0:
-            insight = f"Prices have dropped by ₹{abs(diff)} since your first search! Good time to buy."
-        elif diff > 0:
-            insight = f"Prices have increased by ₹{diff} since your first search."
+        if current_lowest <= lowest_price:
+            insight = f"This is the lowest price ever recorded! Great time to buy."
+        elif diff < 0:
+            insight = f"Current best price (₹{current_lowest:,}) is {abs(pct)}% below the historical average. Good time to buy."
+        elif diff == 0:
+            insight = f"Current price is right at the historical average (₹{avg_price:,})."
         else:
-            insight = "Prices are currently equal to the earliest recorded price."
+            insight = f"Current best price (₹{current_lowest:,}) is {pct}% above the historical average. Consider waiting."
 
     return {
         "summary": {
