@@ -11,7 +11,7 @@ def normalize_query(q: str) -> str:
 
 
 # -----------------------------
-# PRODUCT + PRICE HISTORY
+# PRODUCT (always insert — accumulates price history over time)
 # -----------------------------
 def upsert_product(query, results):
     db: Session = SessionLocal()
@@ -20,31 +20,21 @@ def upsert_product(query, results):
 
     try:
         for r in results:
-            # Check if product with this link already exists for this query
-            existing = db.query(Product).filter(
-                Product.query == query,
-                Product.link == r["link"]
-            ).first()
-
-            if existing:
-                # Update price and timestamp
-                existing.price = r["price_numeric"]
-                existing.created_at = datetime.utcnow()
-                db.add(existing)
-                product_objects.append(existing)
-            else:
-                product = Product(
-                    query=query,
-                    title=r["title"],
-                    source=r["source"],
-                    link=r["link"],
-                    image=r.get("image"),
-                    store_logo=r.get("store_logo"),
-                    price=r["price_numeric"],
-                    created_at=datetime.utcnow()
-                )
-                db.add(product)
-                product_objects.append(product)
+            # Always insert a new row every scrape.
+            # This builds up price history in the products table over time
+            # so analytics can compute lowest/highest/average/volatility across all searches.
+            product = Product(
+                query=query,
+                title=r["title"],
+                source=r["source"],
+                link=r["link"],
+                image=r.get("image"),
+                store_logo=r.get("store_logo"),
+                price=r["price_numeric"],
+                created_at=datetime.utcnow()
+            )
+            db.add(product)
+            product_objects.append(product)
 
         db.commit()
         # Refresh to get IDs
@@ -74,6 +64,48 @@ def get_products(query):
     query = normalize_query(query)
     try:
         products = db.query(Product).filter(Product.query == query).all()
+        return [
+            {
+                "id": p.id,
+                "title": p.title,
+                "source": p.source,
+                "link": p.link,
+                "image": p.image,
+                "store_logo": p.store_logo,
+                "price_numeric": p.price,
+                "price": f"₹{int(p.price):,}" if p.price else "₹0",
+                "created_at": p.created_at
+            } for p in products
+        ]
+    finally:
+        db.close()
+
+
+def get_latest_products(query):
+    """Returns only the most recent scrape results for a query (for the search results page)."""
+    db: Session = SessionLocal()
+    query = normalize_query(query)
+    try:
+        # Get the latest created_at timestamp for this query
+        from sqlalchemy import func
+        latest_time = (
+            db.query(func.max(Product.created_at))
+            .filter(Product.query == query)
+            .scalar()
+        )
+        if not latest_time:
+            return []
+
+        # Return only products from within 5 minutes of the latest scrape
+        from datetime import timedelta
+        cutoff = latest_time - timedelta(minutes=5)
+
+        products = (
+            db.query(Product)
+            .filter(Product.query == query, Product.created_at >= cutoff)
+            .order_by(Product.price)
+            .all()
+        )
         return [
             {
                 "id": p.id,
@@ -280,7 +312,6 @@ def update_user(email: str, first_name: str, last_name: str):
 def add_to_wishlist(email: str, product_id: int):
     db: Session = SessionLocal()
     try:
-        # Check if already in wishlist
         existing = db.query(Wishlist).filter(
             Wishlist.email == email,
             Wishlist.product_id == product_id
