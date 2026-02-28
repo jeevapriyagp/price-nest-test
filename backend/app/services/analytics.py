@@ -93,9 +93,6 @@ def analyze_price(query: str):
         else:
             insight = f"Current best price (₹{current_lowest:,}) is {pct}% above the historical average. Consider waiting."
 
-    print(lowest_price)
-    print(highest_price)
-    print(avg_price)
     return {
         "summary": {
             "lowest_price": lowest_price,
