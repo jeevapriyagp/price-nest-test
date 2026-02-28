@@ -1,4 +1,3 @@
-import json
 import re
 import statistics
 from urllib.parse import urlparse
@@ -193,9 +192,6 @@ def extract_results(data: dict, user_query: str):
     product_result_domains = {get_domain(r["link"]) for r in results if r["result_type"] == "product_result"}
     results = [r for r in results if not (r["result_type"] == "organic" and get_domain(r["link"]) in product_result_domains)]
 
-    with open("raw_results.json", "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=4, ensure_ascii=False)
-
     # Sort, then drop statistical EMI outliers
     results = sorted(results, key=lambda x: x["price_numeric"])
     results = filter_emi_outliers(results)
@@ -208,10 +204,6 @@ def extract_results(data: dict, user_query: str):
 def compare_product(user_query: str):
     query = build_search_query(user_query)
     raw = google_search(query)
-
-    # SAVE COMPLETE RAW SERPAPI RESPONSE
-    with open("serpapi_raw_response.json", "w", encoding="utf-8") as f:
-        json.dump(raw, f, indent=4, ensure_ascii=False)
 
     return {
         "query": user_query,
