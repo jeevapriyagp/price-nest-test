@@ -275,9 +275,10 @@ function displayProducts(products) {
 
     // Update current best price if possible
     if (products.length > 0 && document.getElementById('currentBestPrice')) {
-        const bestPrice = products[0].price_numeric;
-        if (bestPrice) {
-            document.getElementById('currentBestPrice').textContent = `₹${bestPrice.toLocaleString('en-IN')}`;
+        const prices = products.map(p => p.price_numeric).filter(p => p > 0);
+        if (prices.length > 0) {
+            const lowestPrice = Math.min(...prices);
+            document.getElementById('currentBestPrice').textContent = `₹${lowestPrice.toLocaleString('en-IN')}`;
         }
     }
 }
@@ -336,7 +337,8 @@ async function loadAnalytics() {
 
             // Populate summary cards from live productsData
             const livePrices = productsData.map(p => p.price_numeric).filter(p => p > 0);
-            if (livePrices.length > 0) {
+            if (livePrices.length > 0) 
+            {
                 const liveMin = Math.min(...livePrices);
                 const liveMax = Math.max(...livePrices);
                 const liveAvg = Math.round(livePrices.reduce((a, c) => a + c, 0) / livePrices.length);
@@ -348,8 +350,9 @@ async function loadAnalytics() {
                 document.querySelector('#avgPrice .stat-value').textContent = formatCurrency(liveAvg);
                 document.querySelector('#priceRange .stat-value').textContent = `${formatCurrency(liveMin)} - ${formatCurrency(liveMax)}`;
                 document.querySelector('#stabilityScore .stat-value').textContent = stability;
-                if (document.getElementById('currentBestPrice')) document.getElementById('currentBestPrice').textContent = formatCurrency(liveMin);
-            } else {
+            } 
+            else 
+            {
                 document.querySelectorAll('.stat-value').forEach(sv => sv.textContent = 'N/A');
             }
 
@@ -403,10 +406,6 @@ async function loadAnalytics() {
 
             // Stability from DB volatility
             document.querySelector('#stabilityScore .stat-value').textContent = data.volatility.stability;
-
-            if (document.getElementById('currentBestPrice')) {
-                document.getElementById('currentBestPrice').textContent = formatCurrency(summary.lowest_price);
-            }
         } catch (cardErr) {
             console.error('Error updating summary cards:', cardErr);
         }
