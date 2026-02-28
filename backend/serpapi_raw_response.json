@@ -1,0 +1,940 @@
+{
+    "search_metadata": {
+        "id": "69a2eff4484c09acb35d2759",
+        "status": "Success",
+        "json_endpoint": "https://serpapi.com/searches/Xvu-X9DotXIr6iUxOoOx4g/69a2eff4484c09acb35d2759.json",
+        "pixel_position_endpoint": "https://serpapi.com/searches/Xvu-X9DotXIr6iUxOoOx4g/69a2eff4484c09acb35d2759.json_with_pixel_position",
+        "created_at": "2026-02-28 13:39:00 UTC",
+        "processed_at": "2026-02-28 13:39:00 UTC",
+        "google_url": "https://www.google.com/search?q=airpods+4+buy+price&oq=airpods+4+buy+price&uule=w+CAIQICIFSW5kaWE&hl=en&gl=in&num=60&sourceid=chrome&ie=UTF-8",
+        "raw_html_file": "https://serpapi.com/searches/Xvu-X9DotXIr6iUxOoOx4g/69a2eff4484c09acb35d2759.html",
+        "total_time_taken": 1.82
+    },
+    "search_parameters": {
+        "engine": "google",
+        "q": "airpods 4 buy price",
+        "location_requested": "India",
+        "location_used": "India",
+        "google_domain": "google.com",
+        "hl": "en",
+        "gl": "in",
+        "num": "60",
+        "device": "desktop"
+    },
+    "search_information": {
+        "query_displayed": "airpods 4 buy price",
+        "total_results": 96500000,
+        "time_taken_displayed": 0.99,
+        "organic_results_state": "Results for exact spelling"
+    },
+    "product_result": {
+        "title": "AirPods 4 Apple",
+        "reviews": 59000,
+        "rating": 4.6,
+        "pricing": [
+            {
+                "price": "₹2,016",
+                "extracted_price": 2016,
+                "link": "http://www.flipkart.com/orionis-airpodsss-4-true-wireless-earbuds-active-noise-cancellation-anc-bluetooth/p/itm4f145ddbfc9d7?pid=ACCHGHTPHBK9CR6G&lid=LSTACCHGHTPHBK9CR6GXCDNWU&marketplace=FLIPKART&cmpid=content_headphone_8965229628_gmc",
+                "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/FNQpL_YEypfajy5aNhBxMzx6wN9iG8WAZQQMyLQC01RkwRY66Oot6OZXTauidQQH.png",
+                "name": "Flipkart",
+                "description": "Orionis Airpodsss 4 | True Wireless Earbuds With Active Noise Cancellation Anc Bluetooth",
+                "buying_options": [
+                    "In stock online",
+                    "Free delivery by Fri"
+                ],
+                "original_price": "₹17,900",
+                "extracted_original_price": 17900
+            },
+            {
+                "price": "₹10,999",
+                "extracted_price": 10999,
+                "link": "https://www.amazon.in/Apple-Bluetooth-Headphones-Personalised-Effortless/dp/B0DGJLL7V1",
+                "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/FNQpL_YEypfajy5aNhBxM4Zi59U0wpcXEWXrwIWoIfqDPf8TaixjbfpjRSc6x0iG.png",
+                "name": "amazon.in",
+                "description": "Apple AirPods 4 Wireless Earbuds, Bluetooth Headphones, Personalised Spatial Audio, Sweat and Water Resistant, USB-C Charging Case, H2 Chip, Up to 30",
+                "buying_options": [
+                    "In stock online"
+                ]
+            },
+            {
+                "price": "₹12,290",
+                "extracted_price": 12290,
+                "link": "https://www.croma.com/apple-airpods-4-with-charging-case/p/309235?srsltid=AfmBOopJ-OCNuP3lgtQwfuZ2QqdSBIjzR7R2LK_kHk-zsTqyGS_jBPMQ3nA",
+                "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/FNQpL_YEypfajy5aNhBxM5Se7Kjd7R1TMyNovyRcz2Bx-1xSsZTtchwD64LkGnI7.png",
+                "name": "Croma",
+                "description": "Apple AirPods 4 with Charging Case",
+                "buying_options": [
+                    "In stock online",
+                    "Delivery ₹49"
+                ],
+                "original_price": "₹12,900",
+                "extracted_original_price": 12900
+            },
+            {
+                "price": "₹12,900",
+                "extracted_price": 12900,
+                "link": "https://www.apple.com/in/shop/go/product/MXP63HN/A?cid=aos-in-seo-pla-airpods",
+                "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/FNQpL_YEypfajy5aNhBxMyhUZ9yuF7I3QTxK0sw5-lra6cvIOsq5-Tjxip7D6Xyx.png",
+                "name": "Apple",
+                "description": "Apple AirPods 4 (2024)",
+                "buying_options": [
+                    "In stock online",
+                    "Free delivery",
+                    "Not eligible for returns"
+                ]
+            }
+        ],
+        "typical_price": "Typically ₹2,074–₹17,900",
+        "description": "Product Description The redesigned AirPods 4 offer improved comfort and stability for all-day wear. The shorter stem allows quick control of music and calls with a simple press. Active Noise Cancellation reduces external noise before it reaches your ears, helping you focus on what you're listening to. The built-in H2 chip powers adaptive audio, blending noise cancellation and ambient sound modes. This lets you hear your surroundings clearly while enjoying your audio.",
+        "features": {
+            "cable_length": "0.9 m",
+            "connectivity": "Wireless",
+            "features": "Noise Cancelling, With Charging Case, With Detachable Cable, With In-cord Volume Control, With Microphone, With Rechargeable Battery",
+            "headphone_cup_type": "Open",
+            "headphone_driver_technology": "Dynamic",
+            "headphone_impedance": "40 ohms",
+            "height": "30.2 mm tall",
+            "maximum_run_time": "30 hours run time",
+            "microphone_impedance": "40 ohms microphone",
+            "microphone_mount_type": "Built-in",
+            "microphone_technology": "Dynamic Technology",
+            "microphones_included": "2",
+            "recharge_time": "5 hours",
+            "recommended_use": "Portable Electronics",
+            "remote_control_function": "Next/Previous Track",
+            "sound_output": "Stereo",
+            "style": "In-ear",
+            "use": "Mobile Phone, Sports, TV",
+            "weight": "4.3 g",
+            "wireless_type": "Bluetooth"
+        },
+        "thumbnails": [
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbm0arv0oFh7mLFsejR2aB4A.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbvjeBspKPDclDZItXoqOi6A.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbgCPn7gNbCOVKK-mxyN78J8.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbh8EssOBSd5AzPbvNIiDaFs.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbiT32wDWgFuboM9ZePaayDA.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbiCu9scfyoLF-rneIRux-8I.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbq604qmdBMJm3j_QdAwnqSA.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbpByiTLKhmyYyWxt_3_6bcY.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbu6DA92nPjVRePeRTeOksfA.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbpjIBiYaxyYnATnc1IEuszE.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbohv7GWUwvk8dy4X-mcuwYo.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbin_6GWTj0_cs9jvHqvItlo.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbt51oiorNvTGz7iNqDpYdhk.webp",
+            "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/pYAprGTJwB8WrrxeuYJzbubOtW78kdwkE3vS5m5wLoA.webp"
+        ],
+        "reviews_results": {
+            "user_reviews": {
+                "rating": 4.6,
+                "reviews_original": "59,222 reviews",
+                "reviews": 59222,
+                "review": [
+                    {
+                        "title": "Apple AirPods 4 Review – Bought from Walmart",
+                        "date": "10 months ago",
+                        "rating": 5.0,
+                        "source": "Reviewed on walmart.com",
+                        "user": "Jihad",
+                        "snippet": "So I picked up the new Apple AirPods 4 from Walmart, and honestly? They're kind of amazing. First Impressions: Right out of the box, the design feels super familiar but slightly more refined. The case still has that satisfying magnetic snap, but everything feels just a little sleeker ...More"
+                    }
+                ]
+            }
+        }
+    },
+    "related_questions": [
+        {
+            "question": "Can you buy one AirPods 4?",
+            "type": "featured_snippet",
+            "snippet": "Did you lose an AirPod or your Charging Case? You can buy a replacement for a left or right AirPod or the Charging Case. Your replacement will be new.",
+            "title": "AirPods Replacement, Repair and Service - Apple Support",
+            "link": "https://support.apple.com/en-au/airpods/repair#:~:text=Did%20you%20lose%20an%20AirPod,Your%20replacement%20will%20be%20new.",
+            "displayed_link": "https://support.apple.com › en-au › airpods › repair",
+            "source_logo": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/_c-aCLP7VgPUecE5In8Msun3XyZoP3renjgfD54Trrg.png",
+            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsUk5EWkhhVE5zWjNkS1ZWZHJRbEZFWlU1VVFrbGZTRlZpWlhGM2RuWlFXVWd3Y0RaM2EzbFFWR2swWlRsRWR6azJVRGhHZGpkbllXOWxPV2xDUjNsZk1sVkRTRjlYWkY5NlltdEtaMHd0U0VJM01sVnBiblkwTUZaalp4SVhPV1V0YVdGaFUyMUJjbWxVZDJKclVEaGpNMm80VVZVYUlrRktTMHhHYlVsT0xVVnFiV2RFVG05UE9YZFlaVTFSTUZSb05FWkVNeTFQVmxFIiwiZmN2IjoiMyIsImVpIjoiOWUtaWFhU21BcmlUd2JrUDhjM2o4UVUiLCJxYyI6IkNoTmhhWEp3YjJSeklEUWdZblY1SUhCeWFXTmxFQUI5NmdrN1B3IiwicXVlc3Rpb24iOiJDYW4geW91IGJ1eSBvbmUgQWlyUG9kcyA0PyIsImxrIjoiR2hsallXNGdlVzkxSUdKMWVTQnZibVVnWVdseWNHOWtjeUEwIiwiYnMiOiJjLU95NFpKeVRzeFRxTXd2VlVncXJWVEl6MHRWY013c0NzaFBLVll3c1plWWwyQWtMU1daaktZZ01iT29BS3lBeTQxTDNpT19YQ0czTkRsRG9TUmZvVGcxSndlaFhTRXR2OGhlWW4tY2tZS1VYQWE2S3JnWklGVmNQbHhLeUs1SVRTeEtLZ1ZLQXFXUVhYTzkxRWhaU2pFWmgwS0Vxd3k1eEZ6eWtkeFJubDlVa3FHUVdXSnZKQzRsbXBLUFpEZE1Sb0FSQUEiLCJpZCI6ImZjXzllLWlhYVNtQXJpVHdia1A4YzNqOFFVXzEifQ==",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsUk5EWkhhVE5zWjNkS1ZWZHJRbEZFWlU1VVFrbGZTRlZpWlhGM2RuWlFXVWd3Y0RaM2EzbFFWR2swWlRsRWR6azJVRGhHZGpkbllXOWxPV2xDUjNsZk1sVkRTRjlYWkY5NlltdEtaMHd0U0VJM01sVnBiblkwTUZaalp4SVhPV1V0YVdGaFUyMUJjbWxVZDJKclVEaGpNMm80VVZVYUlrRktTMHhHYlVsT0xVVnFiV2RFVG05UE9YZFlaVTFSTUZSb05FWkVNeTFQVmxFIiwiZmN2IjoiMyIsImVpIjoiOWUtaWFhU21BcmlUd2JrUDhjM2o4UVUiLCJxYyI6IkNoTmhhWEp3YjJSeklEUWdZblY1SUhCeWFXTmxFQUI5NmdrN1B3IiwicXVlc3Rpb24iOiJDYW4geW91IGJ1eSBvbmUgQWlyUG9kcyA0PyIsImxrIjoiR2hsallXNGdlVzkxSUdKMWVTQnZibVVnWVdseWNHOWtjeUEwIiwiYnMiOiJjLU95NFpKeVRzeFRxTXd2VlVncXJWVEl6MHRWY013c0NzaFBLVll3c1plWWwyQWtMU1daaktZZ01iT29BS3lBeTQxTDNpT19YQ0czTkRsRG9TUmZvVGcxSndlaFhTRXR2OGhlWW4tY2tZS1VYQWE2S3JnWklGVmNQbHhLeUs1SVRTeEtLZ1ZLQXFXUVhYTzkxRWhaU2pFWmgwS0Vxd3k1eEZ6eWtkeFJubDlVa3FHUVdXSnZKQzRsbXBLUFpEZE1Sb0FSQUEiLCJpZCI6ImZjXzllLWlhYVNtQXJpVHdia1A4YzNqOFFVXzEifQ%3D%3D"
+        },
+        {
+            "question": "How much to sell AirPods 4 for?",
+            "type": "featured_snippet",
+            "snippet": "We pay up to £26.40 but this will vary based on condition and spec. The best thing to get an instant quote.",
+            "title": "Sell My AirPods 4 with USB-C Charging Case For Cash",
+            "link": "https://www.gadgetgogo.co.uk/gadget/airpods-4-with-usb-c-charging-case/#:~:text=We%20pay%20up%20to%20%C2%A326.40%20but%20this%20will%20vary,to%20get%20an%20instant%20quote.",
+            "displayed_link": "https://www.gadgetgogo.co.uk › gadget › airpods-4-with...",
+            "source_logo": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/_c-aCLP7VgPUecE5In8Msq1FNHAggqZH9VE38zZHYaw.png",
+            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsUk5EWkhhVE5zWjNkS1ZWZHJRbEZFWlU1VVFrbGZTRlZpWlhGM2RuWlFXVWd3Y0RaM2EzbFFWR2swWlRsRWR6azJVRGhHZGpkbllXOWxPV2xDUjNsZk1sVkRTRjlYWkY5NlltdEtaMHd0U0VJM01sVnBiblkwTUZaalp4SVhPV1V0YVdGaFUyMUJjbWxVZDJKclVEaGpNMm80VVZVYUlrRktTMHhHYlVsT0xVVnFiV2RFVG05UE9YZFlaVTFSTUZSb05FWkVNeTFQVmxFIiwiZmN2IjoiMyIsImVpIjoiOWUtaWFhU21BcmlUd2JrUDhjM2o4UVUiLCJxYyI6IkNoTmhhWEp3YjJSeklEUWdZblY1SUhCeWFXTmxFQUI5NmdrN1B3IiwicXVlc3Rpb24iOiJIb3cgbXVjaCB0byBzZWxsIEFpclBvZHMgNCBmb3I/IiwibGsiOiJHaDVvYjNjZ2JYVmphQ0IwYnlCelpXeHNJR0ZwY25CdlpITWdOQ0JtYjNJIiwiYnMiOiJjLU95NFpKeVRzeFRxTXd2VlVncXJWVEl6MHRWY013c0NzaFBLVll3c1plWWwyQWtMU1daaktZZ01iT29BS3lBeTQxTDNpT19YQ0czTkRsRG9TUmZvVGcxSndlaFhTRXR2OGhlWW4tY2tZS1VYQWE2S3JnWklGVmNQbHhLeUs1SVRTeEtLZ1ZLQXFXUVhYTzkxRWhaU2pFWmgwS0Vxd3k1eEZ6eWtkeFJubDlVa3FHUVdXSnZKQzRsbXBLUFpEZE1Sb0FSQUEiLCJpZCI6ImZjXzllLWlhYVNtQXJpVHdia1A4YzNqOFFVXzEifQ==",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsUk5EWkhhVE5zWjNkS1ZWZHJRbEZFWlU1VVFrbGZTRlZpWlhGM2RuWlFXVWd3Y0RaM2EzbFFWR2swWlRsRWR6azJVRGhHZGpkbllXOWxPV2xDUjNsZk1sVkRTRjlYWkY5NlltdEtaMHd0U0VJM01sVnBiblkwTUZaalp4SVhPV1V0YVdGaFUyMUJjbWxVZDJKclVEaGpNMm80VVZVYUlrRktTMHhHYlVsT0xVVnFiV2RFVG05UE9YZFlaVTFSTUZSb05FWkVNeTFQVmxFIiwiZmN2IjoiMyIsImVpIjoiOWUtaWFhU21BcmlUd2JrUDhjM2o4UVUiLCJxYyI6IkNoTmhhWEp3YjJSeklEUWdZblY1SUhCeWFXTmxFQUI5NmdrN1B3IiwicXVlc3Rpb24iOiJIb3cgbXVjaCB0byBzZWxsIEFpclBvZHMgNCBmb3I%2FIiwibGsiOiJHaDVvYjNjZ2JYVmphQ0IwYnlCelpXeHNJR0ZwY25CdlpITWdOQ0JtYjNJIiwiYnMiOiJjLU95NFpKeVRzeFRxTXd2VlVncXJWVEl6MHRWY013c0NzaFBLVll3c1plWWwyQWtMU1daaktZZ01iT29BS3lBeTQxTDNpT19YQ0czTkRsRG9TUmZvVGcxSndlaFhTRXR2OGhlWW4tY2tZS1VYQWE2S3JnWklGVmNQbHhLeUs1SVRTeEtLZ1ZLQXFXUVhYTzkxRWhaU2pFWmgwS0Vxd3k1eEZ6eWtkeFJubDlVa3FHUVdXSnZKQzRsbXBLUFpEZE1Sb0FSQUEiLCJpZCI6ImZjXzllLWlhYVNtQXJpVHdia1A4YzNqOFFVXzEifQ%3D%3D"
+        },
+        {
+            "question": "Can you buy earbuds for AirPods 4?",
+            "type": "featured_snippet",
+            "snippet": "Earbuds for AirPods 4 Noise Reduction Silicone Earbuds for Airpods 3&4 with Portable Case(S): Amazon.co.uk: Electronics & Photo.",
+            "title": "Earbuds for AirPods 4 Noise Reduction Silicone ... - Amazon UK",
+            "link": "https://www.amazon.co.uk/Earbuds-AirPods-Reduction-Silicone-Portable-Transparent-Black/dp/B0DKNDDVCN#:~:text=Earbuds%20for%20AirPods%204%20Noise,co.uk%3A%20Electronics%20%26%20Photo",
+            "displayed_link": "https://www.amazon.co.uk › Earbuds-AirPods-Reduction...",
+            "source_logo": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/_c-aCLP7VgPUecE5In8Msl-3FjAOUnAp3dy_KAC9ax4.png",
+            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsUk5EWkhhVE5zWjNkS1ZWZHJRbEZFWlU1VVFrbGZTRlZpWlhGM2RuWlFXVWd3Y0RaM2EzbFFWR2swWlRsRWR6azJVRGhHZGpkbllXOWxPV2xDUjNsZk1sVkRTRjlYWkY5NlltdEtaMHd0U0VJM01sVnBiblkwTUZaalp4SVhPV1V0YVdGaFUyMUJjbWxVZDJKclVEaGpNMm80VVZVYUlrRktTMHhHYlVsT0xVVnFiV2RFVG05UE9YZFlaVTFSTUZSb05FWkVNeTFQVmxFIiwiZmN2IjoiMyIsImVpIjoiOWUtaWFhU21BcmlUd2JrUDhjM2o4UVUiLCJxYyI6IkNoTmhhWEp3YjJSeklEUWdZblY1SUhCeWFXTmxFQUI5NmdrN1B3IiwicXVlc3Rpb24iOiJDYW4geW91IGJ1eSBlYXJidWRzIGZvciBBaXJQb2RzIDQ/IiwibGsiOiJHaUZqWVc0Z2VXOTFJR0oxZVNCbFlYSmlkV1J6SUdadmNpQmhhWEp3YjJSeklEUSIsImJzIjoiYy1PeTRaSnlUc3hUcU13dlZVZ3FyVlRJejB0VmNNd3NDc2hQS1ZZd3NaZVlsMkFrTFNXWmpLWWdNYk9vQUt5QXk0MUwzaU9fWENHM05EbERvU1Jmb1RnMUp3ZWhYU0V0djhoZVluLWNrWUtVWEFhNktyZ1pJRlZjUGx4S3lLNUlUU3hLS2dWS0FxV1FYWE85MUVoWlNqRVpoMEtFcXd5NXhGenlrZHhSbmw5VWtxR1FXV0p2SkM0bG1wS1BaRGRNUm9BUkFBIiwiaWQiOiJmY185ZS1pYWFTbUFyaVR3YmtQOGMzajhRVV8xIn0=",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsUk5EWkhhVE5zWjNkS1ZWZHJRbEZFWlU1VVFrbGZTRlZpWlhGM2RuWlFXVWd3Y0RaM2EzbFFWR2swWlRsRWR6azJVRGhHZGpkbllXOWxPV2xDUjNsZk1sVkRTRjlYWkY5NlltdEtaMHd0U0VJM01sVnBiblkwTUZaalp4SVhPV1V0YVdGaFUyMUJjbWxVZDJKclVEaGpNMm80VVZVYUlrRktTMHhHYlVsT0xVVnFiV2RFVG05UE9YZFlaVTFSTUZSb05FWkVNeTFQVmxFIiwiZmN2IjoiMyIsImVpIjoiOWUtaWFhU21BcmlUd2JrUDhjM2o4UVUiLCJxYyI6IkNoTmhhWEp3YjJSeklEUWdZblY1SUhCeWFXTmxFQUI5NmdrN1B3IiwicXVlc3Rpb24iOiJDYW4geW91IGJ1eSBlYXJidWRzIGZvciBBaXJQb2RzIDQ%2FIiwibGsiOiJHaUZqWVc0Z2VXOTFJR0oxZVNCbFlYSmlkV1J6SUdadmNpQmhhWEp3YjJSeklEUSIsImJzIjoiYy1PeTRaSnlUc3hUcU13dlZVZ3FyVlRJejB0VmNNd3NDc2hQS1ZZd3NaZVlsMkFrTFNXWmpLWWdNYk9vQUt5QXk0MUwzaU9fWENHM05EbERvU1Jmb1RnMUp3ZWhYU0V0djhoZVluLWNrWUtVWEFhNktyZ1pJRlZjUGx4S3lLNUlUU3hLS2dWS0FxV1FYWE85MUVoWlNqRVpoMEtFcXd5NXhGenlrZHhSbmw5VWtxR1FXV0p2SkM0bG1wS1BaRGRNUm9BUkFBIiwiaWQiOiJmY185ZS1pYWFTbUFyaVR3YmtQOGMzajhRVV8xIn0%3D"
+        },
+        {
+            "question": "Do AirPods 4 worth it?",
+            "type": "ai_overview",
+            "text_blocks": [
+                {
+                    "type": "paragraph",
+                    "snippet": "Yes, AirPods 4 are generally considered worth it, especially the ANC (Active Noise Cancellation) model, offering significant upgrades in sound quality, comfort, and features like Adaptive Audio and Spatial Audio for a better overall experience, though they still sit below the premium AirPods Pro series, particularly in noise isolation and battery with ANC. For those coming from older models (1st/2nd Gen), the jump is substantial, while the choice between AirPods 4 ANC and AirPods Pro 3 depends on budget and preference for sealed-fit comfort versus open-fit convenience.",
+                    "snippet_links": [
+                        {
+                            "text": "ANC (Active Noise Cancellation)",
+                            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=ANC+(Active+Noise+Cancellation)&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QxccNegUIiwEQAg"
+                        }
+                    ],
+                    "snippet_highlighted_words": [
+                        "Yes, AirPods 4 are generally considered worth it"
+                    ],
+                    "reference_indexes": [
+                        1,
+                        2,
+                        6,
+                        7,
+                        8,
+                        9,
+                        11
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "This video provides a detailed comparison to help you decide if AirPods 4 are the right choice for you:",
+                    "video": {
+                        "link": "https://www.youtube.com/watch?v=WwjHonzRd4E&t=533",
+                        "thumbnail": "https://i.ytimg.com/vi/WwjHonzRd4E/mqdefault.jpg?sqp=-oaymwEGCPgEEOQC&rs=AMzJL3nsNY_ZH5rHrfTrq7xsH3Gv9oryTw",
+                        "source": "Marques Brownlee",
+                        "date": "16 Sept 2024"
+                    }
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "Key Reasons They're Worth It (Especially ANC Model)"
+                },
+                {
+                    "type": "list",
+                    "list": [
+                        {
+                            "title": "Improved Sound:",
+                            "snippet": "Enhanced bass and clearer sound compared to older standard models, rivaling Pro models in some areas.",
+                            "reference_indexes": [
+                                6,
+                                9
+                            ]
+                        },
+                        {
+                            "title": "Effective ANC:",
+                            "snippet": "The noise cancellation in the ANC version is surprisingly good for an open-fit earbud, making commutes better.",
+                            "reference_indexes": [
+                                0,
+                                6,
+                                9
+                            ]
+                        },
+                        {
+                            "title": "Adaptive Audio:",
+                            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=Adaptive+Audio&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QxccNegUItQEQAQ",
+                            "snippet": "Blends Transparency and ANC for seamless environmental awareness.",
+                            "reference_indexes": [
+                                8
+                            ]
+                        },
+                        {
+                            "title": "Comfort & Fit:",
+                            "snippet": "Redesigned for a more secure and natural fit for more users, with updated stems and force sensors.",
+                            "reference_indexes": [
+                                0,
+                                8
+                            ]
+                        },
+                        {
+                            "title": "Value:",
+                            "snippet": "The ANC model offers Pro-like features at a lower price point than Pro earbuds, making them a great value upgrade.",
+                            "reference_indexes": [
+                                6,
+                                7,
+                                10
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "Considerations & Trade-offs"
+                },
+                {
+                    "type": "list",
+                    "list": [
+                        {
+                            "title": "Open Fit vs. Sealed:",
+                            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=Open+Fit&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QxccNegUInQEQAQ",
+                            "snippet": "The open design means less passive noise isolation than the silicone-tipped AirPods Pro, which can affect deep bass and quiet environments.",
+                            "reference_indexes": [
+                                2,
+                                4
+                            ]
+                        },
+                        {
+                            "title": "Battery Life (with ANC):",
+                            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=Battery+Life&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QxccNegUIqQEQAQ",
+                            "snippet": "Can be shorter when ANC is active, requiring more frequent charging compared to AirPods Pro with their larger case.",
+                            "reference_indexes": [
+                                5
+                            ]
+                        },
+                        {
+                            "title": "No On-Ear Volume Control:",
+                            "snippet": "Volume control is still managed via the connected device or Siri, unlike the stem controls on AirPods Pro.",
+                            "reference_indexes": [
+                                1
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "This video explains why the AirPods 4 ANC model may still be a good buy even a year after its release:",
+                    "video": {
+                        "link": "https://www.youtube.com/watch?v=K25vhulWanU&t=586",
+                        "thumbnail": "https://i.ytimg.com/vi/K25vhulWanU/mqdefault.jpg?sqp=-oaymwEGCPgEEOQC&rs=AMzJL3l3a5B1g56g14a1wRkucQvNcfNEcA",
+                        "source": "SoundGuys",
+                        "date": "15 Nov 2025"
+                    }
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "Who Should Buy Them?"
+                },
+                {
+                    "type": "list",
+                    "list": [
+                        {
+                            "snippet": "Upgrade from 1st/2nd Gen: A definite \"yes\" for a significant upgrade in sound, features, and comfort.",
+                            "reference_indexes": [
+                                11
+                            ]
+                        },
+                        {
+                            "snippet": "Value Seekers: The ANC model offers a compelling package close to Pro features at a better price.",
+                            "reference_indexes": [
+                                6,
+                                7
+                            ]
+                        },
+                        {
+                            "snippet": "Comfort-Focused Users: If sealed tips bother you, the comfortable open fit is a major plus.",
+                            "reference_indexes": [
+                                0,
+                                3,
+                                6
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "paragraph",
+                    "snippet": "Who Should Consider AirPods Pro?"
+                },
+                {
+                    "type": "list",
+                    "list": [
+                        {
+                            "snippet": "Ultimate Noise Cancellation: If blocking out the world is your top priority.",
+                            "reference_indexes": [
+                                1,
+                                2
+                            ]
+                        },
+                        {
+                            "snippet": "Longer Battery with ANC: If you need all-day ANC performance.",
+                            "reference_indexes": [
+                                2,
+                                5
+                            ]
+                        },
+                        {
+                            "snippet": "Volume Control on Earbuds: For quick volume adjustments without reaching for your phone.",
+                            "reference_indexes": [
+                                1,
+                                2
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "references": [
+                {
+                    "title": "I've been using the AirPods 4 for 10 months — the good, bad and the ugly",
+                    "link": "https://www.tomsguide.com/audio/headphones/i-tested-the-new-airpods-4-with-noise-canceling-for-a-week-here-are-my-pros-and-cons#:~:text=So%20what%20do%20I%20think,many%20users%20also%20probably%20will.",
+                    "snippet": "28 Nov 2025 — So what do I think? (Image credit: Future) I can't tell you the AirPods 4 are a bad pair of buds. If you love the way t...",
+                    "source": "Tom's Guide",
+                    "index": 0
+                },
+                {
+                    "title": "AirPods 4 with ANC review - 1 Year Later...",
+                    "link": "https://www.youtube.com/watch?t=586&v=K25vhulWanU",
+                    "snippet": "15 Nov 2025 — because. I really think that's just one of the most like Apple things they've done with this is the fact that minor con...",
+                    "source": "YouTube · SoundGuys",
+                    "index": 1
+                },
+                {
+                    "title": "AirPods Pro 3 vs. AirPods 4 (ANC) - Which Should You Buy?",
+                    "link": "https://www.youtube.com/watch?t=9&v=-xJRR07gSB8",
+                    "snippet": "22 Nov 2025 — 3 I'm going to take you through how much better the AirPods Pro 3 are compared to the AirPods. 4 with&C. and when I thi...",
+                    "source": "YouTube · 6 Months Later",
+                    "index": 2
+                },
+                {
+                    "title": "It is worth to buy AirPods 4 ANC? - Reddit",
+                    "link": "https://www.reddit.com/r/airpods/comments/1mkgtg6/it_is_worth_to_buy_airpods_4_anc/#:~:text=For%20my%20taste%20they%20sound,%E2%80%A2%206mo%20ago",
+                    "snippet": "8 Aug 2025 — For my taste they sound great, I sold my AirPods Pro 2 because the rubber inside the ear has always bothered me and thes...",
+                    "source": "RReddit · r/airpods",
+                    "index": 3
+                },
+                {
+                    "title": "AirPods 4 Review // Forget AirPods Pro?!",
+                    "link": "https://www.youtube.com/watch?t=117&v=yaq_jzVafDM",
+                    "snippet": "10 Dec 2025 — I'll have a spare sitting around for when my kids inevitably lose theirs again because I just had to buy my other son a...",
+                    "source": "YouTube · TechOdyssey",
+                    "index": 4
+                },
+                {
+                    "title": "Airpods 4 ANC Or Airpods Pro 3 | My Honest Advice On Which Ones To ...",
+                    "link": "https://www.youtube.com/watch?t=13&v=ICd5Ppsinsg",
+                    "snippet": "16 Nov 2025 — which one is the right fit for you there's a couple key takeaways such as price the fit. and then also how good the noi...",
+                    "source": "YouTube · Qasim Zafar",
+                    "index": 5
+                },
+                {
+                    "title": "Apple AirPods 4 review: Practically Pro | CNN Underscored",
+                    "link": "https://www.cnn.com/cnn-underscored/reviews/apple-airpods-4#:~:text=The%20AirPods%204%20are%20some,cancellation%20that%20does%20the%20same.",
+                    "snippet": "The AirPods 4 are some of the best Apple headphones I've ever used. I also can't recommend them without noting a few asterisks. Th...",
+                    "source": "CNN",
+                    "index": 6
+                },
+                {
+                    "title": "Apple AirPods 4 ANC Review: Worth it in 2025? - RecordingNOW.com",
+                    "link": "https://recordingnow.com/blog/apple-airpods-4-anc-review/#:~:text=The%20Apple%20AirPods%204th%20gen,which%20one%20you%20should%20choose.",
+                    "snippet": "20 Sept 2024 — The Apple AirPods 4th gen ANC are the best regular-line AirPods to date, and are a worthy upgrade to the 3rd gen due t...",
+                    "source": "RecordingNOW.com",
+                    "index": 7
+                },
+                {
+                    "title": "AirPods 4 - Apple (IN)",
+                    "link": "https://www.apple.com/in/airpods-4/#:~:text=AirPods%204%20offer%20the%20option,the%20new%20camera%20remote%20functionality.",
+                    "snippet": "AirPods 4 offer the option of Active Noise Cancellation. Powered by the H2 chip and upgraded microphones, it helps reduce low-freq...",
+                    "source": "Apple",
+                    "index": 8
+                },
+                {
+                    "title": "Apple AirPods 4 Review: The Noise Canceling Really Is a Game-Changer",
+                    "link": "https://www.cnet.com/tech/mobile/apple-airpods-4-review-the-noise-canceling-really-is-a-game-changer/#:~:text=Overall%2C%20the%20sound%20is%20a,listening%20in%20a%20quiet%20room.",
+                    "snippet": "16 Sept 2024 — Overall, the sound is a little cleaner (improved treble), and you get a bit more bass, so there's a touch more depth a...",
+                    "source": "CNET",
+                    "index": 9
+                },
+                {
+                    "title": "AirPods 4 vs AirPods 4 with ANC: Which should you buy? - SoundGuys",
+                    "link": "https://www.soundguys.com/airpods-4-vs-airpods-4-with-anc-124447/#:~:text=The%20AirPods%204%20are%20priced,Apple%20Stores%2C%20and%20authorized%20retailers.",
+                    "snippet": "The AirPods 4 are priced at $129 at Amazon, making them the most affordable AirPods to date. The AirPods 4 with ANC are priced at ...",
+                    "source": "SoundGuys",
+                    "index": 10
+                },
+                {
+                    "title": "AirPods 4: What's New, What's Improved, and Why You Should ...",
+                    "link": "https://mybyte.com.au/blogs/news/airpods-4-what-s-new-what-s-improved-and-why-you-should-upgrade#:~:text=From%20AirPods%201%20or%202,make%20this%20an%20essential%20upgrade.",
+                    "snippet": "10 Oct 2024 — From AirPods 1 or 2: The upgrade to AirPods 4 is a no-brainer. The sound quality, design improvements, and added featur...",
+                    "source": "mybyte.com.au",
+                    "index": 11
+                }
+            ],
+            "next_page_token": "eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsUk5EWkhhVE5zWjNkS1ZWZHJRbEZFWlU1VVFrbGZTRlZpWlhGM2RuWlFXVWd3Y0RaM2EzbFFWR2swWlRsRWR6azJVRGhHZGpkbllXOWxPV2xDUjNsZk1sVkRTRjlYWkY5NlltdEtaMHd0U0VJM01sVnBiblkwTUZaalp4SVhPV1V0YVdGaFUyMUJjbWxVZDJKclVEaGpNMm80VVZVYUlrRktTMHhHYlVsT0xVVnFiV2RFVG05UE9YZFlaVTFSTUZSb05FWkVNeTFQVmxFIiwiZmN2IjoiMyIsImVpIjoiOWUtaWFhU21BcmlUd2JrUDhjM2o4UVUiLCJxYyI6IkNoTmhhWEp3YjJSeklEUWdZblY1SUhCeWFXTmxFQUI5NmdrN1B3IiwicXVlc3Rpb24iOiJEbyBBaXJQb2RzIDQgd29ydGggaXQ/IiwibGsiOiJHaFZrYnlCaGFYSndiMlJ6SURRZ2QyOXlkR2dnYVhRIiwiYnMiOiJjLU95NFpKeVRzeFRxTXd2VlVncXJWVEl6MHRWY013c0NzaFBLVll3c1plWWwyQWtMU1daaktZZ01iT29BS3lBeTQxTDNpT19YQ0czTkRsRG9TUmZvVGcxSndlaFhTRXR2OGhlWW4tY2tZS1VYQWE2S3JnWklGVmNQbHhLeUs1SVRTeEtLZ1ZLQXFXUVhYTzkxRWhaU2pFWmgwS0Vxd3k1eEZ6eWtkeFJubDlVa3FHUVdXSnZKQzRsbXBLUFpEZE1Sb0FSQUEiLCJpZCI6ImZjXzllLWlhYVNtQXJpVHdia1A4YzNqOFFVXzEifQ==",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google_related_questions&google_domain=google.com&next_page_token=eyJvbnMiOiIxMDA0MSIsImZjIjoiRXFFQkNtSkJUVzR6TFhsUk5EWkhhVE5zWjNkS1ZWZHJRbEZFWlU1VVFrbGZTRlZpWlhGM2RuWlFXVWd3Y0RaM2EzbFFWR2swWlRsRWR6azJVRGhHZGpkbllXOWxPV2xDUjNsZk1sVkRTRjlYWkY5NlltdEtaMHd0U0VJM01sVnBiblkwTUZaalp4SVhPV1V0YVdGaFUyMUJjbWxVZDJKclVEaGpNMm80VVZVYUlrRktTMHhHYlVsT0xVVnFiV2RFVG05UE9YZFlaVTFSTUZSb05FWkVNeTFQVmxFIiwiZmN2IjoiMyIsImVpIjoiOWUtaWFhU21BcmlUd2JrUDhjM2o4UVUiLCJxYyI6IkNoTmhhWEp3YjJSeklEUWdZblY1SUhCeWFXTmxFQUI5NmdrN1B3IiwicXVlc3Rpb24iOiJEbyBBaXJQb2RzIDQgd29ydGggaXQ%2FIiwibGsiOiJHaFZrYnlCaGFYSndiMlJ6SURRZ2QyOXlkR2dnYVhRIiwiYnMiOiJjLU95NFpKeVRzeFRxTXd2VlVncXJWVEl6MHRWY013c0NzaFBLVll3c1plWWwyQWtMU1daaktZZ01iT29BS3lBeTQxTDNpT19YQ0czTkRsRG9TUmZvVGcxSndlaFhTRXR2OGhlWW4tY2tZS1VYQWE2S3JnWklGVmNQbHhLeUs1SVRTeEtLZ1ZLQXFXUVhYTzkxRWhaU2pFWmgwS0Vxd3k1eEZ6eWtkeFJubDlVa3FHUVdXSnZKQzRsbXBLUFpEZE1Sb0FSQUEiLCJpZCI6ImZjXzllLWlhYVNtQXJpVHdia1A4YzNqOFFVXzEifQ%3D%3D"
+        }
+    ],
+    "organic_results": [
+        {
+            "position": 1,
+            "title": "Buy AirPods 4",
+            "link": "https://www.apple.com/in/shop/buy-airpods/airpods-4",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.apple.com/in/shop/buy-airpods/airpods-4&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QFnoECBcQAQ",
+            "displayed_link": "https://www.apple.com › shop › buy-airpods › airpods-4",
+            "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4nI5rtjCsTvWgZNHidJiZbI.jpeg",
+            "favicon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4ieOoNm8B9OS3NLgcXb7Puo.png",
+            "snippet": "Choose your model. AirPods 4 From ₹1983.00/mo.Per Month with instant cashback Footnote §§ and No Cost EMI Footnote § ₹12900.00. AirPods 4 with Active Noise ...",
+            "snippet_highlighted_words": [
+                "AirPods 4 From ₹1983.00/mo.Per Month"
+            ],
+            "about_this_result": {
+                "source": {
+                    "description": "Choose your model. AirPods 4 From ₹1983.00/mo.Per Month with instant cashback Footnote §§ and No Cost EMI Footnote § ₹12900.00. AirPods 4 with Active Noise ...",
+                    "source_info_link": "https://www.apple.com/in/shop/buy-airpods/airpods-4",
+                    "icon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4nWDVf5IPh-VD6H3rABVSouGJ9AN4GFMUs4SN_zvg4o8.png"
+                },
+                "languages": [
+                    "en"
+                ],
+                "regions": [
+                    "IN"
+                ]
+            },
+            "about_page_link": "https://www.google.com/search?q=About+https://www.apple.com/in/shop/buy-airpods/airpods-4&tbm=ilp",
+            "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Fwww.apple.com%2Fin%2Fshop%2Fbuy-airpods%2Fairpods-4",
+            "source": "Apple"
+        },
+        {
+            "position": 2,
+            "title": "Buy Apple AirPods 4 at best price in India",
+            "link": "https://inventstore.in/product/airpods-4/?srsltid=AfmBOop_MY7gZ6yxCHKiZJ7G1We8yOpd4E6QolZafJ9_r85LgpjWs3Ce",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://inventstore.in/product/airpods-4/%3Fsrsltid%3DAfmBOop_MY7gZ6yxCHKiZJ7G1We8yOpd4E6QolZafJ9_r85LgpjWs3Ce&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QFnoECBoQAQ",
+            "displayed_link": "https://inventstore.in › AirPods",
+            "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4mYOvSZXXXqUamhG8JguIG0.jpeg",
+            "favicon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4hMkKyrvzNMA7_9NgTa5bzU.png",
+            "snippet": "Shop Apple AirPods 4 at lowest prices in India at InventStore.in. Also checkout latest Apple AirPods 4 features and colors.",
+            "snippet_highlighted_words": [
+                "Apple AirPods 4 at lowest prices in India at InventStore.in"
+            ],
+            "rich_snippet": {
+                "bottom": {
+                    "detected_extensions": {
+                        "price": 11900.0,
+                        "currency": "₹",
+                        "rating": 4.6,
+                        "reviews": 59816
+                    },
+                    "extensions": [
+                        "₹11,900.00",
+                        "Old price ₹12,900",
+                        "₹12,900",
+                        "In stock",
+                        "4.6 (59,816)",
+                        "Free delivery"
+                    ]
+                }
+            },
+            "about_this_result": {
+                "source": {
+                    "description": "Shop Apple AirPods 4 at lowest prices in India at InventStore.in. Also checkout latest Apple AirPods 4 features and colors.",
+                    "source_info_link": "https://inventstore.in/product/airpods-4/?srsltid=AfmBOop_MY7gZ6yxCHKiZJ7G1We8yOpd4E6QolZafJ9_r85LgpjWs3Ce",
+                    "icon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4lWH_8DtDgng9e_iPYzMyZdQ8WsSaRySl_uMhumXrKnJ.png"
+                },
+                "languages": [
+                    "en"
+                ],
+                "regions": [
+                    "IN"
+                ]
+            },
+            "about_page_link": "https://www.google.com/search?q=About+https://inventstore.in/product/airpods-4/?srsltid=AfmBOop_MY7gZ6yxCHKiZJ7G1We8yOpd4E6QolZafJ9_r85LgpjWs3Ce&tbm=ilp",
+            "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Finventstore.in%2Fproduct%2Fairpods-4%2F%3Fsrsltid%3DAfmBOop_MY7gZ6yxCHKiZJ7G1We8yOpd4E6QolZafJ9_r85LgpjWs3Ce",
+            "source": "iNvent Store"
+        },
+        {
+            "position": 3,
+            "title": "Apple AirPods 4 Wireless Earbuds, Bluetooth ...",
+            "link": "https://www.amazon.in/Apple-Bluetooth-Headphones-Personalised-Effortless/dp/B0DGJLL7V1",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.amazon.in/Apple-Bluetooth-Headphones-Personalised-Effortless/dp/B0DGJLL7V1&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QFnoECBsQAQ",
+            "displayed_link": "https://www.amazon.in › Apple-Bluetooth-Headphones-...",
+            "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4p394XRRKQGleuOcwXFh6Y4.jpeg",
+            "favicon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4hqRKu1-v_hHkAjr9vXRq9E.png",
+            "snippet": "₹10,999 ; EMI from ₹387. No Cost EMI available. EMI options ; Total: ₹10,999.00 ; ₹10,999.00 ; FREE delivery Wednesday, 4 March. Details.",
+            "snippet_highlighted_words": [
+                "₹10,999"
+            ],
+            "rich_snippet": {
+                "bottom": {
+                    "detected_extensions": {
+                        "price": 10999.0,
+                        "currency": "₹",
+                        "rating": 4.2,
+                        "reviews": 971
+                    },
+                    "extensions": [
+                        "₹10,999.00",
+                        "In stock",
+                        "4.2(971)"
+                    ]
+                }
+            },
+            "about_this_result": {
+                "source": {
+                    "description": "₹10,999 ; EMI from ₹387. No Cost EMI available. EMI options ; Total: ₹10,999.00 ; ₹10,999.00 ; FREE delivery Wednesday, 4 March. Details.",
+                    "source_info_link": "https://www.amazon.in/Apple-Bluetooth-Headphones-Personalised-Effortless/dp/B0DGJLL7V1",
+                    "icon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4rUZiId98Y9faVp6TpYEKutlbDpynCzRziwN0Ry_MT1W.png"
+                },
+                "languages": [
+                    "en"
+                ],
+                "regions": [
+                    "IN"
+                ]
+            },
+            "about_page_link": "https://www.google.com/search?q=About+https://www.amazon.in/Apple-Bluetooth-Headphones-Personalised-Effortless/dp/B0DGJLL7V1&tbm=ilp",
+            "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Fwww.amazon.in%2FApple-Bluetooth-Headphones-Personalised-Effortless%2Fdp%2FB0DGJLL7V1",
+            "source": "Amazon.in"
+        },
+        {
+            "position": 4,
+            "title": "Apple AirPods 4 (2nd generation) (Without Active Noise ...",
+            "link": "https://www.aptronixindia.com/products/new-apple-airpods-4-2nd-generation-2024?srsltid=AfmBOoqhjGVj0kkg6Everhjs9Ci7oiKHc6gFuoMX-JCotWtQ2gBJ5U-g",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.aptronixindia.com/products/new-apple-airpods-4-2nd-generation-2024%3Fsrsltid%3DAfmBOoqhjGVj0kkg6Everhjs9Ci7oiKHc6gFuoMX-JCotWtQ2gBJ5U-g&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QFnoECBwQAQ",
+            "displayed_link": "https://www.aptronixindia.com › products › new-apple-a...",
+            "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4qUDxWbXcewWXsoSmjKXBrk.jpeg",
+            "favicon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4gJ5HTlr7Lu4o1EyBdSTSUc.png",
+            "snippet": "Apple AirPods 4 (2nd generation) (Without Active Noise Cancellation) 2024. Starting from. Regular price ₹ 12,900.00.",
+            "snippet_highlighted_words": [
+                "Apple AirPods 4 (2nd generation"
+            ],
+            "rich_snippet": {
+                "bottom": {
+                    "detected_extensions": {
+                        "price": 12900.0,
+                        "currency": "₹",
+                        "rating": 4.6,
+                        "reviews": 59816
+                    },
+                    "extensions": [
+                        "₹12,900.00",
+                        "In stock",
+                        "4.6 (59,816)",
+                        "Free delivery"
+                    ]
+                }
+            },
+            "about_this_result": {
+                "source": {
+                    "description": "Apple AirPods 4 (2nd generation) (Without Active Noise Cancellation) 2024. Starting from. Regular price ₹ 12,900.00.",
+                    "source_info_link": "https://www.aptronixindia.com/products/new-apple-airpods-4-2nd-generation-2024?srsltid=AfmBOoqhjGVj0kkg6Everhjs9Ci7oiKHc6gFuoMX-JCotWtQ2gBJ5U-g",
+                    "icon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4rDc9bNzXgAZmtLF548XRn3gArppezs_xSKjDRW4t8MZ.png"
+                },
+                "languages": [
+                    "en"
+                ],
+                "regions": [
+                    "IN"
+                ]
+            },
+            "about_page_link": "https://www.google.com/search?q=About+https://www.aptronixindia.com/products/new-apple-airpods-4-2nd-generation-2024?srsltid=AfmBOoqhjGVj0kkg6Everhjs9Ci7oiKHc6gFuoMX-JCotWtQ2gBJ5U-g&tbm=ilp",
+            "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Fwww.aptronixindia.com%2Fproducts%2Fnew-apple-airpods-4-2nd-generation-2024%3Fsrsltid%3DAfmBOoqhjGVj0kkg6Everhjs9Ci7oiKHc6gFuoMX-JCotWtQ2gBJ5U-g",
+            "source": "Aptronix"
+        },
+        {
+            "position": 5,
+            "title": "Buy Apple AirPods 4 Wireless Earbuds with Active Noise ...",
+            "link": "https://www.flipkart.com/apple-airpods-4-wireless-earbuds-active-noise-cancellation-adaptive-audio-bluetooth/p/itm8fa3b69c4f879",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.flipkart.com/apple-airpods-4-wireless-earbuds-active-noise-cancellation-adaptive-audio-bluetooth/p/itm8fa3b69c4f879&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QFnoECGgQAQ",
+            "displayed_link": "https://www.flipkart.com › apple-airpods-4-wireless-ear...",
+            "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4gqgR-juytHi4P52Rt9BKkU.jpeg",
+            "favicon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4odhlAEqdHtu4uPD9L8bwj4.png",
+            "snippet": "Buy Apple AirPods 4 Wireless Earbuds with Active Noise Cancellation, Adaptive Audio Bluetooth for Rs.17900 Online, Also get Apple AirPods 4 Wireless Earbuds ...",
+            "snippet_highlighted_words": [
+                "Buy",
+                "AirPods 4",
+                "AirPods 4"
+            ],
+            "rich_snippet": {
+                "bottom": {
+                    "detected_extensions": {
+                        "rating": 4.1,
+                        "reviews": 1500
+                    },
+                    "extensions": [
+                        "4.1 store rating (1.5K)"
+                    ]
+                }
+            },
+            "about_this_result": {
+                "source": {
+                    "description": "Buy Apple AirPods 4 Wireless Earbuds with Active Noise Cancellation, Adaptive Audio Bluetooth for Rs.17900 Online, Also get Apple AirPods 4 Wireless Earbuds ...",
+                    "source_info_link": "https://www.flipkart.com/apple-airpods-4-wireless-earbuds-active-noise-cancellation-adaptive-audio-bluetooth/p/itm8fa3b69c4f879",
+                    "icon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4hNglKA8-FoZ7bF_I6FNdcmBma8R7Rr86j4RBUQY-CCN.png"
+                },
+                "languages": [
+                    "en"
+                ],
+                "regions": [
+                    "IN"
+                ]
+            },
+            "about_page_link": "https://www.google.com/search?q=About+https://www.flipkart.com/apple-airpods-4-wireless-earbuds-active-noise-cancellation-adaptive-audio-bluetooth/p/itm8fa3b69c4f879&tbm=ilp",
+            "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Fwww.flipkart.com%2Fapple-airpods-4-wireless-earbuds-active-noise-cancellation-adaptive-audio-bluetooth%2Fp%2Fitm8fa3b69c4f879",
+            "source": "Flipkart"
+        },
+        {
+            "position": 6,
+            "title": "Buy Apple Airpods 4 | Get Exciting Offers",
+            "link": "https://www.imagineonline.store/products/airpods-4-mxp63hn-a?srsltid=AfmBOopmb_kaqCkZTpidV3SeXOyrZPTTuM0PuLgVZFp_-oJuigimDyjf",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.imagineonline.store/products/airpods-4-mxp63hn-a%3Fsrsltid%3DAfmBOopmb_kaqCkZTpidV3SeXOyrZPTTuM0PuLgVZFp_-oJuigimDyjf&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QFnoECGYQAQ",
+            "displayed_link": "https://www.imagineonline.store › airpods-4-mxp63hn-a",
+            "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4uDCX4-iteFH7bFRaS1FD7A.jpeg",
+            "favicon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4s_mc0BtXWUtguFjODDMC0s.png",
+            "snippet": "Buy Apple Airpods 4 Online At Best Price With 1 Year Of Apple Certified Service And Support. ✓ Emi ✓Credit Cards Offers & Cashback ✓Free Shipping.",
+            "snippet_highlighted_words": [
+                "Buy Apple Airpods 4 Online At Best Price"
+            ],
+            "rich_snippet": {
+                "bottom": {
+                    "detected_extensions": {
+                        "price": 12900.0,
+                        "currency": "₹",
+                        "rating": 4.5,
+                        "reviews": 44
+                    },
+                    "extensions": [
+                        "₹12,900.00",
+                        "In stock",
+                        "4.5(44)",
+                        "Free delivery",
+                        "7-day returns"
+                    ]
+                }
+            },
+            "about_this_result": {
+                "source": {
+                    "description": "Buy Apple Airpods 4 Online At Best Price With 1 Year Of Apple Certified Service And Support. ✓ Emi ✓Credit Cards Offers & Cashback ✓Free Shipping.",
+                    "source_info_link": "https://www.imagineonline.store/products/airpods-4-mxp63hn-a?srsltid=AfmBOopmb_kaqCkZTpidV3SeXOyrZPTTuM0PuLgVZFp_-oJuigimDyjf",
+                    "icon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4k9R2nm2frjJve8F1alSqDB3dDa1dviXHCfqY_NAV1fm.png"
+                },
+                "languages": [
+                    "en"
+                ],
+                "regions": [
+                    "IN"
+                ]
+            },
+            "about_page_link": "https://www.google.com/search?q=About+https://www.imagineonline.store/products/airpods-4-mxp63hn-a?srsltid=AfmBOopmb_kaqCkZTpidV3SeXOyrZPTTuM0PuLgVZFp_-oJuigimDyjf&tbm=ilp",
+            "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Fwww.imagineonline.store%2Fproducts%2Fairpods-4-mxp63hn-a%3Fsrsltid%3DAfmBOopmb_kaqCkZTpidV3SeXOyrZPTTuM0PuLgVZFp_-oJuigimDyjf",
+            "source": "Imagine Online Store"
+        },
+        {
+            "position": 7,
+            "title": "Buy Apple True Wireless Bluetooth AirPods 4",
+            "link": "https://www.myntra.com/headphones/apple/apple-true-wireless-bluetooth-airpods-4/31328161/buy",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.myntra.com/headphones/apple/apple-true-wireless-bluetooth-airpods-4/31328161/buy&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QFnoECGcQAQ",
+            "displayed_link": "https://www.myntra.com › headphones › apple › buy",
+            "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4mfiu3S9h2VNaM3Fa3N5tCE.jpeg",
+            "favicon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4l-eVwtTmBvZSWPNwH2ix0E.png",
+            "snippet": "View Similar. 4.7. 160. Apple True Wireless Bluetooth AirPods 4. MRP. ₹12,900. Return not available. This product cannot be exchanged or returned. Wishlist.",
+            "snippet_highlighted_words": [
+                "Apple True Wireless Bluetooth AirPods 4"
+            ],
+            "rich_snippet": {
+                "top": {
+                    "detected_extensions": {
+                        "rating": 4.7,
+                        "reviews": 160
+                    },
+                    "extensions": [
+                        "4.7(160)"
+                    ]
+                }
+            },
+            "about_this_result": {
+                "source": {
+                    "description": "View Similar. 4.7. 160. Apple True Wireless Bluetooth AirPods 4. MRP. ₹12,900. Return not available. This product cannot be exchanged or returned. Wishlist.",
+                    "source_info_link": "https://www.myntra.com/headphones/apple/apple-true-wireless-bluetooth-airpods-4/31328161/buy",
+                    "icon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4iqXfCG6fvyKtmDNvlD9WmWyXTaRRekmUw9i79zGiZRt.png"
+                },
+                "languages": [
+                    "en"
+                ],
+                "regions": [
+                    "IN"
+                ]
+            },
+            "about_page_link": "https://www.google.com/search?q=About+https://www.myntra.com/headphones/apple/apple-true-wireless-bluetooth-airpods-4/31328161/buy&tbm=ilp",
+            "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Fwww.myntra.com%2Fheadphones%2Fapple%2Fapple-true-wireless-bluetooth-airpods-4%2F31328161%2Fbuy",
+            "source": "Myntra"
+        },
+        {
+            "position": 8,
+            "title": "Compare AirPods models",
+            "link": "https://www.apple.com/in/airpods/compare/",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.apple.com/in/airpods/compare/&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QFnoECGMQAQ",
+            "displayed_link": "https://www.apple.com › airpods › compare",
+            "thumbnail": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4qe_jlfyuQbCCopjo_mUngA.jpeg",
+            "favicon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4g04lq7sxn1JQedDeQ7DgaQ.png",
+            "snippet": "Compare features for AirPods Pro 3, AirPods 4, AirPods 4 with Active Noise Cancellation and AirPods Max.",
+            "snippet_highlighted_words": [
+                "AirPods 4"
+            ],
+            "about_this_result": {
+                "source": {
+                    "description": "Compare features for AirPods Pro 3, AirPods 4, AirPods 4 with Active Noise Cancellation and AirPods Max.",
+                    "source_info_link": "https://www.apple.com/in/airpods/compare/",
+                    "icon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4rafajToAdjY1ZHdngx4IX-QFV3shAkAOEc3e-4HXU9M.png"
+                },
+                "languages": [
+                    "en"
+                ],
+                "regions": [
+                    "IN"
+                ]
+            },
+            "about_page_link": "https://www.google.com/search?q=About+https://www.apple.com/in/airpods/compare/&tbm=ilp",
+            "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Fwww.apple.com%2Fin%2Fairpods%2Fcompare%2F",
+            "source": "Apple"
+        },
+        {
+            "position": 9,
+            "title": "Apple AirPods 4 with Active Noise Cancellation",
+            "link": "https://www.vijaysales.com/p/232334/apple-airpods-4-with-active-noise-cancellation-charging-case-usb-c-with-speaker",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.vijaysales.com/p/232334/apple-airpods-4-with-active-noise-cancellation-charging-case-usb-c-with-speaker&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QFnoECGUQAQ",
+            "displayed_link": "https://www.vijaysales.com › ... › Truly Wireless Earbuds",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTx78a5NC7I-oQjbE8Kr_J-TF1xDyDOygKNynqGKhruGVhyj81_N2J&usqp=CAE&s",
+            "favicon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4nEFgwl3Gw4rZGhzdr7CFhc.png",
+            "snippet": "Buy Apple AirPods 4 with Active Noise Cancellation , Charging Case (USB-C) ... Price arrow-icon. Below Rs 10,000 · Rs 10,001 to Rs 20,000 · Rs 20,001 to Rs ...",
+            "snippet_highlighted_words": [
+                "Below Rs 10,000"
+            ],
+            "about_this_result": {
+                "source": {
+                    "description": "Buy Apple AirPods 4 with Active Noise Cancellation , Charging Case (USB-C) ... Price arrow-icon. Below Rs 10,000 · Rs 10,001 to Rs 20,000 · Rs 20,001 to Rs ...",
+                    "source_info_link": "https://www.vijaysales.com/p/232334/apple-airpods-4-with-active-noise-cancellation-charging-case-usb-c-with-speaker",
+                    "icon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4gjsIvkIYcRIAULEGSOP_WphZlsqCa29tbFaE-0nR0cH.png"
+                },
+                "languages": [
+                    "en"
+                ],
+                "regions": [
+                    "IN"
+                ]
+            },
+            "about_page_link": "https://www.google.com/search?q=About+https://www.vijaysales.com/p/232334/apple-airpods-4-with-active-noise-cancellation-charging-case-usb-c-with-speaker&tbm=ilp",
+            "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Fwww.vijaysales.com%2Fp%2F232334%2Fapple-airpods-4-with-active-noise-cancellation-charging-case-usb-c-with-speaker",
+            "source": "Vijay Sales"
+        },
+        {
+            "position": 10,
+            "title": "Apple Airpods 4",
+            "link": "https://www.myimaginestore.com/airpods-4?srsltid=AfmBOopCVLSxwjxPki4hrJxi051VBTQ4-_igbkt6Q4_b63FbOAtrpnAb",
+            "redirect_link": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.myimaginestore.com/airpods-4%3Fsrsltid%3DAfmBOopCVLSxwjxPki4hrJxi051VBTQ4-_igbkt6Q4_b63FbOAtrpnAb&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4QFnoECGoQAQ",
+            "displayed_link": "https://www.myimaginestore.com › airpods-4",
+            "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3yfjfFk2fD1VdmK_u6WNCGej42QqP7kF7Cku8SDPhCYsNbyllzT2G&usqp=CAE&s=3",
+            "favicon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4nTMTANfDjE0HBUDp_71OOg.png",
+            "snippet": "AirPods 4. Offer Price: ₹12,000. (Inclusive of all taxes). Be the first to review this product. Special Price ₹12,000 Regular Price ₹12,900. Available Offers.",
+            "snippet_highlighted_words": [
+                "AirPods 4"
+            ],
+            "rich_snippet": {
+                "bottom": {
+                    "detected_extensions": {
+                        "price": 12000.0,
+                        "currency": "₹",
+                        "rating": 4.6,
+                        "reviews": 59816
+                    },
+                    "extensions": [
+                        "₹12,000.00",
+                        "In stock",
+                        "4.6 (59,816)",
+                        "Free delivery"
+                    ]
+                }
+            },
+            "about_this_result": {
+                "source": {
+                    "description": "AirPods 4. Offer Price: ₹12,000. (Inclusive of all taxes). Be the first to review this product. Special Price ₹12,000 Regular Price ₹12,900. Available Offers.",
+                    "source_info_link": "https://www.myimaginestore.com/airpods-4?srsltid=AfmBOopCVLSxwjxPki4hrJxi051VBTQ4-_igbkt6Q4_b63FbOAtrpnAb",
+                    "icon": "https://serpapi.com/searches/69a2eff4484c09acb35d2759/images/TxVchG2ikSNc5wNjo8XK4kCTFmGeENgK4ExR2aeOqAVN8pVnkIrP33xdYQ3ckyKY.png"
+                },
+                "languages": [
+                    "en"
+                ],
+                "regions": [
+                    "IN"
+                ]
+            },
+            "about_page_link": "https://www.google.com/search?q=About+https://www.myimaginestore.com/airpods-4?srsltid=AfmBOopCVLSxwjxPki4hrJxi051VBTQ4-_igbkt6Q4_b63FbOAtrpnAb&tbm=ilp",
+            "about_page_serpapi_link": "https://serpapi.com/search.json?engine=google_about_this_result&google_domain=google.com&q=About+https%3A%2F%2Fwww.myimaginestore.com%2Fairpods-4%3Fsrsltid%3DAfmBOopCVLSxwjxPki4hrJxi051VBTQ4-_igbkt6Q4_b63FbOAtrpnAb",
+            "source": "myimaginestore.com"
+        }
+    ],
+    "related_searches": [
+        {
+            "block_position": 1,
+            "query": "Airpods 4 buy price in india",
+            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=Airpods+4+buy+price+in+india&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q1QJ6BAhiEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=Airpods+4+buy+price+in+india"
+        },
+        {
+            "block_position": 1,
+            "query": "AirPods 4 Price in India",
+            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=AirPods+4+Price+in+India&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q1QJ6BAh2EAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=AirPods+4+Price+in+India"
+        },
+        {
+            "block_position": 1,
+            "query": "Airpods 4 buy price in india flipkart",
+            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=Airpods+4+buy+price+in+india+flipkart&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q1QJ6BAhzEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=Airpods+4+buy+price+in+india+flipkart"
+        },
+        {
+            "block_position": 1,
+            "query": "AirPods 4 Pro Price in India",
+            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=AirPods+4+Pro+Price+in+India&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q1QJ6BAhyEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=AirPods+4+Pro+Price+in+India"
+        },
+        {
+            "block_position": 1,
+            "query": "Airpods 4 buy price amazon",
+            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=Airpods+4+buy+price+amazon&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q1QJ6BAhsEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=Airpods+4+buy+price+amazon"
+        },
+        {
+            "block_position": 1,
+            "query": "AirPods 4 India",
+            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=AirPods+4+India&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q1QJ6BAhrEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=AirPods+4+India"
+        },
+        {
+            "block_position": 1,
+            "query": "AirPods 3 price in India",
+            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=AirPods+3+price+in+India&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q1QJ6BAhpEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=AirPods+3+price+in+India"
+        },
+        {
+            "block_position": 1,
+            "query": "Apple AirPods price",
+            "link": "https://www.google.com/search?sca_esv=643cd21dc826a565&gl=in&hl=en&q=Apple+AirPods+price&sa=X&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q1QJ6BAhkEAE",
+            "serpapi_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=Apple+AirPods+price"
+        }
+    ],
+    "pagination": {
+        "current": 1,
+        "next": "https://www.google.com/search?q=airpods+4+buy+price&sca_esv=643cd21dc826a565&gl=in&hl=en&ei=9e-iaaSmAriTwbkP8c3j8QU&start=10&sa=N&sstk=Af77f_cZCKERSIXJsKyn4jIeDyFCnbq2cPE2lzAdYyk7OFqmlNh8FUIWmVyWUAqAKjL5tVCd32-_W_Tb7dg04d7lgHLLEVNxs7s-iA&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q8NMDegQIDhAW",
+        "other_pages": {
+            "2": "https://www.google.com/search?q=airpods+4+buy+price&sca_esv=643cd21dc826a565&gl=in&hl=en&ei=9e-iaaSmAriTwbkP8c3j8QU&start=10&sa=N&sstk=Af77f_cZCKERSIXJsKyn4jIeDyFCnbq2cPE2lzAdYyk7OFqmlNh8FUIWmVyWUAqAKjL5tVCd32-_W_Tb7dg04d7lgHLLEVNxs7s-iA&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q8tMDegQIDhAE",
+            "3": "https://www.google.com/search?q=airpods+4+buy+price&sca_esv=643cd21dc826a565&gl=in&hl=en&ei=9e-iaaSmAriTwbkP8c3j8QU&start=20&sa=N&sstk=Af77f_cZCKERSIXJsKyn4jIeDyFCnbq2cPE2lzAdYyk7OFqmlNh8FUIWmVyWUAqAKjL5tVCd32-_W_Tb7dg04d7lgHLLEVNxs7s-iA&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q8tMDegQIDhAG",
+            "4": "https://www.google.com/search?q=airpods+4+buy+price&sca_esv=643cd21dc826a565&gl=in&hl=en&ei=9e-iaaSmAriTwbkP8c3j8QU&start=30&sa=N&sstk=Af77f_cZCKERSIXJsKyn4jIeDyFCnbq2cPE2lzAdYyk7OFqmlNh8FUIWmVyWUAqAKjL5tVCd32-_W_Tb7dg04d7lgHLLEVNxs7s-iA&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q8tMDegQIDhAI",
+            "5": "https://www.google.com/search?q=airpods+4+buy+price&sca_esv=643cd21dc826a565&gl=in&hl=en&ei=9e-iaaSmAriTwbkP8c3j8QU&start=40&sa=N&sstk=Af77f_cZCKERSIXJsKyn4jIeDyFCnbq2cPE2lzAdYyk7OFqmlNh8FUIWmVyWUAqAKjL5tVCd32-_W_Tb7dg04d7lgHLLEVNxs7s-iA&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q8tMDegQIDhAK",
+            "6": "https://www.google.com/search?q=airpods+4+buy+price&sca_esv=643cd21dc826a565&gl=in&hl=en&ei=9e-iaaSmAriTwbkP8c3j8QU&start=50&sa=N&sstk=Af77f_cZCKERSIXJsKyn4jIeDyFCnbq2cPE2lzAdYyk7OFqmlNh8FUIWmVyWUAqAKjL5tVCd32-_W_Tb7dg04d7lgHLLEVNxs7s-iA&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q8tMDegQIDhAM",
+            "7": "https://www.google.com/search?q=airpods+4+buy+price&sca_esv=643cd21dc826a565&gl=in&hl=en&ei=9e-iaaSmAriTwbkP8c3j8QU&start=60&sa=N&sstk=Af77f_cZCKERSIXJsKyn4jIeDyFCnbq2cPE2lzAdYyk7OFqmlNh8FUIWmVyWUAqAKjL5tVCd32-_W_Tb7dg04d7lgHLLEVNxs7s-iA&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q8tMDegQIDhAO",
+            "8": "https://www.google.com/search?q=airpods+4+buy+price&sca_esv=643cd21dc826a565&gl=in&hl=en&ei=9e-iaaSmAriTwbkP8c3j8QU&start=70&sa=N&sstk=Af77f_cZCKERSIXJsKyn4jIeDyFCnbq2cPE2lzAdYyk7OFqmlNh8FUIWmVyWUAqAKjL5tVCd32-_W_Tb7dg04d7lgHLLEVNxs7s-iA&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q8tMDegQIDhAQ",
+            "9": "https://www.google.com/search?q=airpods+4+buy+price&sca_esv=643cd21dc826a565&gl=in&hl=en&ei=9e-iaaSmAriTwbkP8c3j8QU&start=80&sa=N&sstk=Af77f_cZCKERSIXJsKyn4jIeDyFCnbq2cPE2lzAdYyk7OFqmlNh8FUIWmVyWUAqAKjL5tVCd32-_W_Tb7dg04d7lgHLLEVNxs7s-iA&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q8tMDegQIDhAS",
+            "10": "https://www.google.com/search?q=airpods+4+buy+price&sca_esv=643cd21dc826a565&gl=in&hl=en&ei=9e-iaaSmAriTwbkP8c3j8QU&start=90&sa=N&sstk=Af77f_cZCKERSIXJsKyn4jIeDyFCnbq2cPE2lzAdYyk7OFqmlNh8FUIWmVyWUAqAKjL5tVCd32-_W_Tb7dg04d7lgHLLEVNxs7s-iA&ved=2ahUKEwjk9NLPp_ySAxW4STABHfHmOF4Q8tMDegQIDhAU"
+        }
+    },
+    "serpapi_pagination": {
+        "current": 1,
+        "next_link": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=10",
+        "next": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=10",
+        "other_pages": {
+            "2": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=10",
+            "3": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=20",
+            "4": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=30",
+            "5": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=40",
+            "6": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=50",
+            "7": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=60",
+            "8": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=70",
+            "9": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=80",
+            "10": "https://serpapi.com/search.json?device=desktop&engine=google&gl=in&google_domain=google.com&hl=en&location=India&num=60&q=airpods+4+buy+price&start=90"
+        }
+    }
+}

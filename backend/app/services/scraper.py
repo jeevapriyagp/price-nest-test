@@ -123,60 +123,42 @@ def google_search(query: str):
 def extract_results(data: dict, user_query: str):
     results = []
 
-    # ---------- GOOGLE SHOPPING ----------
-    for item in data.get("shopping_results", []):
-        link = item.get("link")
-        title = item.get("title")
-        price_text = item.get("price")
+    # ---------- PRODUCT RESULT (pricing array) ----------
+    product_result = data.get("product_result", {})
+    product_title = product_result.get("title", "")
+    product_thumbnails = product_result.get("thumbnails", [])
+    product_image = product_thumbnails[0] if product_thumbnails else None
 
-        if not link or not title or not price_text:
+    for item in product_result.get("pricing", []):
+        link = item.get("link")
+        title = item.get("description") or product_title
+        extracted_price = item.get("extracted_price")
+        store_name = item.get("name", "")
+
+        if not link or not title:
             continue
-        if not is_relevant_title(title, user_query):
+        if not is_relevant_title(product_title, user_query):
             continue
         if item_signals_emi(item):
             continue
-
-        domain = get_domain(link)
-        prices = extract_prices(price_text)
-        if not prices:
+        if not extracted_price or not (500 <= extracted_price <= 5_000_000):
             continue
 
+        price_val = int(extracted_price)
+        prices = [price_val]
+        domain = get_domain(link)
+
+        print(prices)
         results.append({
             "title": title,
-            "source": domain,
+            "source": store_name or domain,
             "link": link,
-            "price_numeric": max(prices),
-            "price": f"₹{max(prices):,}",
-            "image": item.get("thumbnail"),
-            "store_logo": item.get("source_icon")
-        })
-
-    # ---------- INLINE SHOPPING ----------
-    for item in data.get("inline_shopping_results", []):
-        link = item.get("link")
-        title = item.get("title")
-        price_text = item.get("price")
-
-        if not link or not title or not price_text:
-            continue
-        if not is_relevant_title(title, user_query):
-            continue
-        if item_signals_emi(item):
-            continue
-
-        domain = get_domain(link)
-        prices = extract_prices(price_text)
-        if not prices:
-            continue
-
-        results.append({
-            "title": title,
-            "source": domain,
-            "link": link,
-            "price_numeric": max(prices),
-            "price": f"₹{max(prices):,}",
-            "image": item.get("thumbnail"),
-            "store_logo": item.get("source_icon")
+            "prices": prices,
+            "price_numeric": price_val,
+            "price": f"₹{price_val:,}",
+            "image": item.get("thumbnail") or product_image,
+            "store_logo": None,
+            "result_type": "product_result"
         })
 
     # ---------- ORGANIC RESULTS ----------
@@ -195,16 +177,25 @@ def extract_results(data: dict, user_query: str):
         if not prices:
             continue
 
+        print(prices)
         results.append({
             "title": title,
             "source": domain,
             "link": link,
+            "prices": prices,
             "price_numeric": max(prices),
             "price": f"₹{max(prices):,}",
             "image": item.get("thumbnail"),
-            "store_logo": item.get("favicon")
+            "store_logo": item.get("favicon"),
+            "result_type": "organic"
         })
-    
+
+    product_result_domains = {get_domain(r["link"]) for r in results if r["result_type"] == "product_result"}
+    results = [r for r in results if not (r["result_type"] == "organic" and get_domain(r["link"]) in product_result_domains)]
+
+    with open("raw_results.json", "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=4, ensure_ascii=False)
+
     # Sort, then drop statistical EMI outliers
     results = sorted(results, key=lambda x: x["price_numeric"])
     results = filter_emi_outliers(results)
@@ -218,7 +209,11 @@ def compare_product(user_query: str):
     query = build_search_query(user_query)
     raw = google_search(query)
 
+    # SAVE COMPLETE RAW SERPAPI RESPONSE
+    with open("serpapi_raw_response.json", "w", encoding="utf-8") as f:
+        json.dump(raw, f, indent=4, ensure_ascii=False)
+
     return {
         "query": user_query,
-        "results": extract_results(raw, user_query)  
+        "results": extract_results(raw, user_query)
     }
