@@ -399,10 +399,8 @@ async function loadAnalytics() {
             document.querySelector('#lowestPrice .stat-value').textContent = formatCurrency(summary.lowest_price);
             document.querySelector('#avgPrice .stat-value').textContent = formatCurrency(summary.average_price);
 
-            // Price Range: DB lowest → current live lowest (or DB highest if no live data)
-            const livePrices = productsData.map(p => p.price_numeric).filter(p => p > 0);
-            const currentLowest = livePrices.length > 0 ? Math.min(...livePrices) : summary.highest_price;
-            document.querySelector('#priceRange .stat-value').textContent = `${formatCurrency(summary.lowest_price)} - ${formatCurrency(currentLowest)}`;
+            // Price Range
+            document.querySelector('#priceRange .stat-value').textContent = summary.price_range;
 
             // Stability from DB volatility
             document.querySelector('#stabilityScore .stat-value').textContent = data.volatility.stability;
