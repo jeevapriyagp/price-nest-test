@@ -204,9 +204,6 @@ def extract_results(data: dict, user_query: str):
             "image": item.get("thumbnail"),
             "store_logo": item.get("favicon")
         })
-
-    with open("results.json", "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=4, ensure_ascii=False)
     
     # Sort, then drop statistical EMI outliers
     results = sorted(results, key=lambda x: x["price_numeric"])

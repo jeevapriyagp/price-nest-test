@@ -12,7 +12,7 @@ router = APIRouter(tags=["products"])
 logger = logging.getLogger("pricenest")
 
 EXECUTOR = ThreadPoolExecutor(max_workers=4)
-SCRAPER_TIMEOUT = 12
+SCRAPER_TIMEOUT = 25
 
 @router.get("/compare", response_model=CompareResponse)
 def compare(q: str):
