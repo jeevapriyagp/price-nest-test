@@ -1,9 +1,9 @@
-import os
 import json
 from google import genai
 from pydantic import BaseModel, Field, field_validator, ValidationError
 from typing import List
 from google.genai import types
+from ..core.config import GEMINI_API_KEY
 
 # -----------------------------------------------
 # Pydantic Schema for LLM output
@@ -35,7 +35,6 @@ class ProductSummary(BaseModel):
 # -----------------------------------------------
 # Configure Gemini
 # -----------------------------------------------
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 client = genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
 
 

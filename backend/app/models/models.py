@@ -45,6 +45,7 @@ class User(Base):
     last_name = Column(String)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
+    created_at = Column(DateTime, default=datetime.utcnow)
 
 # -----------------------------
 # WISHLIST

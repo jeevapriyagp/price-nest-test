@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Initialize tabs
     initializeTabs();
 
-    // Load mock data
+    // Load products from backend
     loadProducts();
 
     // Initialize alert form

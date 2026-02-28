@@ -1,9 +1,16 @@
 from sqlalchemy.orm import Session
 from datetime import datetime
 from typing import Optional
+from fastapi import HTTPException
 
 from ..core.database import SessionLocal
 from ..models.models import Product, Alert, User, Wishlist
+
+
+def _require_db():
+    """Raise HTTP 503 if the database is not configured instead of crashing with TypeError."""
+    if SessionLocal is None:
+        raise HTTPException(status_code=503, detail="Database is not configured (DATABASE_URL missing)")
 
 
 def normalize_query(q: str) -> str:
@@ -14,6 +21,7 @@ def normalize_query(q: str) -> str:
 # PRODUCT (always insert — accumulates price history over time)
 # -----------------------------
 def upsert_product(query, results):
+    _require_db()
     db: Session = SessionLocal()
     query = normalize_query(query)
     product_objects = []
@@ -60,6 +68,7 @@ def upsert_product(query, results):
 
 
 def get_products(query):
+    _require_db()
     db: Session = SessionLocal()
     query = normalize_query(query)
     try:
@@ -80,50 +89,8 @@ def get_products(query):
     finally:
         db.close()
 
-
-def get_latest_products(query):
-    """Returns only the most recent scrape results for a query (for the search results page)."""
-    db: Session = SessionLocal()
-    query = normalize_query(query)
-    try:
-        # Get the latest created_at timestamp for this query
-        from sqlalchemy import func
-        latest_time = (
-            db.query(func.max(Product.created_at))
-            .filter(Product.query == query)
-            .scalar()
-        )
-        if not latest_time:
-            return []
-
-        # Return only products from within 5 minutes of the latest scrape
-        from datetime import timedelta
-        cutoff = latest_time - timedelta(minutes=5)
-
-        products = (
-            db.query(Product)
-            .filter(Product.query == query, Product.created_at >= cutoff)
-            .order_by(Product.price)
-            .all()
-        )
-        return [
-            {
-                "id": p.id,
-                "title": p.title,
-                "source": p.source,
-                "link": p.link,
-                "image": p.image,
-                "store_logo": p.store_logo,
-                "price_numeric": p.price,
-                "price": f"₹{int(p.price):,}" if p.price else "₹0",
-                "created_at": p.created_at
-            } for p in products
-        ]
-    finally:
-        db.close()
-
-
 def get_product(query):
+    _require_db()
     db: Session = SessionLocal()
     query = normalize_query(query)
     try:
@@ -136,6 +103,7 @@ def get_product(query):
 # ALERTS
 # -----------------------------
 def add_alert(email, query, target_price, notify_method="email"):
+    _require_db()
     db: Session = SessionLocal()
     query = normalize_query(query)
     try:
@@ -162,6 +130,7 @@ def add_alert(email, query, target_price, notify_method="email"):
 
 
 def list_alerts(email: str):
+    _require_db()
     db: Session = SessionLocal()
     try:
         alerts = db.query(Alert).filter(Alert.email == email).all()
@@ -181,6 +150,7 @@ def list_alerts(email: str):
 
 
 def list_all_alerts():
+    _require_db()
     db: Session = SessionLocal()
     try:
         alerts = db.query(Alert).all()
@@ -200,6 +170,7 @@ def list_all_alerts():
 
 
 def update_alert_status(alert_id: int, is_active: bool):
+    _require_db()
     db: Session = SessionLocal()
     try:
         alert = db.query(Alert).filter(Alert.id == alert_id).first()
@@ -222,6 +193,7 @@ def update_alert_status(alert_id: int, is_active: bool):
 
 
 def delete_alert(alert_id: int):
+    _require_db()
     db: Session = SessionLocal()
     try:
         alert = db.query(Alert).filter(Alert.id == alert_id).first()
@@ -233,20 +205,8 @@ def delete_alert(alert_id: int):
     finally:
         db.close()
 
-
-def deactivate_alert(alert_id: int):
-    db: Session = SessionLocal()
-    try:
-        alert = db.query(Alert).filter(Alert.id == alert_id).first()
-        if alert:
-            alert.is_active = False
-            db.commit()
-        return True
-    finally:
-        db.close()
-
-
 def update_alert_price(alert_id: int, last_price: float):
+    _require_db()
     db: Session = SessionLocal()
     try:
         alert = db.query(Alert).filter(Alert.id == alert_id).first()
@@ -263,6 +223,7 @@ def update_alert_price(alert_id: int, last_price: float):
 # USERS
 # -----------------------------
 def get_user_by_email(email: str):
+    _require_db()
     db: Session = SessionLocal()
     try:
         return db.query(User).filter(User.email == email).first()
@@ -271,6 +232,7 @@ def get_user_by_email(email: str):
 
 
 def create_user(first_name, last_name, email, hashed_password):
+    _require_db()
     db: Session = SessionLocal()
     try:
         user = User(
@@ -288,6 +250,7 @@ def create_user(first_name, last_name, email, hashed_password):
 
 
 def update_user(email: str, first_name: str, last_name: str):
+    _require_db()
     db: Session = SessionLocal()
     try:
         user = db.query(User).filter(User.email == email).first()
@@ -310,6 +273,7 @@ def update_user(email: str, first_name: str, last_name: str):
 # WISHLIST
 # -----------------------------
 def add_to_wishlist(email: str, product_id: int):
+    _require_db()
     db: Session = SessionLocal()
     try:
         existing = db.query(Wishlist).filter(
@@ -330,6 +294,7 @@ def add_to_wishlist(email: str, product_id: int):
 
 
 def remove_from_wishlist(email: str, product_id: int):
+    _require_db()
     db: Session = SessionLocal()
     try:
         wish_item = db.query(Wishlist).filter(
@@ -347,6 +312,7 @@ def remove_from_wishlist(email: str, product_id: int):
 
 
 def get_wishlist(email: str):
+    _require_db()
     db: Session = SessionLocal()
     try:
         items = (

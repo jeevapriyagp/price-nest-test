@@ -90,13 +90,6 @@
     margin-bottom: var(--spacing-md);
 }
 
-.product-original-price {
-    font-size: 14px;
-    color: var(--text-muted);
-    text-decoration: line-through;
-    margin-bottom: var(--spacing-sm);
-}
-
 .product-discount {
     display: inline-block;
     padding: 4px 10px;

@@ -8,10 +8,5 @@ pytest
 python-dotenv
 psycopg2-binary
 pandas
-numpy
 bcrypt
-passlib[bcrypt]
-python-jose
-pyjwt
-python-dotenv
 google-genai

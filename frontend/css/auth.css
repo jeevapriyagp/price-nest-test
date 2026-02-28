@@ -379,66 +379,6 @@ body {
 }
 
 /* =====================================================
-   DIVIDER
-===================================================== */
-.divider {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin: 8px 0;
-}
-
-.divider::before,
-.divider::after {
-  content: '';
-  flex: 1;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.divider span {
-  padding: 0 16px;
-  color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 500;
-}
-
-/* =====================================================
-   SOCIAL BUTTONS
-===================================================== */
-.social-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.btn-social {
-  padding: 12px 20px;
-  background: var(--input-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  color: var(--text-primary);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-}
-
-.btn-social:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-.btn-social svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* =====================================================
    FOOTER
 ===================================================== */
 .auth-footer {

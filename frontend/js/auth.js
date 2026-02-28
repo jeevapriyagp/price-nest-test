@@ -46,7 +46,7 @@ if (loginForm) {
           lastName: data.user.last_name,
           email: data.user.email,
           loggedIn: true,
-          timestamp: new Date().toISOString()
+          created_at: data.user.created_at  // actual account creation date from DB
         };
 
         sessionStorage.setItem('userData', JSON.stringify(userData));
@@ -150,7 +150,7 @@ if (signupForm) {
           lastName: data.user.last_name,
           email: data.user.email,
           loggedIn: true,
-          timestamp: new Date().toISOString()
+          created_at: data.user.created_at
         };
 
         sessionStorage.setItem('userData', JSON.stringify(userData));

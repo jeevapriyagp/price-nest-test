@@ -10,7 +10,7 @@ class AlertRequest(BaseModel):
     email: str
     query: str
     target_price: float
-    notify_method: Optional[str] = "email"
+    notify_method: str = "email"
 
 
 class AlertStatusUpdate(BaseModel):
@@ -38,3 +38,6 @@ class UserProfileUpdate(BaseModel):
     email: str
     first_name: str
     last_name: str
+
+class SummaryRequest(BaseModel):
+    query: str

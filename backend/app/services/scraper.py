@@ -5,15 +5,11 @@ from serpapi import GoogleSearch
 from ..core.config import SERPAPI_KEY
 
 
-# --------------------------------------------------
 # BUILD SMART SEARCH QUERY (USER TYPES ONLY PRODUCT)
-# --------------------------------------------------
 def build_search_query(q: str) -> str:
     return f"{q} buy price"
 
-# --------------------------------------------------
 # TITLE RELEVANCE CHECKER
-# --------------------------------------------------
 def _tokenize(text: str) -> list[str]:
     """Lowercase alphanumeric tokens from a string."""
     return re.findall(r"[a-z0-9]+", text.lower())
@@ -29,9 +25,7 @@ def is_relevant_title(title: str, user_query: str) -> bool:
     title_text = title.lower()
     return all(tok in title_text for tok in query_tokens)
 
-# --------------------------------------------------
-# STRICT PRICE EXTRACTOR (NO EMI EVER)
-# --------------------------------------------------
+# STRICT PRICE EXTRACTOR - TO OMIT EMI VALUES
 def extract_prices(text: str):
     if not text:
         return []
@@ -60,9 +54,7 @@ def extract_prices(text: str):
 
     return prices
 
-# --------------------------------------------------
 # EMI KEYWORD DETECTOR
-# --------------------------------------------------
 _EMI_KEYWORDS = re.compile(
     r"\bemi\b|no[\s-]?cost|per\s*month|/mo\b|monthly\s*instalment",
     re.IGNORECASE,
@@ -77,9 +69,7 @@ def item_signals_emi(item: dict) -> bool:
             return True
     return False
 
-# --------------------------------------------------
 # STATISTICAL EMI OUTLIER FILTER
-# --------------------------------------------------
 EMI_OUTLIER_RATIO = 0.40
 
 def filter_emi_outliers(results: list) -> list:
@@ -93,9 +83,7 @@ def filter_emi_outliers(results: list) -> list:
     filtered = [r for r in results if r["price_numeric"] >= threshold]
     return filtered if filtered else results
 
-# --------------------------------------------------
 # DOMAIN NORMALIZER
-# --------------------------------------------------
 def get_domain(url: str) -> str:
     try:
         netloc = urlparse(url).netloc.lower()
@@ -103,9 +91,7 @@ def get_domain(url: str) -> str:
     except:
         return ""
 
-# --------------------------------------------------
 # GOOGLE SEARCH
-# --------------------------------------------------
 def google_search(query: str):
     return GoogleSearch({
         "q": query,
@@ -116,13 +102,11 @@ def google_search(query: str):
         "api_key": SERPAPI_KEY
     }).get_dict()
 
-# --------------------------------------------------
-# EXTRACT RESULTS (ALL PLATFORMS, ALL PRODUCTS)
-# --------------------------------------------------
+# EXTRACT RESULTS
 def extract_results(data: dict, user_query: str):
     results = []
 
-    # ---------- PRODUCT RESULT (pricing array) ----------
+    # ---------- PRODUCT RESULTS ----------
     product_result = data.get("product_result", {})
     product_title = product_result.get("title", "")
     product_thumbnails = product_result.get("thumbnails", [])
@@ -147,7 +131,6 @@ def extract_results(data: dict, user_query: str):
         prices = [price_val]
         domain = get_domain(link)
 
-        print(prices)
         results.append({
             "title": title,
             "source": store_name or domain,
@@ -176,7 +159,6 @@ def extract_results(data: dict, user_query: str):
         if not prices:
             continue
 
-        print(prices)
         results.append({
             "title": title,
             "source": domain,
@@ -192,15 +174,12 @@ def extract_results(data: dict, user_query: str):
     product_result_domains = {get_domain(r["link"]) for r in results if r["result_type"] == "product_result"}
     results = [r for r in results if not (r["result_type"] == "organic" and get_domain(r["link"]) in product_result_domains)]
 
-    # Sort, then drop statistical EMI outliers
     results = sorted(results, key=lambda x: x["price_numeric"])
     results = filter_emi_outliers(results)
 
     return results
 
-# --------------------------------------------------
 # MAIN ENTRY
-# --------------------------------------------------
 def compare_product(user_query: str):
     query = build_search_query(user_query)
     raw = google_search(query)

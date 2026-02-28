@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from ..schemas.schemas import SummaryRequest
 
 try:
     from ..services.summary import get_product_summary
@@ -7,11 +7,6 @@ except ImportError:
     from services.summary import get_product_summary
 
 router = APIRouter()
-
-
-class SummaryRequest(BaseModel):
-    query: str
-
 
 @router.post("/summary")
 def ai_summary(body: SummaryRequest):

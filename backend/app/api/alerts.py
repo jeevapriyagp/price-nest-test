@@ -1,6 +1,6 @@
 import logging
 from fastapi import APIRouter, HTTPException, Query
-from typing import Optional, List
+from typing import Optional
 
 from ..schemas.schemas import AlertRequest, AlertStatusUpdate
 from ..services import storage

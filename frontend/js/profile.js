@@ -92,8 +92,8 @@ async function loadProfile() {
   document.getElementById('wishlistCount').textContent = wishlist.length;
 
   // Calculate member since
-  if (userData.timestamp) {
-    const memberDate = new Date(userData.timestamp);
+  if (userData.created_at) {
+    const memberDate = new Date(userData.created_at);
     const monthYear = memberDate.toLocaleDateString('en-IN', {
       month: 'short',
       year: 'numeric'
