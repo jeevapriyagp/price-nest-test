@@ -14,10 +14,10 @@ if str(current_dir) not in sys.path:
     sys.path.append(str(current_dir))
 
 try:
-    from .api import auth, products, alerts, wishlist, analytics
+    from .api import auth, products, alerts, wishlist, analytics, summary
 except (ImportError, ValueError):
     try:
-        from api import auth, products, alerts, wishlist, analytics
+        from api import auth, products, alerts, wishlist, analytics, summary
     except ImportError as e:
         print(f"Import Error: {e}")
         # We will handle missing routers below to avoid crashing
@@ -62,6 +62,7 @@ try:
     app.include_router(alerts.router, prefix=API_PREFIX)
     app.include_router(wishlist.router, prefix=API_PREFIX)
     app.include_router(analytics.router, prefix=API_PREFIX)
+    app.include_router(summary.router, prefix=API_PREFIX)
 except NameError:
     logger.error("One or more routers failed to import")
 

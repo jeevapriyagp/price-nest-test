@@ -6,7 +6,7 @@ let currentQuery = '';
 let productsData = [];
 let storeChart = null;
 let trendChart = null;
-// trendUnit is removed, fixed to weekly
+let aiSummaryLoaded = false;
 
 document.addEventListener('DOMContentLoaded', async function () {
     // Get search query from URL
@@ -117,6 +117,9 @@ function initializeTabs() {
             // Specific tab initializations
             if (target === 'analytics' && !storeChart) {
                 loadAnalytics();
+            }
+            if (target === 'ai' && !aiSummaryLoaded) {
+                loadAISummary();
             }
             if (target === 'alert' && isLoggedIn()) {
                 const emailInput = document.getElementById('alertEmail');
@@ -641,4 +644,53 @@ function initializeAlertForm() {
             console.error(err);
         }
     });
+}
+
+// =====================================================
+// AI SUMMARY
+// =====================================================
+
+async function loadAISummary() {
+    document.getElementById('aiLoading').style.display = 'flex';
+    document.getElementById('aiError').style.display = 'none';
+    document.getElementById('aiContent').style.display = 'none';
+
+    try {
+        const BASE_URL = API_BASE_URL;
+        const res = await fetch(`${BASE_URL}/summary`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: currentQuery })
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.detail || 'Request failed');
+        }
+
+        const json = await res.json();
+        const d = json.data;
+
+        document.getElementById('aiTitle').textContent = d.title || currentQuery;
+        document.getElementById('aiOverview').textContent = d.overview || '';
+        document.getElementById('aiWhoItsFor').textContent = d.who_its_for || '';
+        document.getElementById('aiBuyingTip').textContent = d.buying_tip || '';
+
+        const ul = document.getElementById('aiHighlights');
+        ul.innerHTML = '';
+        (d.highlights || []).forEach(h => {
+            const li = document.createElement('li');
+            li.textContent = h;
+            ul.appendChild(li);
+        });
+
+        document.getElementById('aiLoading').style.display = 'none';
+        document.getElementById('aiContent').style.display = 'block';
+        aiSummaryLoaded = true;
+
+    } catch (e) {
+        document.getElementById('aiLoading').style.display = 'none';
+        document.getElementById('aiErrorText').textContent = e.message;
+        document.getElementById('aiError').style.display = 'flex';
+    }
 }

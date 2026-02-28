@@ -14,3 +14,4 @@ passlib[bcrypt]
 python-jose
 pyjwt
 python-dotenv
+google-genai
