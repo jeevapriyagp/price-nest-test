@@ -145,8 +145,8 @@ def extract_results(data: dict, user_query: str):
             "title": title,
             "source": domain,
             "link": link,
-            "price_numeric": min(prices),
-            "price": f"₹{min(prices):,}",
+            "price_numeric": max(prices),
+            "price": f"₹{max(prices):,}",
             "image": item.get("thumbnail"),
             "store_logo": item.get("source_icon")
         })
@@ -173,8 +173,8 @@ def extract_results(data: dict, user_query: str):
             "title": title,
             "source": domain,
             "link": link,
-            "price_numeric": min(prices),
-            "price": f"₹{min(prices):,}",
+            "price_numeric": max(prices),
+            "price": f"₹{max(prices):,}",
             "image": item.get("thumbnail"),
             "store_logo": item.get("source_icon")
         })
@@ -199,8 +199,8 @@ def extract_results(data: dict, user_query: str):
             "title": title,
             "source": domain,
             "link": link,
-            "price_numeric": min(prices),
-            "price": f"₹{min(prices):,}",
+            "price_numeric": max(prices),
+            "price": f"₹{max(prices):,}",
             "image": item.get("thumbnail"),
             "store_logo": item.get("favicon")
         })
